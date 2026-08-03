@@ -73,7 +73,7 @@
 | B-33 | Classe "Renda Variável" agregada na Composição | ✅ fechado (reaplicado na v2.0.0) |
 | B-34 | Previdência opcional (toggle mestre carteira+PGBL) | ✅ fechado (v3.3.0, D-36) |
 | B-35 | Alerta de RV "Verificar se está no mycapital" | ✅ fechado (v2.0.0) |
-| B-22 | Migrar para Cowork Project (fim do ciclo zip-upload-rezip) | ⏳ decisão tomada, execução pendente |
+| B-22 | Migrar para Cowork Project (fim do ciclo zip-upload-rezip) | ✅ fechado (03/08/2026) |
 | B-14 | Carteiras ETF BR e ETF USA (item #5) | 🟡 parcial — ETF BR feito na evolução para v3; falta só ETF USA |
 | B-15 | Discursos comercial e técnico das alocações (item #6) | ✅ fechado — finalizado na evolução para v3 |
 | B-16 | Botão R$300k ETF dolarizado / UCITS (item #3) | ⏳ P2 — segue bloqueado (falta a parte de ETF USA do B-14) |
@@ -93,5 +93,6 @@
 ---
 
 ## Histórico
+- **v1.2 — 03/08/2026.** B-22 fechado: projeto migrado para este ambiente (Claude Code / Cowork), confirmado por Alexandre — fim do ciclo zip-upload-rezip entre sessões.
 - **v1.1 — 03/08/2026.** Projeto importado para novo ambiente (zip). B-36 fechado: e-mail de ordens reescrito (v3.4.0). B-14 atualizado para parcial (ETF BR feito, falta ETF USA); B-15 fechado; B-16 segue bloqueado.
 - **v1.0 — 14/07/2026.** Estado vivo aberto. Projeto formalizado; 3 sessões prévias consolidadas em governança.

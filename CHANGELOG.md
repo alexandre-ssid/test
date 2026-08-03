@@ -3,6 +3,9 @@ Formato: `vX.Y — DATA — título`. O mais recente no topo. O *porquê* fica n
 
 ---
 
+## 03/08/2026 — B-22: projeto migrado para este ambiente (Claude Code / Cowork)
+- Confirmado por Alexandre: migração concluída, fim do ciclo zip-upload-rezip entre sessões. Sem mudança de versão do app (não altera o HTML) — item de workflow/governança, registrado aqui e fechado no `BACKLOG.md`/`INDEX.md`.
+
 ## v3.4.0 — 03/08/2026 — B-36: e-mail de ordens reescrito (compliance, um modelo por produto)
 - **Bug reportado por Alexandre:** o botão "Enviar por e-mail" (B-30) sempre mostrava o toast de sucesso, mas o cliente de e-mail nunca abria. Causa: `window.location.href = 'mailto:...'` depende de haver um cliente de e-mail padrão configurado no sistema operacional — sem isso, o navegador não faz nada, sem erro algum, e o toast era um falso positivo.
 - **Substituído — não remendado** (regra §7 do CLAUDE.md): em vez de um único `mailto:` com o resumo inteiro da carteira, o app agora gera **uma ordem por produto**, no modelo exato do PDF interno "Modelos de Ordem — Todos os Produtos" (Supervisão de Agentes Autônomos, XP Investimentos) fornecido por Alexandre.
