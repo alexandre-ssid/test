@@ -1,0 +1,16 @@
+﻿# Distribuiveis / build
+*.zip
+dist/
+build/
+
+# Temporarios
+*.tmp
+~$*
+.DS_Store
+Thumbs.db
+
+# Ambiente
+.venv/
+__pycache__/
+node_modules/
+.env

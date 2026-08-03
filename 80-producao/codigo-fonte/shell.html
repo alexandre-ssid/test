@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Alocação e Produtos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&family=Public+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12181F; --ink2:#3B4653; --muted:#6E7885; --faint:#98A1AC;
+  --paper:#EDEFF2; --card:#FFFFFF; --rule:#D9DDE3; --rule2:#E9ECF0;
+  --brass:#8C6B21; --brass-lt:#C79A3A; --brass-bg:#FBF4E4;
+  --warn:#9A5B12; --warn-bg:#FDF3E5;
+  --danger:#8C2F26; --danger-bg:#FBEDEB;
+  --c-pos:#1E3A4C; --c-inf:#2E6079; --c-pre:#4C8AA0; --c-rfg:#7FB0AE;
+  --c-mm:#A8964F; --c-fli:#C79A3A; --c-rvb:#B5702B; --c-rval:#A85C3B; --c-rvg:#96461F; --c-alt:#6D2C24;
+  --c-res:#8A939B;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --disp:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 20px 64px}
+
+.hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1.5px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(24px,3vw,36px);line-height:1.02;letter-spacing:-.02em;margin:6px 0 0}
+h1 em{font-style:normal;color:var(--brass)}
+.hd-r{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:7px 13px;cursor:pointer;font-size:12.5px;font-weight:500;transition:.13s}
+.btn:hover{border-color:var(--ink);background:#fff}
+.btn-p{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-p:hover{background:#000}
+
+.tabs{display:flex;gap:2px;margin-top:18px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.tabs button{background:transparent;border:0;border-bottom:2px solid transparent;padding:11px 15px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.13s;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-pressed=true]{color:var(--ink);border-bottom-color:var(--brass)}
+.tabs .n{font-family:var(--mono);font-size:10px;color:var(--faint);margin-right:6px}
+section[data-tab]{padding-top:22px}
+.lede{font-size:14.5px;color:var(--ink2);max-width:76ch;margin:0 0 20px;line-height:1.6}
+
+.grid{display:grid;grid-template-columns:296px minmax(0,1fr);gap:26px;align-items:start}
+@media(max-width:940px){.grid{grid-template-columns:1fr}}
+.rail{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:940px){.rail{position:static}}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:16px}
+.panel > h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:500}
+.f{margin-bottom:14px}
+.f:last-child{margin-bottom:0}
+.f label{display:block;font-size:11.5px;font-weight:600;color:var(--ink2);margin-bottom:5px}
+.f .hint{font-size:11px;color:var(--faint);margin-top:4px;line-height:1.4}
+.inp{width:100%;border:1px solid var(--rule);border-radius:2px;padding:8px 10px;background:#fff;transition:.13s}
+.inp:hover{border-color:var(--faint)}
+.inp:focus{border-color:var(--ink);outline:none}
+input.inp[type=number],input.inp.money{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg button{background:#fff;border:0;border-right:1px solid var(--rule);padding:8px 4px;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:.13s}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:var(--rule2)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.seg.two{grid-template-columns:repeat(2,1fr)}
+.radios{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.radios button{text-align:left;background:#fff;border:0;padding:9px 11px;cursor:pointer;font-size:12.5px;display:flex;gap:9px;align-items:center;transition:.13s}
+.radios button:hover{background:var(--rule2)}
+.radios button[aria-pressed=true]{background:var(--ink);color:#fff}
+.radios button[aria-pressed=true] .dot{background:var(--brass-lt);border-color:var(--brass-lt)}
+.radios button[aria-pressed=true] small{color:#B9C0C8}
+.dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--faint);flex:none}
+.radios small{display:block;font-size:10.5px;color:var(--faint);line-height:1.3;margin-top:1px}
+.voltop{display:flex;align-items:center;gap:10px}
+.voltop-nome{font-size:12px;color:var(--muted);font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.kpi{background:var(--card);padding:13px 15px}
+.kpi .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:-.015em;margin-top:3px;white-space:nowrap}
+.kpi .v.sm{font-size:16px}
+
+.bar-wrap{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:18px;margin-top:14px}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px}
+.bar-top h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:500}
+.bar-top .tot{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.bar{display:flex;height:38px;border-radius:2px;overflow:hidden;background:var(--rule2)}
+.seg-r,.seg-c{transition:width .38s cubic-bezier(.4,0,.2,1);min-width:0}
+.seg-r{background:repeating-linear-gradient(45deg,var(--c-res) 0 5px,#9BA3AA 5px 10px);border-right:3px solid var(--card)}
+.seg-c{border-right:1px solid rgba(255,255,255,.5)}
+.legend{display:flex;flex-wrap:wrap;gap:5px 16px;margin-top:14px;padding-top:13px;border-top:1px solid var(--rule2)}
+.lg{display:flex;align-items:center;gap:6px;font-size:11.5px}
+.lg i{width:9px;height:9px;border-radius:1px;flex:none}
+.lg b{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:11px}
+
+.alerts{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.al{display:flex;gap:10px;padding:10px 13px;border-radius:2px;font-size:12.5px;border-left:3px solid;line-height:1.45}
+.al.info{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--faint)}
+.al.warn{background:var(--warn-bg);border-left-color:var(--warn);color:#5B370B}
+.al.err{background:var(--danger-bg);border-left-color:var(--danger);color:#5E1F19}
+.al .ic{font-family:var(--mono);font-weight:600;flex:none}
+
+.tbl-wrap{background:var(--card);border:1px solid var(--rule);border-radius:3px;margin-top:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:right;padding:12px;border-bottom:1px solid var(--rule);white-space:nowrap;background:var(--card)}
+thead th:first-child{text-align:left}
+tbody td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--rule2);font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px;white-space:nowrap}
+tbody td:first-child{text-align:left;font-family:var(--body);font-size:13px;white-space:normal;min-width:240px}
+tr.cls td{background:#F6F7F9;font-weight:700}
+tr.cls td:first-child{font-family:var(--disp);font-size:13px;position:relative;padding-left:22px}
+tr.cls td:first-child::before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);width:4px;height:16px;border-radius:1px;background:var(--cc)}
+tr.cls td{border-bottom:1px solid var(--rule)}
+tr.item td:first-child{padding-left:22px;color:var(--ink2)}
+tr.item:hover td{background:#FCFCFD}
+tr.tot td{font-weight:700;border-top:1.5px solid var(--ink);border-bottom:0;background:#fff}
+.ve{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);border-radius:2px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.flag{display:inline-block;color:var(--warn);font-weight:700;cursor:help;margin-left:5px}
+.tag-res{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);background:var(--brass-bg);border-radius:2px;padding:1px 5px;margin-left:7px}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink2);background:var(--rule2);border-radius:2px;padding:2px 7px}
+
+.comps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:720px){.comps{grid-template-columns:1fr}}
+.comp h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:500}
+.crow{display:grid;grid-template-columns:1fr 62px;gap:10px;align-items:center;margin-bottom:8px}
+.crow .lbl{font-size:12.5px}
+.crow .track{grid-column:1/-1;height:5px;background:var(--rule2);border-radius:3px;overflow:hidden;margin-top:-4px}
+.crow .fill{height:100%;background:var(--ink);transition:width .38s cubic-bezier(.4,0,.2,1)}
+.crow .val{text-align:right;font-family:var(--mono);font-size:12px}
+
+/* --- questionário --- */
+.qwrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;align-items:start}
+@media(max-width:940px){.qwrap{grid-template-columns:1fr}}
+.qbox{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:16px;margin-bottom:12px}
+.qt{font-family:var(--disp);font-weight:600;font-size:15px;margin-bottom:11px;letter-spacing:-.01em}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#criterios{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:16px;position:sticky;top:16px}
+#criterios > h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:500}
+.crit > div{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.crit .ck{font-size:11.5px;font-weight:600;color:var(--ink2)}
+.crit .cv{font-family:var(--disp);font-weight:600;font-size:15px;text-align:right}
+.crit .cs{grid-column:1/-1;font-size:10.5px;color:var(--faint)}
+
+/* --- objetivos --- */
+.mini{min-width:0;width:100%}
+.mini td{padding:6px 9px;font-size:12px;border-bottom:1px solid var(--rule2)}
+.mini td:first-child{min-width:0;font-family:var(--body)}
+.mini tr.sep td{border:0;height:6px;padding:0}
+.mini tr.sub td{font-weight:700;font-family:var(--mono)}
+.sug{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:15px;margin-bottom:12px}
+.sug-h{font-family:var(--disp);font-size:14px;margin-bottom:6px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.sug-d{font-size:12.5px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+td.chk{text-align:center}
+
+/* --- composição --- */
+.vetogs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;margin-bottom:16px}
+.vetog{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:11px 13px;cursor:pointer;transition:.13s;flex-wrap:wrap}
+.vetog.on{border-color:var(--ink)}
+.vetog .vn{font-weight:600;font-size:12.5px}
+.vetog .vc{font-family:var(--mono);font-size:10px;color:var(--faint);width:100%;padding-left:24px}
+.cperfis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:820px){.cperfis{grid-template-columns:1fr}}
+.cperfil{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:13px}
+.cph{font-family:var(--disp);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:9px}
+.knobs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+
+/* --- apresentação --- */
+.chart{width:100%;height:auto;display:block}
+.chart .ax{font-family:var(--mono);font-size:9.5px;fill:var(--faint)}
+.chleg{display:flex;gap:18px;margin-top:10px;font-size:12px}
+.chleg i{display:inline-block;width:16px;height:2.5px;vertical-align:3px;margin-right:6px}
+.tw{font-size:13.5px;line-height:1.65;color:var(--ink2);max-width:70ch}
+.tw p{margin:0 0 11px}
+.argx{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--brass);border-radius:3px;padding:14px 16px;margin-bottom:10px}
+.argt{font-family:var(--disp);font-weight:600;font-size:14.5px;margin-bottom:5px}
+.argd{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+.banda-row{display:grid;grid-template-columns:150px 1fr 100px;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule2)}
+.banda-row:last-child{border-bottom:0}
+.banda-nome{font-family:var(--disp);font-weight:600;font-size:13px}
+.banda-track{position:relative;height:22px;background:var(--rule2);border-radius:3px}
+.banda-faixa{position:absolute;top:0;height:100%;background:#DCC98A;border-radius:3px;opacity:.55}
+.banda-teto{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.banda-teto::after{content:'teto';position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:8.5px;color:var(--muted);white-space:nowrap}
+.banda-cliente{position:absolute;top:50%;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid #fff;transform:translate(-50%,-50%);box-shadow:0 0 0 1px var(--ink)}
+.banda-cliente.fora{background:var(--brass)}
+.banda-vals{text-align:right;font-family:var(--mono);font-size:11.5px;white-space:nowrap}
+.banda-vals .cli{font-weight:700;font-size:13px;display:block}
+.banda-vals .lim{color:var(--muted)}
+.banda-livre{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--brass);background:var(--brass-bg);border-radius:2px;padding:1px 6px;margin-left:6px}
+
+/* --- editor --- */
+.ed-tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.ed-tbl table{min-width:1500px}
+.ed-tbl thead th{font-size:9px;padding:9px 8px}
+.ed-tbl tbody td{padding:5px 8px;font-family:var(--body);font-size:12px;text-align:left;white-space:nowrap}
+.ed-tbl tbody td:first-child{min-width:260px;white-space:normal}
+.ed-tbl input,.ed-tbl select{border:1px solid transparent;background:transparent;border-radius:2px;padding:3px 5px;width:100%;font-size:12px}
+.ed-tbl input:hover,.ed-tbl select:hover{border-color:var(--rule)}
+.ed-tbl input:focus,.ed-tbl select:focus{border-color:var(--ink);background:#fff;outline:none}
+.ed-tbl input[type=number]{font-family:var(--mono);text-align:right;max-width:64px}
+.ed-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+p.note{font-size:12px;color:var(--muted);margin:14px 0;line-height:1.55}
+p.note b{color:var(--ink2)}
+.disc{background:var(--warn-bg);border-left:3px solid var(--warn);padding:13px 15px;border-radius:2px;font-size:12px;color:#5B370B;line-height:1.55;margin-top:16px}
+
+footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--muted);line-height:1.6}
+footer b{color:var(--ink2)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);background:var(--ink);color:#fff;padding:11px 20px;border-radius:3px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:99}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media print{
+  body{background:#fff}
+  .rail,.hd-r,.tabs,.toast{display:none!important}
+  section[data-tab]{display:block!important}
+  section[data-tab][hidden]{display:none!important}
+  .grid{grid-template-columns:1fr}
+  .wrap{max-width:none;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hd">
+    <div>
+      <div class="eyebrow">Base: Alocação PG v2 · 3 perfis · 36 produtos</div>
+      <h1>Guia de alocação<br>e <em>produtos</em></h1>
+    </div>
+    <div class="hd-r">
+      <button class="btn" id="btn-wpp">Copiar resumo</button>
+      <button class="btn" id="btn-csv">Exportar CSV</button>
+      <button class="btn" id="btn-xlsx">Exportar boleta (.xlsx)</button>
+      <button class="btn btn-p" onclick="window.print()">Imprimir / PDF</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-t="diag"  aria-pressed="true"><span class="n">01</span>Diagnóstico</button>
+    <button data-t="obj"   aria-pressed="false"><span class="n">02</span>Objetivos</button>
+    <button data-t="cart"  aria-pressed="false"><span class="n">03</span>Carteira</button>
+    <button data-t="comp"  aria-pressed="false"><span class="n">04</span>Composição</button>
+    <button data-t="apres" aria-pressed="false"><span class="n">05</span>Apresentação</button>
+    <button data-t="prod"  aria-pressed="false"><span class="n">06</span>Produtos</button>
+    <button data-t="cli"   aria-pressed="false"><span class="n">07</span>Carteira Atual</button>
+  </nav>
+
+  <!-- ================= 01 DIAGNÓSTICO ================= -->
+  <section data-tab="diag">
+    <p class="lede">Preencha com o cliente na frente. Cada resposta vira um filtro objetivo — perfil, teto de volatilidade, prazo de liquidez e enquadramento — e o guia passa a selecionar sozinho os produtos elegíveis. A pergunta mais restritiva vence a média: se ele diz que resgataria tudo numa queda de 15%, nenhum score de perfil coloca bolsa na carteira.</p>
+    <div class="qwrap">
+      <div id="quest"></div>
+      <aside id="criterios"></aside>
+    </div>
+  </section>
+
+  <!-- ================= 02 OBJETIVOS ================= -->
+  <section data-tab="obj" hidden>
+    <p class="lede">Dinheiro com data marcada não é carteira de perfil e não é reserva de emergência. É um bolsão à parte, com regra própria: quanto mais curto o prazo, menor a volatilidade e mais rápida a liquidez aceitas. O que sobra depois da reserva e dos bolsões é o que realmente se aloca pelo perfil.</p>
+    <div class="bar-wrap"><div class="bar-top"><h2>Repartição do patrimônio</h2></div><div id="obj-bar"></div></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Objetivo</th><th>Valor</th><th>Prazo (anos)</th><th>Faixa</th><th>Vol. máx.</th><th>Liquidez</th><th>Fora da carteira</th><th></th></tr></thead>
+        <tbody id="obj-body"></tbody>
+      </table>
+    </div>
+    <div class="ed-actions"><button class="btn btn-p" id="obj-add">Adicionar objetivo</button></div>
+    <div id="obj-sug" style="margin-top:20px"></div>
+    <p class="note">A sugestão de produtos por objetivo usa apenas o cadastro atual e os filtros de veículo ativos. Ela ordena por volatilidade e depois por liquidez — não é otimização de retorno.</p>
+  </section>
+
+  <!-- ================= 03 CARTEIRA ================= -->
+  <section data-tab="cart" hidden>
+    <div class="grid">
+      <aside class="rail">
+        <div class="panel">
+          <h2>Cliente</h2>
+          <div class="f"><label for="i-nome">Nome</label><input class="inp" id="i-nome" placeholder="Cliente ou prospect"></div>
+          <div class="f"><label for="i-total">Patrimônio a alocar</label><input class="inp money" id="i-total" value="500.000"></div>
+          <div class="f"><label>Perfil</label>
+            <div class="seg" id="s-perfil">
+              <button data-v="C">Conserv.</button><button data-v="M" aria-pressed="true">Moder.</button><button data-v="A">Arroj.</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Reserva de emergência</h2>
+          <div class="f"><div class="seg two" id="s-resmodo">
+            <button data-v="meses" aria-pressed="true">Por meses</button><button data-v="valor">Valor direto</button>
+          </div></div>
+          <div id="box-meses">
+            <div class="f"><label for="i-custo">Custo de vida mensal</label><input class="inp money" id="i-custo" value="12.000"></div>
+            <div class="f"><label for="i-meses">Meses</label><input class="inp" id="i-meses" type="number" min="0" max="36" value="6"></div>
+          </div>
+          <div id="box-valor" hidden>
+            <div class="f"><label for="i-resval">Valor da reserva</label><input class="inp money" id="i-resval" value="72.000"></div>
+          </div>
+          <div class="f"><label for="i-resprod">Onde fica a reserva</label><select class="inp" id="i-resprod"></select></div>
+        </div>
+
+        <div class="panel">
+          <h2>Filtros</h2>
+          <div class="f"><label for="i-teto">Tolerância a volatilidade (0–10)</label>
+            <div class="voltop">
+              <input class="inp" id="i-teto" type="number" min="0" max="10" step="0.5" value="10" style="width:80px">
+              <span class="voltop-nome" id="i-teto-nome"></span>
+            </div>
+            <div class="seg" id="s-vol" style="grid-template-columns:repeat(6,1fr);margin-top:8px">
+              <button data-v="0">0</button><button data-v="2">2</button><button data-v="4">4</button>
+              <button data-v="6">6</button><button data-v="8">8</button><button data-v="10" aria-pressed="true">10</button>
+            </div>
+            <div class="hint">Escala migrada de N0–N3 para 0–10 em 14/07/2026. Produtos acima do valor escolhido são excluídos. Ver aba Produtos para a origem de cada número (fixo, duration, drawdown real, ou provisório).</div>
+          </div>
+          <div class="f"><label for="i-liq">Liquidez máxima aceita</label>
+            <select class="inp" id="i-liq"></select>
+            <div class="hint">Produtos que demoram mais que isso para virar dinheiro são excluídos.</div>
+          </div>
+          <div class="f"><label>Enquadramento</label>
+            <div class="seg two" id="s-qual"><button data-v="0" aria-pressed="true">Comum</button><button data-v="1">Qualificado</button></div>
+          </div>
+          <div class="f"><label for="i-piso">Piso por posição</label><input class="inp money" id="i-piso" value="1.000">
+            <div class="hint">Posições abaixo disso são eliminadas e o peso volta para a mesma classe.</div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="kpis" id="kpis"></div>
+        <div class="bar-wrap">
+          <div class="bar-top"><h2>Composição</h2><div class="tot" id="bar-tot"></div></div>
+          <div class="bar" id="bar"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="alerts" id="alerts"></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Classe e produto</th><th>% carteira</th><th>% patrimônio</th><th>Valor (R$)</th></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ================= 04 COMPOSIÇÃO ================= -->
+  <section data-tab="comp" hidden>
+    <p class="lede">Ligue e desligue os tipos de produto que entram na carteira. Ao lado, o modelo por perfil no mesmo formato da planilha — percentual por veículo e por sub-perfil — recalculado a partir do cadastro, não copiado dele.</p>
+    <div class="vetogs" id="ve-toggles"></div>
+
+    <div class="cperfis" id="comp-perfis"></div>
+
+    <div class="panel" style="margin-top:20px">
+      <h2>Regras de concentração</h2>
+      <div class="knobs">
+        <div class="f"><label for="k-cap">Teto por fundo (%)</label><input class="inp" id="k-cap" type="number" min="1" max="100" step="0.5" value="5">
+          <div class="hint">ETFs não entram nesse teto.</div></div>
+        <div class="f"><label for="k-fgc">Limite do FGC por grupo emissor</label><input class="inp money" id="k-fgc" value="250.000">
+          <div class="hint">Aplicado sobre o valor <b>projetado no vencimento</b>.</div></div>
+        <div class="f"><label for="k-cdi">CDI projetado (% a.a.)</label><input class="inp" id="k-cdi" type="number" min="0" max="30" step="0.1" value="10">
+          <div class="hint">Usado para projetar o valor futuro dos títulos bancários.</div></div>
+        <div class="f"><label>Aplicar o teto também a</label>
+          <label style="display:flex;gap:8px;font-size:12.5px;font-weight:400;margin-top:6px"><input type="checkbox" id="k-fidc" checked> FIDCs</label>
+          <label style="display:flex;gap:8px;font-size:12.5px;font-weight:400;margin-top:5px"><input type="checkbox" id="k-prev"> Previdência</label>
+        </div>
+        <div class="f"><label>Títulos bancários de reposição</label>
+          <div class="radios" id="s-repos">
+            <button data-v="auto" aria-pressed="true"><span class="dot"></span><span><b>Automático</b><small>Entram quando volatilidade ou liquidez cortam produtos</small></span></button>
+            <button data-v="sempre"><span class="dot"></span><span><b>Sempre</b><small>Disputam peso em qualquer cenário</small></span></button>
+            <button data-v="nunca"><span class="dot"></span><span><b>Nunca</b><small>Ficam fora do modelo</small></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comps">
+      <div class="panel comp"><h3>Carteira do cliente · por veículo</h3><div id="comp-real-ve"></div></div>
+      <div class="panel comp"><h3>Carteira do cliente · por sub-perfil</h3><div id="comp-real-sub"></div></div>
+      <div class="panel comp"><h3>Carteira do cliente · Renda Variável</h3><div id="comp-real-rv"></div>
+        <p class="note" style="margin-top:8px">Soma das classes RV Brasil + RV América Latina + RV Global + Fundos Listados (FIIs). Alternativos ficam de fora — são renda variável por natureza, mas o mercado os trata como categoria própria. B-33.</p>
+      </div>
+    </div>
+
+    <div class="disc">
+      <b>Três divergências na planilha v2. Nenhuma delas é sua ferramenta errando — é a planilha.</b>
+      <br><br>
+      <b>1. O Conservador soma 105%.</b> A coluna de classe fecha em 100%, mas os produtos somam 105%. Quatro classes — Inflação, Prefixado, RV Global e Fundos Listados — têm produtos valendo exatamente 1,25× a classe. Os valores desses produtos são <b>idênticos aos da v1</b>: só a coluna de classe foi atualizada. Escalei esses quatro blocos por 0,8, o que reproduz a coluna de classe e fecha em 100%. Os pesos alterados estão marcados com <span class="flag">!</span> no editor. <b>Confirme a intenção antes de usar.</b>
+      <br><br>
+      <b>2. A célula de ETFs da aba COMPOSIÇÃO está quebrada</b> no Moderado e no Arrojado. A fórmula soma uma lista fixa de células e não acompanhou as três linhas novas do bloco Pós-fixado. Ela subestima os ETFs em exatamente 15 pontos percentuais nos dois perfis. As tabelas acima são recalculadas do cadastro e mostram os valores corretos: ETFs somam <b>44,8%</b> no Moderado e <b>46,5%</b> no Arrojado, não 29,8% e 31,5%.
+      <br><br>
+      <b>3. A linha C/M/A ficou para trás.</b> Na v1, eu recuperava por otimização inteira uma classificação de sub-perfil por produto que reconciliava os três perfis com erro zero. Com os pesos da v2, o menor erro possível é de <b>7 pontos percentuais</b> — nenhuma atribuição por produto reproduz aqueles números. Eles são constantes digitadas, não fórmulas, e não foram revisados. Mantive a classificação por produto recuperada da v1 e o quadro acima a recalcula; a linha da planilha deve ser refeita.
+      <br><br>
+      Duas heranças da v1 continuam valendo: os dois fundos long-short saem como <b>Conservador</b>, e o mesmo LFTB11 aparece como Conservador numa linha e Moderado na outra.
+    </div>
+</section>
+
+  <!-- ================= 05 APRESENTAÇÃO ================= -->
+  <section data-tab="apres" hidden>
+    <p class="lede">Argumentos que saem da carteira que você acabou de montar, não de um material genérico. Os números mudam quando a carteira muda.</p>
+
+    <div class="panel">
+      <h2>O custo invisível do come-cotas</h2>
+      <div class="knobs" style="margin-bottom:18px">
+        <div class="f"><label for="sim-val">Valor aplicado</label><input class="inp money" id="sim-val" value="100.000"></div>
+        <div class="f"><label for="sim-anos">Prazo (anos)</label><input class="inp" id="sim-anos" type="number" min="1" max="40" value="10"></div>
+        <div class="f"><label for="sim-cdi">CDI projetado (% a.a.)</label><input class="inp" id="sim-cdi" type="number" min="0" max="30" step="0.1" value="10"></div>
+        <div class="f"><label for="sim-aliq">Alíquota no resgate (%)</label><input class="inp" id="sim-aliq" type="number" min="0" max="30" step="0.5" value="15">
+          <div class="hint">ETF de renda fixa: depende do prazo médio da carteira.</div></div>
+      </div>
+      <div id="sim-chart"></div>
+      <div class="chleg">
+        <span><i style="background:var(--brass)"></i>Sem come-cotas</span>
+        <span><i style="background:var(--c-pos)"></i>Com come-cotas semestral</span>
+      </div>
+      <div class="kpis" id="sim-num" style="margin:18px 0"></div>
+      <div class="tw" id="sim-tw"></div>
+      <div class="disc">
+        <b>Como ler este gráfico.</b> É uma <b>simulação determinística</b> com CDI constante em <span id="disc-cdi"></span> ao ano, não um histórico e não uma projeção de retorno. As duas curvas partem do mesmo rendimento bruto; a única diferença é o momento em que o imposto sai. O fundo é modelado como renda fixa de longo prazo, com come-cotas semestral a 15% e resgate logo após uma cobrança — por isso não há imposto adicional no fim.
+        <br><br>
+        <b>Acredito</b> que ETFs de renda fixa sejam tributados só no resgate, com alíquota conforme o prazo médio da carteira (25%, 20% ou 15%), e que um ETF de LFTs longas caia na faixa de 15%. <b>Não consigo confirmar isso</b> — verifique o regulamento do LFTB11 e a regra vigente antes de apresentar. Se a alíquota correta for outra, mude o campo acima: a conta se refaz.
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h2>A carteira em números</h2>
+      <div class="kpis" id="ap-kpis" style="margin-bottom:18px"></div>
+      <div id="ap-args"></div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h2>Controle de alocação — bandas da casa</h2>
+      <div class="tw">
+        <p>Cada classe de ativo tem uma <b>banda de alocação</b> definida pela política de investimentos do escritório: uma faixa entre um mínimo e um máximo, pensada para o perfil de risco do cliente. Não é o assessor decidindo o quanto colocar em cada classe — é a política da casa que estabelece o intervalo, e a carteira é montada dentro dele.</p>
+        <p>Isso significa duas coisas concretas para o cliente: primeiro, que a alocação tem um <b>limite institucional</b>, não um teto informal de bom senso — se uma classe mais arriscada bateu no máximo permitido, é a política que barrou, não uma escolha arbitrária. Segundo, que há <b>flexibilidade dentro de regras</b>: a carteira pode se ajustar ao objetivo e à conversa do dia sem nunca sair da faixa aprovada para o perfil dele.</p>
+      </div>
+      <div id="bandas-lista" style="margin-top:16px"></div>
+      <p class="note">Bandas da política de investimentos do perfil <span id="bandas-perfil-nome"></span>. Pós-fixado é tratado como a classe livre de risco — não tem teto — por isso pode aparecer acima da faixa mostrada; é o comportamento esperado, não uma inconsistência. Para as demais classes, a carteira nunca ultrapassa o máximo da banda. O mínimo só é mostrado onde está confirmado pela política; nas classes sem essa confirmação, a barra mostra apenas o teto.</p>
+    </div>
+  </section>
+
+  <!-- ================= 06 PRODUTOS ================= -->
+  <section data-tab="prod" hidden>
+    <p class="lede">A fonte de verdade do guia. Exporte o JSON e distribua aos outros assessores — a mesa inteira passa a trabalhar com o mesmo cadastro, e a atualização mensal do cardápio acontece num lugar só.</p>
+    <div class="ed-tbl">
+      <table>
+        <thead><tr>
+          <th>Produto</th><th>Classe</th><th>Veículo</th><th>Vol.</th><th>Fonte Vol.</th><th>Sub</th><th>Liq. (d)</th>
+          <th>Emissor</th><th>% CDI</th><th>Prazo (a)</th><th>FGC</th><th>Isento</th><th>Qual.</th><th>Mín. (R$)</th>
+          <th>% C</th><th>% M</th><th>% A</th><th></th>
+        </tr></thead>
+        <tbody id="ed-body"></tbody>
+      </table>
+    </div>
+    <div class="ed-actions">
+      <button class="btn btn-p" id="btn-add">Adicionar produto</button>
+      <button class="btn" id="btn-exp">Exportar configuração</button>
+      <button class="btn" id="btn-imp">Importar configuração</button>
+      <button class="btn" id="btn-reset">Restaurar padrão</button>
+      <input type="file" id="file-imp" accept="application/json" hidden>
+    </div>
+    <p class="note">O <span class="flag">!</span> ao lado de um produto guarda o que precisa de conferência. Passe o mouse para ler. Os quatro títulos bancários são <b>placeholders</b>: emissor, % do CDI e prazo são fictícios e existem só para o motor ter o que calcular. A checagem de FGC depende desses três campos.</p>
+  </section>
+
+  <!-- ================= 07 CARTEIRA ATUAL ================= -->
+  <section data-tab="cli" hidden>
+    <p class="lede">Cole aqui o texto copiado da tela "Carteira Distribuída" do XP Hub (selecione a área e Ctrl+C, depois Ctrl+V na caixa abaixo). O guia não lê arquivo <code>.xlsx</code> diretamente — isso exigiria uma biblioteca externa que quebraria o arquivo único e offline. Colar o texto é zero dependência nova.</p>
+    <div class="panel">
+      <h2>Colar posição consolidada</h2>
+      <textarea id="cli-paste" rows="6" style="width:100%;font-family:var(--mono);font-size:11.5px;border:1px solid var(--rule);border-radius:2px;padding:10px" placeholder="Cole aqui o texto copiado do XP Hub..."></textarea>
+      <div class="ed-actions"><button class="btn btn-p" id="cli-analisar">Analisar</button><button class="btn" id="cli-limpar">Limpar</button></div>
+    </div>
+
+    <div id="cli-resultado" style="display:none;margin-top:16px">
+      <div class="kpis" id="cli-kpis"></div>
+      <div class="alerts" id="cli-avisos" style="margin-top:12px"></div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2>Itens identificados — confirme ou ajuste o casamento com o cadastro</h2>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="text-align:left">Categoria</th><th style="text-align:left">Ativo (posição real)</th><th>Valor</th><th style="text-align:left">Casamento com o cadastro</th></tr></thead>
+            <tbody id="cli-body"></tbody>
+          </table>
+        </div>
+        <p class="note">"Casamento" é uma sugestão automática por semelhança de nome — <b>confira sempre</b>. Baixa confiança ou "não mapeado" significa que o produto real difere do cadastro (vencimento, emissor ou fundo diferente); o valor ainda soma no patrimônio total, mas fica de fora do cálculo por classe até você apontar manualmente ou cadastrar o produto.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2>Aportador esporádico — só compra, nunca vende</h2>
+        <div class="knobs">
+          <div class="f"><label for="cli-aporte">Valor do novo aporte</label><input class="inp money" id="cli-aporte" value="50.000"></div>
+          <div class="f"><label>Perfil alvo</label>
+            <div class="seg" id="cli-s-perfil"><button data-v="C">Conserv.</button><button data-v="M" aria-pressed="true">Moder.</button><button data-v="A">Arroj.</button></div>
+          </div>
+        </div>
+        <div class="ed-actions"><button class="btn btn-p" id="cli-calcular">Calcular alocação do aporte</button></div>
+        <div id="cli-aporte-resultado" style="margin-top:16px"></div>
+        <p class="note">Usa os mesmos filtros da aba Carteira (volatilidade, liquidez, enquadramento, veículos ativos). O aporte fecha primeiro as classes mais abaixo do peso ideal do perfil; nenhuma posição existente é reduzida. Itens "não mapeados" da carteira atual contam no patrimônio total mas não entram nesta conta por classe.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2 id="cli-r-titulo">Revisão de carteira completa — pode sugerir venda</h2>
+        <div class="knobs">
+          <div class="f"><label>Modo</label>
+            <div class="seg" id="cli-r-modo"><button data-m="rev" aria-pressed="true">Cliente atual</button><button data-m="novo">Novo cliente</button></div>
+          </div>
+          <div class="f"><label>Perfil alvo</label>
+            <div class="seg" id="cli-r-perfil"><button data-v="C">Conserv.</button><button data-v="M" aria-pressed="true">Moder.</button><button data-v="A">Arroj.</button></div>
+          </div>
+        </div>
+        <div class="ed-actions"><button class="btn btn-p" id="cli-revisar">Analisar</button></div>
+        <div id="cli-revisao-resultado" style="margin-top:16px"></div>
+        <p class="note" id="cli-r-nota"><b>Cliente atual:</b> ajusta a carteira que já existe. <b>Novo cliente:</b> mesmo cálculo, enquadrado como o caminho da carteira que ele traz até a alocação-alvo do perfil. Em ambos, só há sugestão de venda de <b>Renda Fixa bancária/títulos</b> (fora de carência, com quantidade disponível) e <b>Ações</b> — nesses casos o extrato traz o custo de saída (a XP já desconta o IR no valor líquido da RF; para ações o IR é estimado). <b>Fundos, FIDC e previdência aparecem no diagnóstico mas nunca são sugeridos para venda</b>: o extrato não traz o valor aportado original, sem o qual não há como calcular ganho e IR com segurança. O IR de ações é estimado a 15% e <b>ignora</b> a isenção de R$20 mil/mês em vendas e a compensação de prejuízos — confira produto a produto antes de qualquer execução.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>Este guia não é recomendação de investimento.</b> É uma ferramenta de trabalho para estruturar a conversa com o cliente. Os pesos vêm da planilha Alocação PG; taxas, carências, mínimos, prazos de liquidez e tributação precisam ser conferidos na lâmina e no regulamento de cada produto antes de qualquer proposta. Alocação sujeita a suitability, disponibilidade e análise individual.
+    <div style="margin-top:8px;opacity:.55;font-family:var(--mono);font-size:10.5px">Guia de Alocação PG — v__APP_VERSION__ — gerado em __APP_BUILD_DATE__</div>
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*__CORE__*/
+/*__EXPORT__*/
+/*__UI__*/
+/*__CLIENTE_UI__*/
+/*__BOOT__*/
+</script>
+</body>
+</html>

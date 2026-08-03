@@ -1,0 +1,2501 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Alocação e Produtos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&family=Public+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12181F; --ink2:#3B4653; --muted:#6E7885; --faint:#98A1AC;
+  --paper:#EDEFF2; --card:#FFFFFF; --rule:#D9DDE3; --rule2:#E9ECF0;
+  --brass:#8C6B21; --brass-lt:#C79A3A; --brass-bg:#FBF4E4;
+  --warn:#9A5B12; --warn-bg:#FDF3E5;
+  --danger:#8C2F26; --danger-bg:#FBEDEB;
+  --c-pos:#1E3A4C; --c-inf:#2E6079; --c-pre:#4C8AA0; --c-rfg:#7FB0AE;
+  --c-mm:#A8964F; --c-fli:#C79A3A; --c-rvb:#B5702B; --c-rval:#A85C3B; --c-rvg:#96461F; --c-alt:#6D2C24;
+  --c-res:#8A939B;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --disp:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 20px 64px}
+
+.hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1.5px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(24px,3vw,36px);line-height:1.02;letter-spacing:-.02em;margin:6px 0 0}
+h1 em{font-style:normal;color:var(--brass)}
+.hd-r{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:7px 13px;cursor:pointer;font-size:12.5px;font-weight:500;transition:.13s}
+.btn:hover{border-color:var(--ink);background:#fff}
+.btn-p{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-p:hover{background:#000}
+
+.tabs{display:flex;gap:2px;margin-top:18px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.tabs button{background:transparent;border:0;border-bottom:2px solid transparent;padding:11px 15px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.13s;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-pressed=true]{color:var(--ink);border-bottom-color:var(--brass)}
+.tabs .n{font-family:var(--mono);font-size:10px;color:var(--faint);margin-right:6px}
+section[data-tab]{padding-top:22px}
+.lede{font-size:14.5px;color:var(--ink2);max-width:76ch;margin:0 0 20px;line-height:1.6}
+
+.grid{display:grid;grid-template-columns:296px minmax(0,1fr);gap:26px;align-items:start}
+@media(max-width:940px){.grid{grid-template-columns:1fr}}
+.rail{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:940px){.rail{position:static}}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:16px}
+.panel > h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:500}
+.f{margin-bottom:14px}
+.f:last-child{margin-bottom:0}
+.f label{display:block;font-size:11.5px;font-weight:600;color:var(--ink2);margin-bottom:5px}
+.f .hint{font-size:11px;color:var(--faint);margin-top:4px;line-height:1.4}
+.inp{width:100%;border:1px solid var(--rule);border-radius:2px;padding:8px 10px;background:#fff;transition:.13s}
+.inp:hover{border-color:var(--faint)}
+.inp:focus{border-color:var(--ink);outline:none}
+input.inp[type=number],input.inp.money{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg button{background:#fff;border:0;border-right:1px solid var(--rule);padding:8px 4px;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);transition:.13s}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:var(--rule2)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.seg.two{grid-template-columns:repeat(2,1fr)}
+.radios{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.radios button{text-align:left;background:#fff;border:0;padding:9px 11px;cursor:pointer;font-size:12.5px;display:flex;gap:9px;align-items:center;transition:.13s}
+.radios button:hover{background:var(--rule2)}
+.radios button[aria-pressed=true]{background:var(--ink);color:#fff}
+.radios button[aria-pressed=true] .dot{background:var(--brass-lt);border-color:var(--brass-lt)}
+.radios button[aria-pressed=true] small{color:#B9C0C8}
+.dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--faint);flex:none}
+.radios small{display:block;font-size:10.5px;color:var(--faint);line-height:1.3;margin-top:1px}
+.voltop{display:flex;align-items:center;gap:10px}
+.voltop-nome{font-size:12px;color:var(--muted);font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.kpi{background:var(--card);padding:13px 15px}
+.kpi .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:-.015em;margin-top:3px;white-space:nowrap}
+.kpi .v.sm{font-size:16px}
+
+.bar-wrap{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:18px;margin-top:14px}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px}
+.bar-top h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:500}
+.bar-top .tot{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.bar{display:flex;height:38px;border-radius:2px;overflow:hidden;background:var(--rule2)}
+.seg-r,.seg-c{transition:width .38s cubic-bezier(.4,0,.2,1);min-width:0}
+.seg-r{background:repeating-linear-gradient(45deg,var(--c-res) 0 5px,#9BA3AA 5px 10px);border-right:3px solid var(--card)}
+.seg-c{border-right:1px solid rgba(255,255,255,.5)}
+.legend{display:flex;flex-wrap:wrap;gap:5px 16px;margin-top:14px;padding-top:13px;border-top:1px solid var(--rule2)}
+.lg{display:flex;align-items:center;gap:6px;font-size:11.5px}
+.lg i{width:9px;height:9px;border-radius:1px;flex:none}
+.lg b{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:11px}
+
+.alerts{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.al{display:flex;gap:10px;padding:10px 13px;border-radius:2px;font-size:12.5px;border-left:3px solid;line-height:1.45}
+.al.info{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--faint)}
+.al.warn{background:var(--warn-bg);border-left-color:var(--warn);color:#5B370B}
+.al.err{background:var(--danger-bg);border-left-color:var(--danger);color:#5E1F19}
+.al .ic{font-family:var(--mono);font-weight:600;flex:none}
+
+.tbl-wrap{background:var(--card);border:1px solid var(--rule);border-radius:3px;margin-top:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:right;padding:12px;border-bottom:1px solid var(--rule);white-space:nowrap;background:var(--card)}
+thead th:first-child{text-align:left}
+tbody td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--rule2);font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px;white-space:nowrap}
+tbody td:first-child{text-align:left;font-family:var(--body);font-size:13px;white-space:normal;min-width:240px}
+tr.cls td{background:#F6F7F9;font-weight:700}
+tr.cls td:first-child{font-family:var(--disp);font-size:13px;position:relative;padding-left:22px}
+tr.cls td:first-child::before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);width:4px;height:16px;border-radius:1px;background:var(--cc)}
+tr.cls td{border-bottom:1px solid var(--rule)}
+tr.item td:first-child{padding-left:22px;color:var(--ink2)}
+tr.item:hover td{background:#FCFCFD}
+tr.tot td{font-weight:700;border-top:1.5px solid var(--ink);border-bottom:0;background:#fff}
+.ve{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);border-radius:2px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.flag{display:inline-block;color:var(--warn);font-weight:700;cursor:help;margin-left:5px}
+.tag-res{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);background:var(--brass-bg);border-radius:2px;padding:1px 5px;margin-left:7px}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink2);background:var(--rule2);border-radius:2px;padding:2px 7px}
+
+.comps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:720px){.comps{grid-template-columns:1fr}}
+.comp h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:500}
+.crow{display:grid;grid-template-columns:1fr 62px;gap:10px;align-items:center;margin-bottom:8px}
+.crow .lbl{font-size:12.5px}
+.crow .track{grid-column:1/-1;height:5px;background:var(--rule2);border-radius:3px;overflow:hidden;margin-top:-4px}
+.crow .fill{height:100%;background:var(--ink);transition:width .38s cubic-bezier(.4,0,.2,1)}
+.crow .val{text-align:right;font-family:var(--mono);font-size:12px}
+
+/* --- questionário --- */
+.qwrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;align-items:start}
+@media(max-width:940px){.qwrap{grid-template-columns:1fr}}
+.qbox{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:16px;margin-bottom:12px}
+.qt{font-family:var(--disp);font-weight:600;font-size:15px;margin-bottom:11px;letter-spacing:-.01em}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#criterios{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:16px;position:sticky;top:16px}
+#criterios > h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:500}
+.crit > div{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.crit .ck{font-size:11.5px;font-weight:600;color:var(--ink2)}
+.crit .cv{font-family:var(--disp);font-weight:600;font-size:15px;text-align:right}
+.crit .cs{grid-column:1/-1;font-size:10.5px;color:var(--faint)}
+
+/* --- objetivos --- */
+.mini{min-width:0;width:100%}
+.mini td{padding:6px 9px;font-size:12px;border-bottom:1px solid var(--rule2)}
+.mini td:first-child{min-width:0;font-family:var(--body)}
+.mini tr.sep td{border:0;height:6px;padding:0}
+.mini tr.sub td{font-weight:700;font-family:var(--mono)}
+.sug{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:15px;margin-bottom:12px}
+.sug-h{font-family:var(--disp);font-size:14px;margin-bottom:6px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.sug-d{font-size:12.5px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+td.chk{text-align:center}
+
+/* --- composição --- */
+.vetogs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;margin-bottom:16px}
+.vetog{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:11px 13px;cursor:pointer;transition:.13s;flex-wrap:wrap}
+.vetog.on{border-color:var(--ink)}
+.vetog .vn{font-weight:600;font-size:12.5px}
+.vetog .vc{font-family:var(--mono);font-size:10px;color:var(--faint);width:100%;padding-left:24px}
+.cperfis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:820px){.cperfis{grid-template-columns:1fr}}
+.cperfil{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:13px}
+.cph{font-family:var(--disp);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:9px}
+.knobs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+
+/* --- apresentação --- */
+.chart{width:100%;height:auto;display:block}
+.chart .ax{font-family:var(--mono);font-size:9.5px;fill:var(--faint)}
+.chleg{display:flex;gap:18px;margin-top:10px;font-size:12px}
+.chleg i{display:inline-block;width:16px;height:2.5px;vertical-align:3px;margin-right:6px}
+.tw{font-size:13.5px;line-height:1.65;color:var(--ink2);max-width:70ch}
+.tw p{margin:0 0 11px}
+.argx{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--brass);border-radius:3px;padding:14px 16px;margin-bottom:10px}
+.argt{font-family:var(--disp);font-weight:600;font-size:14.5px;margin-bottom:5px}
+.argd{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+.banda-row{display:grid;grid-template-columns:150px 1fr 100px;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule2)}
+.banda-row:last-child{border-bottom:0}
+.banda-nome{font-family:var(--disp);font-weight:600;font-size:13px}
+.banda-track{position:relative;height:22px;background:var(--rule2);border-radius:3px}
+.banda-faixa{position:absolute;top:0;height:100%;background:#DCC98A;border-radius:3px;opacity:.55}
+.banda-teto{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.banda-teto::after{content:'teto';position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:8.5px;color:var(--muted);white-space:nowrap}
+.banda-cliente{position:absolute;top:50%;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid #fff;transform:translate(-50%,-50%);box-shadow:0 0 0 1px var(--ink)}
+.banda-cliente.fora{background:var(--brass)}
+.banda-vals{text-align:right;font-family:var(--mono);font-size:11.5px;white-space:nowrap}
+.banda-vals .cli{font-weight:700;font-size:13px;display:block}
+.banda-vals .lim{color:var(--muted)}
+.banda-livre{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--brass);background:var(--brass-bg);border-radius:2px;padding:1px 6px;margin-left:6px}
+
+/* --- editor --- */
+.ed-tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card)}
+.ed-tbl table{min-width:1500px}
+.ed-tbl thead th{font-size:9px;padding:9px 8px}
+.ed-tbl tbody td{padding:5px 8px;font-family:var(--body);font-size:12px;text-align:left;white-space:nowrap}
+.ed-tbl tbody td:first-child{min-width:260px;white-space:normal}
+.ed-tbl input,.ed-tbl select{border:1px solid transparent;background:transparent;border-radius:2px;padding:3px 5px;width:100%;font-size:12px}
+.ed-tbl input:hover,.ed-tbl select:hover{border-color:var(--rule)}
+.ed-tbl input:focus,.ed-tbl select:focus{border-color:var(--ink);background:#fff;outline:none}
+.ed-tbl input[type=number]{font-family:var(--mono);text-align:right;max-width:64px}
+.ed-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+p.note{font-size:12px;color:var(--muted);margin:14px 0;line-height:1.55}
+p.note b{color:var(--ink2)}
+.disc{background:var(--warn-bg);border-left:3px solid var(--warn);padding:13px 15px;border-radius:2px;font-size:12px;color:#5B370B;line-height:1.55;margin-top:16px}
+
+footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--muted);line-height:1.6}
+footer b{color:var(--ink2)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);background:var(--ink);color:#fff;padding:11px 20px;border-radius:3px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:99}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media print{
+  body{background:#fff}
+  .rail,.hd-r,.tabs,.toast{display:none!important}
+  section[data-tab]{display:block!important}
+  section[data-tab][hidden]{display:none!important}
+  .grid{grid-template-columns:1fr}
+  .wrap{max-width:none;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hd">
+    <div>
+      <div class="eyebrow">Base: Alocação PG v2 · 3 perfis · 36 produtos</div>
+      <h1>Guia de alocação<br>e <em>produtos</em></h1>
+    </div>
+    <div class="hd-r">
+      <button class="btn" id="btn-wpp">Copiar resumo</button>
+      <button class="btn" id="btn-csv">Exportar CSV</button>
+      <button class="btn" id="btn-xlsx">Exportar boleta (.xlsx)</button>
+      <button class="btn btn-p" onclick="window.print()">Imprimir / PDF</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-t="diag"  aria-pressed="true"><span class="n">01</span>Diagnóstico</button>
+    <button data-t="obj"   aria-pressed="false"><span class="n">02</span>Objetivos</button>
+    <button data-t="cart"  aria-pressed="false"><span class="n">03</span>Carteira</button>
+    <button data-t="comp"  aria-pressed="false"><span class="n">04</span>Composição</button>
+    <button data-t="apres" aria-pressed="false"><span class="n">05</span>Apresentação</button>
+    <button data-t="prod"  aria-pressed="false"><span class="n">06</span>Produtos</button>
+    <button data-t="cli"   aria-pressed="false"><span class="n">07</span>Carteira Atual</button>
+  </nav>
+
+  <!-- ================= 01 DIAGNÓSTICO ================= -->
+  <section data-tab="diag">
+    <p class="lede">Preencha com o cliente na frente. Cada resposta vira um filtro objetivo — perfil, teto de volatilidade, prazo de liquidez e enquadramento — e o guia passa a selecionar sozinho os produtos elegíveis. A pergunta mais restritiva vence a média: se ele diz que resgataria tudo numa queda de 15%, nenhum score de perfil coloca bolsa na carteira.</p>
+    <div class="qwrap">
+      <div id="quest"></div>
+      <aside id="criterios"></aside>
+    </div>
+  </section>
+
+  <!-- ================= 02 OBJETIVOS ================= -->
+  <section data-tab="obj" hidden>
+    <p class="lede">Dinheiro com data marcada não é carteira de perfil e não é reserva de emergência. É um bolsão à parte, com regra própria: quanto mais curto o prazo, menor a volatilidade e mais rápida a liquidez aceitas. O que sobra depois da reserva e dos bolsões é o que realmente se aloca pelo perfil.</p>
+    <div class="bar-wrap"><div class="bar-top"><h2>Repartição do patrimônio</h2></div><div id="obj-bar"></div></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Objetivo</th><th>Valor</th><th>Prazo (anos)</th><th>Faixa</th><th>Vol. máx.</th><th>Liquidez</th><th>Fora da carteira</th><th></th></tr></thead>
+        <tbody id="obj-body"></tbody>
+      </table>
+    </div>
+    <div class="ed-actions"><button class="btn btn-p" id="obj-add">Adicionar objetivo</button></div>
+    <div id="obj-sug" style="margin-top:20px"></div>
+    <p class="note">A sugestão de produtos por objetivo usa apenas o cadastro atual e os filtros de veículo ativos. Ela ordena por volatilidade e depois por liquidez — não é otimização de retorno.</p>
+  </section>
+
+  <!-- ================= 03 CARTEIRA ================= -->
+  <section data-tab="cart" hidden>
+    <div class="grid">
+      <aside class="rail">
+        <div class="panel">
+          <h2>Cliente</h2>
+          <div class="f"><label for="i-nome">Nome</label><input class="inp" id="i-nome" placeholder="Cliente ou prospect"></div>
+          <div class="f"><label for="i-total">Patrimônio a alocar</label><input class="inp money" id="i-total" value="500.000"></div>
+          <div class="f"><label>Perfil</label>
+            <div class="seg" id="s-perfil">
+              <button data-v="C">Conserv.</button><button data-v="M" aria-pressed="true">Moder.</button><button data-v="A">Arroj.</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Reserva de emergência</h2>
+          <div class="f"><div class="seg two" id="s-resmodo">
+            <button data-v="meses" aria-pressed="true">Por meses</button><button data-v="valor">Valor direto</button>
+          </div></div>
+          <div id="box-meses">
+            <div class="f"><label for="i-custo">Custo de vida mensal</label><input class="inp money" id="i-custo" value="12.000"></div>
+            <div class="f"><label for="i-meses">Meses</label><input class="inp" id="i-meses" type="number" min="0" max="36" value="6"></div>
+          </div>
+          <div id="box-valor" hidden>
+            <div class="f"><label for="i-resval">Valor da reserva</label><input class="inp money" id="i-resval" value="72.000"></div>
+          </div>
+          <div class="f"><label for="i-resprod">Onde fica a reserva</label><select class="inp" id="i-resprod"></select></div>
+        </div>
+
+        <div class="panel">
+          <h2>Filtros</h2>
+          <div class="f"><label for="i-teto">Tolerância a volatilidade (0–10)</label>
+            <div class="voltop">
+              <input class="inp" id="i-teto" type="number" min="0" max="10" step="0.5" value="10" style="width:80px">
+              <span class="voltop-nome" id="i-teto-nome"></span>
+            </div>
+            <div class="seg" id="s-vol" style="grid-template-columns:repeat(6,1fr);margin-top:8px">
+              <button data-v="0">0</button><button data-v="2">2</button><button data-v="4">4</button>
+              <button data-v="6">6</button><button data-v="8">8</button><button data-v="10" aria-pressed="true">10</button>
+            </div>
+            <div class="hint">Escala migrada de N0–N3 para 0–10 em 14/07/2026. Produtos acima do valor escolhido são excluídos. Ver aba Produtos para a origem de cada número (fixo, duration, drawdown real, ou provisório).</div>
+          </div>
+          <div class="f"><label for="i-liq">Liquidez máxima aceita</label>
+            <select class="inp" id="i-liq"></select>
+            <div class="hint">Produtos que demoram mais que isso para virar dinheiro são excluídos.</div>
+          </div>
+          <div class="f"><label>Enquadramento</label>
+            <div class="seg two" id="s-qual"><button data-v="0" aria-pressed="true">Comum</button><button data-v="1">Qualificado</button></div>
+          </div>
+          <div class="f"><label for="i-piso">Piso por posição</label><input class="inp money" id="i-piso" value="1.000">
+            <div class="hint">Posições abaixo disso são eliminadas e o peso volta para a mesma classe.</div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="kpis" id="kpis"></div>
+        <div class="bar-wrap">
+          <div class="bar-top"><h2>Composição</h2><div class="tot" id="bar-tot"></div></div>
+          <div class="bar" id="bar"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="alerts" id="alerts"></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Classe e produto</th><th>% carteira</th><th>% patrimônio</th><th>Valor (R$)</th></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ================= 04 COMPOSIÇÃO ================= -->
+  <section data-tab="comp" hidden>
+    <p class="lede">Ligue e desligue os tipos de produto que entram na carteira. Ao lado, o modelo por perfil no mesmo formato da planilha — percentual por veículo e por sub-perfil — recalculado a partir do cadastro, não copiado dele.</p>
+    <div class="vetogs" id="ve-toggles"></div>
+
+    <div class="cperfis" id="comp-perfis"></div>
+
+    <div class="panel" style="margin-top:20px">
+      <h2>Regras de concentração</h2>
+      <div class="knobs">
+        <div class="f"><label for="k-cap">Teto por fundo (%)</label><input class="inp" id="k-cap" type="number" min="1" max="100" step="0.5" value="5">
+          <div class="hint">ETFs não entram nesse teto.</div></div>
+        <div class="f"><label for="k-fgc">Limite do FGC por grupo emissor</label><input class="inp money" id="k-fgc" value="250.000">
+          <div class="hint">Aplicado sobre o valor <b>projetado no vencimento</b>.</div></div>
+        <div class="f"><label for="k-cdi">CDI projetado (% a.a.)</label><input class="inp" id="k-cdi" type="number" min="0" max="30" step="0.1" value="10">
+          <div class="hint">Usado para projetar o valor futuro dos títulos bancários.</div></div>
+        <div class="f"><label>Aplicar o teto também a</label>
+          <label style="display:flex;gap:8px;font-size:12.5px;font-weight:400;margin-top:6px"><input type="checkbox" id="k-fidc" checked> FIDCs</label>
+          <label style="display:flex;gap:8px;font-size:12.5px;font-weight:400;margin-top:5px"><input type="checkbox" id="k-prev"> Previdência</label>
+        </div>
+        <div class="f"><label>Títulos bancários de reposição</label>
+          <div class="radios" id="s-repos">
+            <button data-v="auto" aria-pressed="true"><span class="dot"></span><span><b>Automático</b><small>Entram quando volatilidade ou liquidez cortam produtos</small></span></button>
+            <button data-v="sempre"><span class="dot"></span><span><b>Sempre</b><small>Disputam peso em qualquer cenário</small></span></button>
+            <button data-v="nunca"><span class="dot"></span><span><b>Nunca</b><small>Ficam fora do modelo</small></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comps">
+      <div class="panel comp"><h3>Carteira do cliente · por veículo</h3><div id="comp-real-ve"></div></div>
+      <div class="panel comp"><h3>Carteira do cliente · por sub-perfil</h3><div id="comp-real-sub"></div></div>
+      <div class="panel comp"><h3>Carteira do cliente · Renda Variável</h3><div id="comp-real-rv"></div>
+        <p class="note" style="margin-top:8px">Soma das classes RV Brasil + RV América Latina + RV Global + Fundos Listados (FIIs). Alternativos ficam de fora — são renda variável por natureza, mas o mercado os trata como categoria própria. B-33.</p>
+      </div>
+    </div>
+
+    <div class="disc">
+      <b>Três divergências na planilha v2. Nenhuma delas é sua ferramenta errando — é a planilha.</b>
+      <br><br>
+      <b>1. O Conservador soma 105%.</b> A coluna de classe fecha em 100%, mas os produtos somam 105%. Quatro classes — Inflação, Prefixado, RV Global e Fundos Listados — têm produtos valendo exatamente 1,25× a classe. Os valores desses produtos são <b>idênticos aos da v1</b>: só a coluna de classe foi atualizada. Escalei esses quatro blocos por 0,8, o que reproduz a coluna de classe e fecha em 100%. Os pesos alterados estão marcados com <span class="flag">!</span> no editor. <b>Confirme a intenção antes de usar.</b>
+      <br><br>
+      <b>2. A célula de ETFs da aba COMPOSIÇÃO está quebrada</b> no Moderado e no Arrojado. A fórmula soma uma lista fixa de células e não acompanhou as três linhas novas do bloco Pós-fixado. Ela subestima os ETFs em exatamente 15 pontos percentuais nos dois perfis. As tabelas acima são recalculadas do cadastro e mostram os valores corretos: ETFs somam <b>44,8%</b> no Moderado e <b>46,5%</b> no Arrojado, não 29,8% e 31,5%.
+      <br><br>
+      <b>3. A linha C/M/A ficou para trás.</b> Na v1, eu recuperava por otimização inteira uma classificação de sub-perfil por produto que reconciliava os três perfis com erro zero. Com os pesos da v2, o menor erro possível é de <b>7 pontos percentuais</b> — nenhuma atribuição por produto reproduz aqueles números. Eles são constantes digitadas, não fórmulas, e não foram revisados. Mantive a classificação por produto recuperada da v1 e o quadro acima a recalcula; a linha da planilha deve ser refeita.
+      <br><br>
+      Duas heranças da v1 continuam valendo: os dois fundos long-short saem como <b>Conservador</b>, e o mesmo LFTB11 aparece como Conservador numa linha e Moderado na outra.
+    </div>
+</section>
+
+  <!-- ================= 05 APRESENTAÇÃO ================= -->
+  <section data-tab="apres" hidden>
+    <p class="lede">Argumentos que saem da carteira que você acabou de montar, não de um material genérico. Os números mudam quando a carteira muda.</p>
+
+    <div class="panel">
+      <h2>O custo invisível do come-cotas</h2>
+      <div class="knobs" style="margin-bottom:18px">
+        <div class="f"><label for="sim-val">Valor aplicado</label><input class="inp money" id="sim-val" value="100.000"></div>
+        <div class="f"><label for="sim-anos">Prazo (anos)</label><input class="inp" id="sim-anos" type="number" min="1" max="40" value="10"></div>
+        <div class="f"><label for="sim-cdi">CDI projetado (% a.a.)</label><input class="inp" id="sim-cdi" type="number" min="0" max="30" step="0.1" value="10"></div>
+        <div class="f"><label for="sim-aliq">Alíquota no resgate (%)</label><input class="inp" id="sim-aliq" type="number" min="0" max="30" step="0.5" value="15">
+          <div class="hint">ETF de renda fixa: depende do prazo médio da carteira.</div></div>
+      </div>
+      <div id="sim-chart"></div>
+      <div class="chleg">
+        <span><i style="background:var(--brass)"></i>Sem come-cotas</span>
+        <span><i style="background:var(--c-pos)"></i>Com come-cotas semestral</span>
+      </div>
+      <div class="kpis" id="sim-num" style="margin:18px 0"></div>
+      <div class="tw" id="sim-tw"></div>
+      <div class="disc">
+        <b>Como ler este gráfico.</b> É uma <b>simulação determinística</b> com CDI constante em <span id="disc-cdi"></span> ao ano, não um histórico e não uma projeção de retorno. As duas curvas partem do mesmo rendimento bruto; a única diferença é o momento em que o imposto sai. O fundo é modelado como renda fixa de longo prazo, com come-cotas semestral a 15% e resgate logo após uma cobrança — por isso não há imposto adicional no fim.
+        <br><br>
+        <b>Acredito</b> que ETFs de renda fixa sejam tributados só no resgate, com alíquota conforme o prazo médio da carteira (25%, 20% ou 15%), e que um ETF de LFTs longas caia na faixa de 15%. <b>Não consigo confirmar isso</b> — verifique o regulamento do LFTB11 e a regra vigente antes de apresentar. Se a alíquota correta for outra, mude o campo acima: a conta se refaz.
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h2>A carteira em números</h2>
+      <div class="kpis" id="ap-kpis" style="margin-bottom:18px"></div>
+      <div id="ap-args"></div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h2>Controle de alocação — bandas da casa</h2>
+      <div class="tw">
+        <p>Cada classe de ativo tem uma <b>banda de alocação</b> definida pela política de investimentos do escritório: uma faixa entre um mínimo e um máximo, pensada para o perfil de risco do cliente. Não é o assessor decidindo o quanto colocar em cada classe — é a política da casa que estabelece o intervalo, e a carteira é montada dentro dele.</p>
+        <p>Isso significa duas coisas concretas para o cliente: primeiro, que a alocação tem um <b>limite institucional</b>, não um teto informal de bom senso — se uma classe mais arriscada bateu no máximo permitido, é a política que barrou, não uma escolha arbitrária. Segundo, que há <b>flexibilidade dentro de regras</b>: a carteira pode se ajustar ao objetivo e à conversa do dia sem nunca sair da faixa aprovada para o perfil dele.</p>
+      </div>
+      <div id="bandas-lista" style="margin-top:16px"></div>
+      <p class="note">Bandas da política de investimentos do perfil <span id="bandas-perfil-nome"></span>. Pós-fixado é tratado como a classe livre de risco — não tem teto — por isso pode aparecer acima da faixa mostrada; é o comportamento esperado, não uma inconsistência. Para as demais classes, a carteira nunca ultrapassa o máximo da banda. O mínimo só é mostrado onde está confirmado pela política; nas classes sem essa confirmação, a barra mostra apenas o teto.</p>
+    </div>
+  </section>
+
+  <!-- ================= 06 PRODUTOS ================= -->
+  <section data-tab="prod" hidden>
+    <p class="lede">A fonte de verdade do guia. Exporte o JSON e distribua aos outros assessores — a mesa inteira passa a trabalhar com o mesmo cadastro, e a atualização mensal do cardápio acontece num lugar só.</p>
+    <div class="ed-tbl">
+      <table>
+        <thead><tr>
+          <th>Produto</th><th>Classe</th><th>Veículo</th><th>Vol.</th><th>Fonte Vol.</th><th>Sub</th><th>Liq. (d)</th>
+          <th>Emissor</th><th>% CDI</th><th>Prazo (a)</th><th>FGC</th><th>Isento</th><th>Qual.</th><th>Mín. (R$)</th>
+          <th>% C</th><th>% M</th><th>% A</th><th></th>
+        </tr></thead>
+        <tbody id="ed-body"></tbody>
+      </table>
+    </div>
+    <div class="ed-actions">
+      <button class="btn btn-p" id="btn-add">Adicionar produto</button>
+      <button class="btn" id="btn-exp">Exportar configuração</button>
+      <button class="btn" id="btn-imp">Importar configuração</button>
+      <button class="btn" id="btn-reset">Restaurar padrão</button>
+      <input type="file" id="file-imp" accept="application/json" hidden>
+    </div>
+    <p class="note">O <span class="flag">!</span> ao lado de um produto guarda o que precisa de conferência. Passe o mouse para ler. Os quatro títulos bancários são <b>placeholders</b>: emissor, % do CDI e prazo são fictícios e existem só para o motor ter o que calcular. A checagem de FGC depende desses três campos.</p>
+  </section>
+
+  <!-- ================= 07 CARTEIRA ATUAL ================= -->
+  <section data-tab="cli" hidden>
+    <p class="lede">Cole aqui o texto copiado da tela "Carteira Distribuída" do XP Hub (selecione a área e Ctrl+C, depois Ctrl+V na caixa abaixo). O guia não lê arquivo <code>.xlsx</code> diretamente — isso exigiria uma biblioteca externa que quebraria o arquivo único e offline. Colar o texto é zero dependência nova.</p>
+    <div class="panel">
+      <h2>Colar posição consolidada</h2>
+      <textarea id="cli-paste" rows="6" style="width:100%;font-family:var(--mono);font-size:11.5px;border:1px solid var(--rule);border-radius:2px;padding:10px" placeholder="Cole aqui o texto copiado do XP Hub..."></textarea>
+      <div class="ed-actions"><button class="btn btn-p" id="cli-analisar">Analisar</button><button class="btn" id="cli-limpar">Limpar</button></div>
+    </div>
+
+    <div id="cli-resultado" style="display:none;margin-top:16px">
+      <div class="kpis" id="cli-kpis"></div>
+      <div class="alerts" id="cli-avisos" style="margin-top:12px"></div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2>Itens identificados — confirme ou ajuste o casamento com o cadastro</h2>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="text-align:left">Categoria</th><th style="text-align:left">Ativo (posição real)</th><th>Valor</th><th style="text-align:left">Casamento com o cadastro</th></tr></thead>
+            <tbody id="cli-body"></tbody>
+          </table>
+        </div>
+        <p class="note">"Casamento" é uma sugestão automática por semelhança de nome — <b>confira sempre</b>. Baixa confiança ou "não mapeado" significa que o produto real difere do cadastro (vencimento, emissor ou fundo diferente); o valor ainda soma no patrimônio total, mas fica de fora do cálculo por classe até você apontar manualmente ou cadastrar o produto.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2>Aportador esporádico — só compra, nunca vende</h2>
+        <div class="knobs">
+          <div class="f"><label for="cli-aporte">Valor do novo aporte</label><input class="inp money" id="cli-aporte" value="50.000"></div>
+          <div class="f"><label>Perfil alvo</label>
+            <div class="seg" id="cli-s-perfil"><button data-v="C">Conserv.</button><button data-v="M" aria-pressed="true">Moder.</button><button data-v="A">Arroj.</button></div>
+          </div>
+        </div>
+        <div class="ed-actions"><button class="btn btn-p" id="cli-calcular">Calcular alocação do aporte</button></div>
+        <div id="cli-aporte-resultado" style="margin-top:16px"></div>
+        <p class="note">Usa os mesmos filtros da aba Carteira (volatilidade, liquidez, enquadramento, veículos ativos). O aporte fecha primeiro as classes mais abaixo do peso ideal do perfil; nenhuma posição existente é reduzida. Itens "não mapeados" da carteira atual contam no patrimônio total mas não entram nesta conta por classe.</p>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2 id="cli-r-titulo">Revisão de carteira completa — pode sugerir venda</h2>
+        <div class="knobs">
+          <div class="f"><label>Modo</label>
+            <div class="seg" id="cli-r-modo"><button data-m="rev" aria-pressed="true">Cliente atual</button><button data-m="novo">Novo cliente</button></div>
+          </div>
+          <div class="f"><label>Perfil alvo</label>
+            <div class="seg" id="cli-r-perfil"><button data-v="C">Conserv.</button><button data-v="M" aria-pressed="true">Moder.</button><button data-v="A">Arroj.</button></div>
+          </div>
+        </div>
+        <div class="ed-actions"><button class="btn btn-p" id="cli-revisar">Analisar</button></div>
+        <div id="cli-revisao-resultado" style="margin-top:16px"></div>
+        <p class="note" id="cli-r-nota"><b>Cliente atual:</b> ajusta a carteira que já existe. <b>Novo cliente:</b> mesmo cálculo, enquadrado como o caminho da carteira que ele traz até a alocação-alvo do perfil. Em ambos, só há sugestão de venda de <b>Renda Fixa bancária/títulos</b> (fora de carência, com quantidade disponível) e <b>Ações</b> — nesses casos o extrato traz o custo de saída (a XP já desconta o IR no valor líquido da RF; para ações o IR é estimado). <b>Fundos, FIDC e previdência aparecem no diagnóstico mas nunca são sugeridos para venda</b>: o extrato não traz o valor aportado original, sem o qual não há como calcular ganho e IR com segurança. O IR de ações é estimado a 15% e <b>ignora</b> a isenção de R$20 mil/mês em vendas e a compensação de prejuízos — confira produto a produto antes de qualquer execução.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>Este guia não é recomendação de investimento.</b> É uma ferramenta de trabalho para estruturar a conversa com o cliente. Os pesos vêm da planilha Alocação PG; taxas, carências, mínimos, prazos de liquidez e tributação precisam ser conferidos na lâmina e no regulamento de cada produto antes de qualquer proposta. Alocação sujeita a suitability, disponibilidade e análise individual.
+    <div style="margin-top:8px;opacity:.55;font-family:var(--mono);font-size:10.5px">Guia de Alocação PG — v1.23.0 — gerado em 30/07/2026</div>
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================================
+   NÚCLEO — cadastro, motor de alocação, tetos de concentração
+   Este arquivo é a fonte de verdade; é injetado no HTML final.
+   ========================================================================= */
+
+const CLASSES = [
+  {id:'pos', nome:'Pós-fixado',      cor:'--c-pos', fb:null },
+  {id:'inf', nome:'Inflação',        cor:'--c-inf', fb:'pos'},
+  {id:'pre', nome:'Prefixado',       cor:'--c-pre', fb:'inf'},
+  {id:'rfg', nome:'RF Global',       cor:'--c-rfg', fb:'inf'},
+  {id:'mm',  nome:'Multimercados',   cor:'--c-mm',  fb:'inf'},
+  {id:'fli', nome:'Fundos Listados', cor:'--c-fli', fb:'mm' },
+  {id:'rvb', nome:'RV Brasil',       cor:'--c-rvb', fb:'mm' },
+  {id:'rval',nome:'RV América Latina',cor:'--c-rval',fb:'mm' },
+  {id:'rvg', nome:'RV Global',       cor:'--c-rvg', fb:'mm' },
+  {id:'alt', nome:'Alternativos',    cor:'--c-alt', fb:'mm' },
+];
+const CM = Object.fromEntries(CLASSES.map(c=>[c.id,c]));
+
+/* -------------------------------------------------------------------------
+   TETO POR CLASSE — Diretrizes do escritório, "Bandas de Alocação por Classe
+   de Ativo" (imagem enviada por Alexandre em 15/07/2026). Valor = limite
+   SUPERIOR da banda de cada classe, por perfil. 'pos' (Pós-fixado) não tem
+   teto — é a classe "livre de risco", confirmado explicitamente; funciona
+   como a válvula de segurança no fim de toda cadeia de fallback.
+   'rval' (RV América Latina) não tem linha própria nas Diretrizes — tratado
+   como parte de RV Global (mesmo teto, peso somado), por decisão do
+   Alexandre. Ver DECISOES D-22.
+   ------------------------------------------------------------------------- */
+const CAP_CLASSE = {
+  C: {inf:17.5, pre:7.5,  mm:5.0,  rvb:5.0,  fli:5.0, alt:0.0,  rfg:5.0, rvg:7.5},
+  M: {inf:27.5, pre:12.5, mm:16.5, rvb:10.0, fli:6.5, alt:10.5, rfg:5.0, rvg:8.5},
+  A: {inf:32.5, pre:10.0, mm:12.5, rvb:20.0, fli:12.0,alt:14.5, rfg:5.0, rvg:10.0},
+};
+const grupoDe = cl => cl==='rval' ? 'rvg' : cl;
+/* Mínimo da banda — só está confirmado na imagem para Pós-fixado, Inflação e Prefixado
+   (as únicas três linhas com os dois números impressos). Nas demais classes a imagem só
+   traz o teto; o mínimo visual parece próximo de 0% mas não está escrito, então não é
+   tratado como dado confirmado — fica de fora deste objeto, e a UI não afirma um piso ali. */
+const CAP_CLASSE_MIN = {
+  C: {pos:65.0, inf:7.5,  pre:2.5},
+  M: {pos:28.0, inf:17.5, pre:7.5},
+  A: {pos:8.5,  inf:22.5, pre:5.0},
+};
+
+/* Escala de volatilidade 0–10 (migrada de 0–3 em 14/07/2026 — ver DECISOES D-14/D-15
+   e 01-fundamentos/SPEC-volatilidade-v2.md). rotuloVol(n) devolve a banda descritiva
+   para exibição; o motor sempre compara o número, nunca a faixa. */
+function rotuloVol(v){
+  if(v<=0.01) return 'Sem volatilidade (0)';
+  if(v<=2)    return 'Muito baixa (até 2)';
+  if(v<=4)    return 'Baixa (até 4)';
+  if(v<=6)    return 'Moderada (até 6)';
+  if(v<=8)    return 'Alta (até 8)';
+  return 'Muito alta (até 10)';
+}
+const VOL_BANDAS = [
+  {ate:0,  nome:'Sem volatilidade'},
+  {ate:2,  nome:'Muito baixa'},
+  {ate:4,  nome:'Baixa'},
+  {ate:6,  nome:'Moderada'},
+  {ate:8,  nome:'Alta'},
+  {ate:10, nome:'Muito alta'},
+];
+const VEICULOS = ['Tesouro Direto','ETF','Fundo','FIDC','Previdência','Renda Fixa Bancária'];
+/* Na aba COMPOSIÇÃO da planilha, FIDC é contado dentro de "Fundos de Investimentos". */
+const GRUPO_VE = v => (v==='FIDC' ? 'Fundo' : v);
+const SUBS = {C:'Conservador', M:'Moderado', A:'Arrojado'};
+
+/* Faixas de liquidez oferecidas ao usuário — mínima D+0, máxima ilimitada. */
+const LIQ_OPCOES = [
+  {v:0,     r:'D+0',        d:'Resgate no mesmo dia'},
+  {v:1,     r:'D+1',        d:'Tesouro Direto'},
+  {v:2,     r:'D+2',        d:'ETFs na B3'},
+  {v:5,     r:'D+5',        d:'Previdência (após carência)'},
+  {v:30,    r:'D+30',       d:'Fundos com cotização mensal'},
+  {v:90,    r:'D+90',       d:'LCI/LCA e fundos trimestrais'},
+  {v:180,   r:'D+180',      d:'Crédito estruturado'},
+  {v:365,   r:'D+365',      d:'Até 1 ano'},
+  {v:99999, r:'Ilimitada',  d:'Carrega até o vencimento'},
+];
+const rotuloLiq = d => { const o = LIQ_OPCOES.find(x=>x.v>=d); return o ? o.r : `D+${d}`; };
+
+/* -------------------------------------------------------------------------
+   CADASTRO
+   sub  = classificação C/M/A da aba COMPOSIÇÃO da planilha. Foi RECUPERADA por
+          otimização inteira: 30 dos 32 produtos têm classificação única que
+          reconcilia os três perfis. Os dois ambíguos (MARG11 e DEBB11) estão
+          marcados — exatamente um dos dois é 'M'.
+   liq  = dias até o dinheiro na conta. ESTIMATIVAS DE PARTIDA. Confirmar.
+   ------------------------------------------------------------------------- */
+const PADRAO = [
+  {id:'ts_estrat',  nome:'Tesouro Selic (maior venc.) — Reserva Estratégica', cl:'pos', ve:'Tesouro Direto', vol10:0, volFonte:'fixo', sub:'C', liq:1, qual:false, min:0, prot:true, receber:true, wr:30, w:{C:14.5,M:0,A:8.5}},
+  {id:'lftb_estrat',nome:'LFTB11 — Reserva Estratégica', cl:'pos', ve:'ETF', vol10:2.0, volFonte:'provisorio', sub:'M', liq:2, qual:false, min:0, ver:'A planilha classifica este LFTB11 como sub-perfil Moderado e a linha "LFTB11" comum como Conservador. Mesmo ativo, dois sub-perfis — conferir. [TRIBUTAÇÃO] Confirmado por Alexandre em 20/07/2026: LFTB11 tributado a 15% flat sobre o ganho na venda, sem come-cotas (regra padrão de ETF no Brasil). [VOL] Tentei em 20/07/2026: LFTB11 tem menos de 1 ano de pregão na B3 e não achei índice internacional que replique (é um índice de duration-alvo curta específico do mercado local, sem equivalente líquido no Yahoo Finance). Alexandre decidiu manter o valor-ponte provisório em vez de forçar um proxy sem base. Valor é ponte provisória da escala antiga (N1→2,0), não dado real.', w:{C:0,M:10,A:0}},
+  {id:'ts_emerg',   nome:'Tesouro Selic (maior venc.) — Reserva de Emergência', cl:'pos', ve:'Tesouro Direto', vol10:0, volFonte:'fixo', sub:'C', liq:1, qual:false, min:0, emerg:true, w:{C:10,M:10,A:5}},
+
+  {id:'lftb', nome:'LFTB11', cl:'pos', ve:'ETF', vol10:2.0, volFonte:'provisorio', sub:'C', liq:2, qual:false, min:0, ver:'[TRIBUTAÇÃO] Confirmado por Alexandre em 20/07/2026: LFTB11 tributado a 15% flat sobre o ganho na venda, sem come-cotas (regra padrão de ETF). [VOL] Mesma pendência do LFTB11 Reserva Estratégica — tentativa de busca em 20/07/2026 sem proxy viável, valor-ponte mantido por decisão do Alexandre. Valor é ponte provisória (N1→2,0), não dado real.', w:{C:20,M:0,A:5}},
+  {id:'nlfa', nome:'NLFA11', cl:'pos', ve:'ETF', vol10:2.0, volFonte:'provisorio', sub:'C', liq:2, qual:false, min:0, ver:'[VOL] NLFA11 replica um índice ANBIMA de letras financeiras sem equivalente líquido no Yahoo Finance, e tem histórico curtíssimo na B3 (menos de 2 meses em 20/07/2026). Alexandre decidiu manter o valor-ponte provisório em vez de forçar um proxy sem base. Valor é ponte provisória (N1→2,0), não dado real.', w:{C:7.5,M:5,A:0}},
+  {id:'lfin', nome:'LFIN11', cl:'pos', ve:'ETF', vol10:2.0, volFonte:'provisorio', sub:'C', liq:2, qual:false, min:0, ver:'Confirmar índice de referência. [VOL] LFIN11 replica um índice DI de letras financeiras sem equivalente líquido no Yahoo Finance, e tem menos de 1 ano de pregão na B3. Alexandre decidiu manter o valor-ponte provisório em vez de forçar um proxy sem base. Valor é ponte provisória (N1→2,0), não dado real.', w:{C:7.5,M:5,A:0}},
+  {id:'marg', nome:'MARG11', cl:'pos', ve:'ETF', vol10:2.0, volFonte:'provisorio', sub:'M', liq:2, qual:false, min:0, ver:'Sub-perfil ambíguo na planilha v1: MARG11 e DEBB11 só admitiam "um dos dois é Moderado". Escolhi MARG11=M, DEBB11=C. Confirmar. [VOL] MARG11 replica um índice de debêntures DI sem equivalente líquido no Yahoo Finance, e tem menos de 1 ano de pregão na B3. Alexandre decidiu manter o valor-ponte provisório em vez de forçar um proxy sem base. Valor é ponte provisória (N1→2,0), não dado real.', w:{C:3.5,M:5,A:5}},
+  {id:'debb', nome:'DEBB11', cl:'pos', ve:'ETF', vol10:0.25, volFonte:'drawdown', sub:'C', liq:2, qual:false, min:0, ver:'ETF de debêntures: confirmar se há hedge de juros. Sub-perfil ambíguo (ver MARG11). [VOL] Dado real obtido via Yahoo Finance (histórico diário, 22/06/2022–20/07/2026, 4,1 anos) em 20/07/2026: drawdown máximo −1,23% (pico 12/01/2024, vale 18/01/2024). vol10=min(10,|dd|/0,50×10)=0,25 — mesma fórmula dos fundos. Autenticidade do dado verificada por cruzamento com referências conhecidas (Ibovespa, Bitcoin, Apple, Vale) antes de aplicar — ver ERROR-LOG E-16 (revisado).', w:{C:3.5,M:5,A:5}},
+
+  {id:'jive',   nome:'Jive BossaNova High Yield Advisory FIC FIDC', cl:'pos', ve:'FIDC', vol10:3, volFonte:'fixo', sub:'A', liq:180, qual:true, min:0, ver:'Público-alvo e liquidez não confirmados. Marquei como qualificado e D+180 por precaução — conferir no regulamento.', w:{C:0,M:1.5,A:2}},
+  {id:'patria', nome:'Pátria Crédito Estruturado 365 FIDC', cl:'pos', ve:'FIDC', vol10:3, volFonte:'fixo', sub:'A', liq:365, qual:true, min:0, ver:'"365" no nome sugere cotização de 365 dias. Público-alvo não confirmado — conferir no regulamento.', w:{C:0,M:1.5,A:2}},
+  {id:'plural', nome:'Plural Debêntures Incentivadas Hedge 30 FIC FIF RF CP RL', cl:'pos', ve:'Fundo', vol10:0.5, volFonte:'drawdown', sub:'C', liq:30, isento:true, qual:false, min:0, ver:'[ISENÇÃO] Confirmado por Alexandre em 14/07/2026: isento de IR. "30" no nome sugere D+30 — carência ainda não confirmada no regulamento. [VOL] Drawdown real: "Plural Debêntures Incentivadas Hedge 30 Fc FIF" no Guia de Fundos 06/2026, máximo drawdown desde o início de -2,53%. Âncora: 50% de queda = 10. Nome bate com o do cadastro.', w:{C:2.5,M:2.5,A:0}},
+  {id:'xpdeb',  nome:'XP Debêntures Incentivadas CDI 30', cl:'pos', ve:'Fundo', vol10:0.32, volFonte:'drawdown', sub:'C', liq:30, isento:true, qual:false, min:0, ver:'[ISENÇÃO] Confirmado por Alexandre em 14/07/2026: isento de IR. "30" no nome sugere D+30 — carência ainda não confirmada no regulamento. [MATCH] Confirmado por Alexandre em 20/07/2026: CNPJ 26.803.233/0001-16, "XP Debêntures Incentivadas CDI CP FIF Incentivado de Investimento em Infra RF RL" (resolve a ambiguidade anterior — não é o fundo indexado a IPCA que eu tinha achado por engano). [VOL] Dado real obtido via dados abertos da CVM (Informe Diário, cota diária 04/01/2021–16/07/2026, 1390 pontos): drawdown máximo −1,61% (pico 11/01/2023, vale 16/02/2023). vol10=min(10,1,61/50×10)=0,32 — baixo, coerente com fundo de crédito curto prazo.', w:{C:2.5,M:2.5,A:0}},
+  {id:'prev_brad',  nome:'Previdência Bradesco Ultra XP Seg Prev', cl:'pos', ve:'Previdência', vol10:0.0, volFonte:'volatilidade', sub:'C', liq:6, qual:false, min:100, ver:'Dado real confirmado por Alexandre em 20/07/2026 (planilha Guia-de-Previdência, aba Prev XPCS, linha "Bradesco Ultra XP Seg Prev FIRF RL"): público-alvo Em Geral, aporte inicial e mínimo mensal R$100, carência de portabilidade D+0, liquidez total (cotização+liquidação) 6 dias. [VOL] Volatilidade real desde o início: 0,20% — fórmula vol10=min(10,vol×10) confirmada por Alexandre. Fundo de crédito/RF, volatilidade baixa é coerente com a classificação "Crédito High Grade" da própria planilha.', w:{C:3,M:0,A:0}},
+  {id:'prev_brave', nome:'Previdência Brave Prev XP Seg', cl:'pos', ve:'Previdência', vol10:0.0, volFonte:'volatilidade', sub:'C', liq:21, qual:true, min:100, ver:'Dado real confirmado por Alexandre em 20/07/2026 (planilha Guia-de-Previdência, aba Prev XPCS, linha "Brave XP Seg FIRF CP"): público-alvo Qualificados (⚠️ cadastro tinha qual:false — corrigido), aporte inicial e mínimo mensal R$100, carência de portabilidade D+0, liquidez total 21 dias. [VOL] Volatilidade real desde o início: 0,07% — fórmula vol10=min(10,vol×10) confirmada por Alexandre.', w:{C:3,M:0,A:0}},
+
+  {id:'b30',   nome:'Tesouro IPCA+ Principal 2030 (B30)', cl:'inf', ve:'Tesouro Direto', vol10:1.7, volFonte:'duration', sub:'M', liq:1, qual:false, min:0, ver:'[PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 7,5% para 6,0%, escala ×0,8 mantida como definitiva (classe Inflação do Conservador vale 10% na planilha v2, mas os produtos somavam 12,5%). [VOL] Duration ≈ anos até o vencimento (título "Principal", zero-coupon). Âncora: 20 anos = 10. CONFIRMAR a âncora.', w:{C:6,M:14.5,A:0}},
+  {id:'b35',   nome:'Tesouro IPCA+ Principal 2035 (B35)', cl:'inf', ve:'Tesouro Direto', vol10:4.2, volFonte:'duration', sub:'A', liq:1, qual:false, min:0, ver:'[PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 2,5% para 2,0%, escala ×0,8 mantida (ver B30). [VOL] Duration ≈ anos até o vencimento. Âncora: 20 anos = 10. CONFIRMAR a âncora.', w:{C:2,M:1.5,A:17.5}},
+  {id:'b50',   nome:'Tesouro IPCA+ Principal 2050 (B50)', cl:'inf', ve:'Tesouro Direto', vol10:10, volFonte:'duration', sub:'A', liq:1, qual:false, min:0, ver:'Na v2 o rótulo já vem como B50, corrigindo a divergência da v1. [VOL] Duration ≈ anos até o vencimento, truncada em 10 (vencimento além da âncora de 20 anos). CONFIRMAR a âncora.', w:{C:0,M:0,A:1.5}},
+  {id:'educa', nome:'Tesouro Educa+ (venc. mais longo)', cl:'inf', ve:'Tesouro Direto', vol10:10, volFonte:'duration', sub:'A', liq:1, qual:false, min:0, ver:'[VOL] Duration truncada em 10 — assumi vencimento tão longo quanto o B50 por não ter a data exata. CONFIRMAR vencimento real e a âncora de 20 anos.', w:{C:0,M:0,A:1}},
+  {id:'prev_trend', nome:'Previdência Trend IMA-B 5+ & Bolsa Americana Dólar XP Seg', cl:'inf', ve:'Previdência', vol10:0.6, volFonte:'volatilidade', sub:'A', liq:2, qual:true, min:100, ver:'Está em Inflação na planilha, mas carrega bolsa americana e câmbio. Classifiquei a volatilidade como nível 3 antes do dado real chegar. [PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 2,5% para 2,0%, escala ×0,8 mantida (ver B30). [VOL] Dado real confirmado por Alexandre em 20/07/2026 (planilha Guia-de-Previdência, aba Prev XPCS, linha "Trend IMA-B 5+ & Bolsa Americana Dólar XP Seg Prev FIM RL"): público-alvo Qualificados (⚠️ cadastro tinha qual:false — corrigido), aporte inicial e mínimo mensal R$100, liquidez total 2 dias. Volatilidade real desde o início: 5,88% — fórmula vol10=min(10,vol×10) confirmada por Alexandre. Vol10 baixo apesar da exposição cambial/bolsa americana; o peso do perfil e a exigência de qualificado seguem sendo as guardas de suitability, não só o vol10.', w:{C:2,M:2,A:2}},
+
+  {id:'ltn29', nome:'Tesouro Prefixado Principal 2029 (LTN 2029)', cl:'pre', ve:'Tesouro Direto', vol10:1.2, volFonte:'duration', sub:'M', liq:1, qual:false, min:0, ver:'[PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 4,0% para 3,2%, escala ×0,8 mantida (classe Prefixado do Conservador vale 5,2% na planilha v2, mas os produtos somavam 6,5%). [VOL] Duration ≈ anos até o vencimento (LTN, zero-coupon). Âncora: 20 anos = 10. CONFIRMAR a âncora.', w:{C:3.2,M:6.5,A:0}},
+  {id:'ltn32', nome:'Tesouro Prefixado Principal 2032 (LTN 2032)', cl:'pre', ve:'Tesouro Direto', vol10:2.7, volFonte:'duration', sub:'A', liq:1, qual:false, min:0, ver:'[PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 2,5% para 2,0%, escala ×0,8 mantida (ver LTN 2029). [VOL] Duration ≈ anos até o vencimento. Âncora: 20 anos = 10. CONFIRMAR a âncora.', w:{C:2,M:1.5,A:6}},
+
+  {id:'azbayes',  nome:'AZ Quest Bayes LS Sistemático FIF em Cotas de FIM', cl:'mm', ve:'Fundo', vol10:4.9, volFonte:'drawdown', sub:'M', liq:30, qual:true, min:0, ver:'[SUB] Confirmado por Alexandre em 14/07/2026: a planilha v1 classificava como Conservador, mas o fundo é Moderado ou mais agressivo — corrigido para Moderado. Público-alvo presumido qualificado. [VOL] Drawdown real: "Az Quest Bayes Sistemático FI F" no Guia de Fundos 06/2026, máximo drawdown desde o início de -24,62%. Âncora: 50% de queda = 10. Nome bate ("Sistemático") com o do cadastro.', w:{C:0,M:2,A:0}},
+  {id:'alphakey', nome:'AlphaKey Long Short FIC FIM', cl:'mm', ve:'Fundo', vol10:0.18, volFonte:'drawdown', sub:'M', liq:30, qual:true, min:0, ver:'[SUB] Confirmado por Alexandre em 14/07/2026: a planilha v1 classificava como Conservador, mas o fundo é Moderado ou mais agressivo — corrigido para Moderado. Público-alvo presumido qualificado. [MATCH] Confirmado por Alexandre em 20/07/2026: CNPJ 52.304.477/0001-64, "AlphaKey LS FIF em Cotas FIM RL" — resolve a ambiguidade anterior. O "AlphaKey Ações" do Guia de Fundos (drawdown -52,38%) era mesmo outro fundo, como eu suspeitava — dado real por CNPJ confirma valores bem diferentes. [VOL] Dado real obtido via dados abertos da CVM (Informe Diário, cota diária 28/09/2023–16/07/2026, 702 pontos): drawdown máximo −0,92% (pico 26/11/2024, vale 10/12/2024). vol10=min(10,0,92/50×10)=0,18 — muito baixo, coerente com estratégia long-short bem hedgeada (baixa exposição líquida ao mercado).', w:{C:0,M:2,A:0}},
+  {id:'prev_kap', nome:'Previdência Kapitalo K10 Global Prev XP Seg', cl:'mm', ve:'Previdência', vol10:0.9, volFonte:'volatilidade', sub:'M', liq:9, qual:false, min:100, ver:'[MATCH] Confirmado por Alexandre em 20/07/2026: o fundo correto na planilha Guia-de-Previdência (aba Prev XPCS) é "Kapitalo K10 Global Prev XP Seg Advisory FICFIM RL" (havia um segundo candidato fechado para novos aportes, "...Icatu Prev...", descartado). Público-alvo Em Geral, aporte inicial e mínimo mensal R$100, liquidez total 9 dias. [VOL] Volatilidade real desde o início: 9,22% (a mais alta dos 5 fundos de previdência do cadastro) — fórmula vol10=min(10,vol×10) confirmada por Alexandre. Vol10 baixo apesar da própria planilha classificar o fundo como "Macro Alta Vol" e restringi-lo a investidor qualificado — o peso do perfil (`w`, zero no Conservador) e a exigência de qualificado seguem sendo as guardas reais de suitability, não só o vol10.', w:{C:0,M:3.6,A:4}},
+  {id:'prev_arca',nome:'Previdência Arca Grão Prev XP Seg', cl:'mm', ve:'Previdência', vol10:0.5, volFonte:'volatilidade', sub:'M', liq:9, qual:false, min:100, ver:'[MATCH] Confirmado por Alexandre em 20/07/2026: o fundo correto na planilha Guia-de-Previdência (aba Prev XPCS) é "Arca Grão Previdência Advisory FIC FIM" (classe Multiestratégia/FIM — havia um segundo candidato, "Arca Grão XP Seg FIC RF CP", de Renda Fixa, descartado por não bater com a classe mm do cadastro). Público-alvo Em Geral, aporte inicial e mínimo mensal R$100, liquidez total 9 dias. [VOL] Volatilidade real desde o início: 5,42% — fórmula vol10=min(10,vol×10) confirmada por Alexandre.', w:{C:0,M:3.6,A:4}},
+
+  {id:'hgbr', nome:'HGBR11', cl:'rfg', ve:'ETF', vol10:5.87, volFonte:'drawdown-proxy', sub:'M', liq:2, qual:false, min:0, ver:'[VOL] HGBR11 tem menos de 1 ano de pregão na B3 — drawdown próprio não é confiável. Usei o índice-base que o nome referencia (iBoxx $ Investment Grade, proxy via ETF LQD, NYSEArca): drawdown máximo real −29,37% em 10 anos (pico 06/08/2020 — auge do rali de crédito pós-pandemia com juros baixos —, vale 19/10/2023 — alta de juros do Fed). vol10=min(10,29,37/50×10)=5,87. Proxy imperfeito: HGBR11 é "hedge carry" (estrutura de hedge cambial + estratégia de carry), não uma réplica passiva pura do LQD — a volatilidade real pode diferir. Metodologia de proxy confirmada por Alexandre em 20/07/2026, mas ESTA correspondência específica (LQD) não foi confirmada por ele — CONFIRMAR.', w:{C:2.5,M:2.5,A:2.5}},
+  {id:'spxr', nome:'SPXR11', cl:'rvg', ve:'ETF', vol10:6.78, volFonte:'drawdown-proxy', sub:'A', liq:2, qual:false, min:0, ver:'[PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 2,5% para 2,0%, escala ×0,8 mantida (classe RV Global do Conservador vale 2,0% na planilha v2). [VOL] SPXR11 tem menos de 1 ano de pregão na B3 — drawdown próprio não é confiável. Usei o índice que replica (S&P 500, ^GSPC, quanto BRL): drawdown máximo real −33,92% (pico 19/02/2020, vale 23/03/2020 — bate exatamente com o crash da COVID). vol10=min(10,33,92/50×10)=6,78. Metodologia de proxy confirmada por Alexandre em 20/07/2026.', w:{C:2,M:2.8,A:4}},
+  {id:'bilf', nome:'BILF39 (BDR de ETF)', cl:'rval', ve:'ETF', vol10:10, volFonte:'drawdown-proxy', sub:'A', liq:2, qual:false, min:0, ver:'[TRIBUTAÇÃO] Confirmado por Alexandre em 14/07/2026: BILF39 é tributado como BDR (não como ETF local), conforme o sufixo 39 sugeria. Produto novo na v2, classe nova (RV América Latina); a planilha o conta dentro de ETFs mesmo sendo BDR. [VOL] BILF39 acabou de estrear na B3 (1 único pregão) — sem histórico próprio algum. Usei o ETF original que a BDR replica (iShares Latin America 40 ETF, ticker ILF, NYSEArca): drawdown máximo real −60,41% em 10 anos (pico 26/01/2018, vale 23/03/2020). vol10=min(10,60,41/50×10)=12,08→teto em 10. Metodologia de proxy confirmada por Alexandre em 20/07/2026.', w:{C:0,M:0,A:7.6}},
+  {id:'divo', nome:'DIVO11', cl:'rvb', ve:'ETF', vol10:8.0, volFonte:'provisorio', sub:'A', liq:2, qual:false, min:0, ver:'[CLASSE] Confirmado por Alexandre em 14/07/2026: DIVO11 é ETF de RV Brasil. O rótulo "Fundos Listados" que aparece no Conservador da planilha provavelmente é herdado do XFIX11 (saiu da v2) — "Fundos Listados" ali provavelmente se refere só a FIIs, e DIVO11 não é FII. Mantido como RV Brasil nos 3 perfis. [PESO] Confirmado por Alexandre em 16/07/2026 (B-02): peso Conservador ajustado de 3,5% para 2,8%, escala ×0,8 mantida (ver nota do B30). [VOL] Dado real obtido via Yahoo Finance (histórico diário, 10 anos) em 20/07/2026: drawdown máximo −40,10% (pico 23/01/2020, vale 23/03/2020 — bate com o crash da COVID). vol10=min(10,|dd|/0,50×10)=8,02, coincidentemente perto do valor provisório que já estava em uso. Autenticidade do dado verificada por cruzamento com referências conhecidas antes de aplicar — ver ERROR-LOG E-16 (revisado).', w:{C:2.8,M:7,A:12}},
+  {id:'golx', nome:'GOLX11', cl:'alt', ve:'ETF', vol10:5.01, volFonte:'drawdown-proxy', sub:'A', liq:2, qual:false, min:0, ver:'[VOL] GOLX11 tem menos de 3 meses de pregão na B3 — drawdown próprio não é confiável. Usei o ativo que replica (ouro, futuro contínuo GC=F): drawdown máximo real −25,06% em 10 anos (pico 29/01/2026, vale 16/07/2026). vol10=min(10,25,06/50×10)=5,01. Metodologia de proxy confirmada por Alexandre em 20/07/2026.', w:{C:0,M:1,A:2}},
+  {id:'bcom', nome:'BCOM39 (BDR de ETF)', cl:'alt', ve:'ETF', vol10:9.79, volFonte:'drawdown-proxy', sub:'A', liq:2, qual:false, min:0, ver:'[VOL] BCOM39 acabou de estrear na B3 (1 único pregão) — sem histórico próprio algum. Nome retornado pelo Yahoo Finance ("BKR COMT ROLDRE") sugere BDR do iShares GSCI Commodity Dynamic Roll Strategy ETF (ticker COMT, NYSEArca) — match por semelhança de nome, não confirmado por CNPJ/prospecto. Usei o drawdown desse ETF: máximo real −48,95% em 10 anos (pico 08/06/2022, vale 08/04/2025). vol10=min(10,48,95/50×10)=9,79. Metodologia de proxy confirmada por Alexandre em 20/07/2026; match do ticker CONFIRMAR.', w:{C:0,M:0.5,A:1.4}},
+  {id:'hash', nome:'HASH11', cl:'alt', ve:'ETF', vol10:10, volFonte:'drawdown', sub:'A', liq:2, qual:false, min:0, ver:'ETF de cripto. [VOL] Dado real obtido via Yahoo Finance (histórico diário, 26/04/2021–20/07/2026, 5,2 anos) em 20/07/2026: drawdown máximo −78,08% (pico 09/11/2021, vale 29/11/2022 — bate com o topo e o "inverno cripto" de 2022). vol10=min(10,|dd|/0,50×10)=15,6→teto em 10 (o dd de 78% já excede em muito a âncora de 50%). Autenticidade do dado verificada por cruzamento com referências conhecidas antes de aplicar — ver ERROR-LOG E-16 (revisado).', w:{C:0,M:1,A:2}},
+
+  /* ---- Títulos bancários. Peso zero nos três perfis: só entram quando a carteira
+         precisa de reposição (volatilidade zero, liquidez restrita). O peso de
+         reposição `wr` define como o caixa se reparte entre eles. Emissor, taxa e
+         prazo são PLACEHOLDERS — preencher com a oferta vigente. ---- */
+  {id:'cdb_liq', nome:'CDB Banco XP S.A. — JUL/2028', cl:'pos', ve:'Renda Fixa Bancária', vol10:1, volFonte:'fixo', sub:'C', liq:1,
+   qual:false, min:0, fgc:true, emissor:'Banco XP', rating:'brAAA', pctCDI:101, prazoAnos:1.99, receber:true, wr:40,
+   ver:'Fonte: vitrine de renda fixa bancária, oferta de 14/07/2026 (Tax.Máx). Carência de 1 dia = liquidez praticamente diária. "Qtd Mín." da planilha é em unidades/lotes de emissão, não em R$ — mínimo de investimento em reais não confirmado. Taxa muda por oferta; conferir vigência antes de boletar.', w:{C:0,M:0,A:0}},
+  {id:'cdb_venc', nome:'CDB PicPay — JUL/2031', cl:'pos', ve:'Renda Fixa Bancária', vol10:1, volFonte:'fixo', sub:'C', liq:1825,
+   qual:false, min:0, fgc:true, emissor:'PicPay', rating:'AA-.br', pctCDI:106.75, prazoAnos:5.0, receber:true, wr:20,
+   ver:'Fonte: vitrine de renda fixa bancária, oferta de 14/07/2026 (Tax.Máx). Sem liquidez antes do vencimento (carência = quase todo o prazo). "Qtd Mín." da planilha é em unidades/lotes, não em R$ — mínimo em reais não confirmado. Taxa muda por oferta; conferir vigência.', w:{C:0,M:0,A:0}},
+  {id:'lci', nome:'LCI CEF — NOV/2026', cl:'pos', ve:'Renda Fixa Bancária', vol10:1, volFonte:'fixo', sub:'C', liq:119,
+   qual:false, min:0, fgc:true, isento:true, emissor:'CEF', rating:'brAAA', pctCDI:91, prazoAnos:0.31, receber:true, wr:20,
+   ver:'Fonte: vitrine de renda fixa bancária, oferta de 14/07/2026 (Tax.Máx). [ISENÇÃO] Confirmado por Alexandre em 14/07/2026: isento de IR. Carência de 119 dias. "Qtd Mín." em unidades/lotes, não R$. Taxa muda por oferta; conferir vigência.', w:{C:0,M:0,A:0}},
+  {id:'lca', nome:'LCA Banco Cooperativo Sicoob — JAN/2028', cl:'pos', ve:'Renda Fixa Bancária', vol10:1, volFonte:'fixo', sub:'C', liq:571,
+   qual:false, min:0, fgc:true, isento:true, emissor:'Sicoob', rating:'AAA', pctCDI:88, prazoAnos:1.56, receber:true, wr:20,
+   ver:'Fonte: vitrine de renda fixa bancária, oferta de 14/07/2026 (Tax.Máx). [ISENÇÃO] Confirmado por Alexandre em 14/07/2026: isento de IR. Carência de 571 dias. "Qtd Mín." em unidades/lotes, não R$. Taxa muda por oferta; conferir vigência.', w:{C:0,M:0,A:0}},
+];
+
+let PROD = JSON.parse(JSON.stringify(PADRAO));
+
+const state = {
+  nome:'', total:500000, perfil:'M', teto:10, qual:false, piso:1000,
+  resmodo:'meses', custo:12000, meses:6, resval:72000, resprod:'ts_emerg',
+  liqMin:0, liqMax:99999,
+  capFundo:5, capPrev:false, capFidc:true, repos:'auto',
+  fgcLim:250000, cdiProj:10, aliqEtf:15,
+  ve:{'Tesouro Direto':true,'ETF':true,'Fundo':true,'FIDC':true,'Previdência':true,'Renda Fixa Bancária':true},
+  objetivos:[],
+  q:{},
+  simVal:100000, simAnos:10,
+};
+
+/* ---------------- utils ---------------- */
+const brl  = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const brlc = n => n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pc   = n => (n*100).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+const pc2  = n => (n*100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'%';
+const parseMoney = s => { const t=String(s).replace(/[^\d,.-]/g,'').replace(/\./g,'').replace(',','.'); const v=parseFloat(t); return isFinite(v)?v:0; };
+const fmtMoney = n => n.toLocaleString('pt-BR',{maximumFractionDigits:0});
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nomePerfil = p => SUBS[p];
+const uid = () => 'o'+Math.random().toString(36).slice(2,9);
+
+/* fator de capitalização de um título bancário até o vencimento */
+function fatorFuturo(p){
+  const tx = (state.cdiProj/100) * ((p.pctCDI||100)/100);
+  const anos = p.prazoAnos || 0;
+  return Math.pow(1+tx, anos);
+}
+/* teto de peso individual por concentração de fundo */
+function capIndividual(p){
+  const alvo = p.ve==='Fundo' || (state.capFidc && p.ve==='FIDC') || (state.capPrev && p.ve==='Previdência');
+  return alvo ? state.capFundo/100 : Infinity;
+}
+const ehBancarioFgc = p => p.ve==='Renda Fixa Bancária' && p.fgc;
+
+/* ---------------- realocação ---------------- */
+/* Derrama `peso` em candidatos com folga, por ordem de preferência:
+   1) mesma classe + mesmo veículo   2) mesma classe
+   3) cadeia de fallback da classe   4) qualquer sobrevivente
+   Respeita o teto individual de cada destino. */
+function _tentarDistribuir(lista, pesoRef, folgaDe, destinos){
+  if(pesoRef.v <= 1e-10) return;
+  let guard = 0;
+  while(pesoRef.v > 1e-10 && guard++ < 30){
+    const cand = lista.filter(v => folgaDe(v) > 1e-10);
+    if(!cand.length) return;
+    const folgaTotal = cand.reduce((a,b)=>a+Math.min(folgaDe(b), 1), 0);
+    if(folgaTotal <= 1e-10) return;
+    const dar = Math.min(pesoRef.v, folgaTotal);
+    const basePos = cand.reduce((a,b)=>a+pesoBase(b),0);
+    cand.forEach(v=>{
+      const share = basePos>0 ? pesoBase(v)/basePos : 1/cand.length;
+      const add = Math.min(dar*share, folgaDe(v));
+      v.w += add; pesoRef.v -= add;
+      if(add>1e-10 && !destinos.includes(CM[v.cl].nome)) destinos.push(CM[v.cl].nome);
+    });
+    if(dar < 1e-10) return;
+  }
+}
+function derramar(itens, peso, origem, folgaDe){
+  const destinos = [];
+  const pesoRef = {v: peso};
+  const tentar = lista => _tentarDistribuir(lista, pesoRef, folgaDe, destinos);
+  const vivos = itens.filter(v=>v.on && v!==origem);
+  tentar(vivos.filter(v=>v.cl===origem.cl && GRUPO_VE(v.ve)===GRUPO_VE(origem.ve) && !mesmoEmissor(v,origem)));
+  tentar(vivos.filter(v=>v.cl===origem.cl && !mesmoEmissor(v,origem)));
+  let cls = CM[origem.cl].fb, g=0;
+  while(pesoRef.v>1e-10 && cls && g++<12){ tentar(vivos.filter(v=>v.cl===cls)); cls = CM[cls].fb; }
+  tentar(vivos);
+  return {resto: pesoRef.v, dest: destinos.length ? destinos.join(' + ') : '—'};
+}
+/* Excesso de uma CLASSE inteira (não de um produto): pula direto para a cadeia de
+   fallback a partir da própria classe/grupo excedente — nunca redistribui para
+   dentro do mesmo grupo, que é justamente quem estourou o teto. */
+function derramarClasse(itens, peso, grupoOrigem, folgaDe){
+  const destinos = [];
+  const pesoRef = {v: peso};
+  const tentar = lista => _tentarDistribuir(lista, pesoRef, folgaDe, destinos);
+  const vivos = itens.filter(v=>v.on && grupoDe(v.cl)!==grupoOrigem);
+  let cls = CM[grupoOrigem]?.fb, g=0;
+  while(pesoRef.v>1e-10 && cls && g++<12){ tentar(vivos.filter(v=>v.cl===cls)); cls = CM[cls].fb; }
+  tentar(vivos);
+  return {resto: pesoRef.v, dest: destinos.length ? destinos.join(' + ') : '—'};
+}
+const mesmoEmissor = (a,b) => !!(a.emissor && b.emissor && a.emissor===b.emissor);
+/* REPOS: os produtos de reposição (títulos bancários, Tesouro Selic) só disputam peso
+   quando a carteira perdeu produtos por VOLATILIDADE ou LIQUIDEZ — exatamente as
+   restrições que eles resolvem. Uma exclusão por enquadramento não os convoca:
+   o destino natural do FIDC restrito é o outro produto de crédito da mesma classe. */
+let REPOS = false;
+const pesoBase = v => v.w > 1e-9 ? v.w : ((v.receber && REPOS) ? (v.wr||1)/100 : 0);
+
+/* ---------------- motor ---------------- */
+function calcular(){
+  const alerts = [];
+  const reserva = state.resmodo==='meses' ? state.custo*state.meses : state.resval;
+  const bolsoes = state.objetivos.filter(o=>o.carve);
+  const somaBolsoes = bolsoes.reduce((a,b)=>a+(b.valor||0),0);
+  const investivel = Math.max(state.total - reserva - somaBolsoes, 0);
+
+  if(reserva + somaBolsoes >= state.total && state.total>0)
+    alerts.push(['err','A reserva de emergência somada aos objetivos de curto prazo consome todo o patrimônio. Não sobra valor para a carteira de longo prazo.']);
+  else if(state.total>0 && reserva/state.total > 0.30)
+    alerts.push(['warn',`A reserva representa ${pc(reserva/state.total)} do patrimônio. Vale rever o custo mensal, o número de meses, ou tratar a construção da reserva como o objetivo desta primeira fase.`]);
+  if(somaBolsoes>0)
+    alerts.push(['info',`${bolsoes.length} objetivo(s) de curto/médio prazo, somando ${brl(somaBolsoes)}, foram retirados da carteira e alocados em bolsões próprios. Ficam fora da reserva de emergência e fora do modelo de perfil.`]);
+
+  const p = state.perfil;
+  const emerg = PROD.find(x=>x.emerg);
+  const pesoEmerg = emerg ? (emerg.w[p]||0) : 0;
+
+  let itens = PROD.filter(x => !x.emerg && ((x.w[p]||0) > 0 || x.receber))
+                  .map(x => ({...x, w:x.w[p]||0, w0:x.w[p]||0, on:true}));
+  const soma = itens.reduce((a,b)=>a+b.w,0);
+  if(soma>0) itens.forEach(i=>{ i.w/=soma; i.w0=i.w; });
+
+  if(pesoEmerg>0)
+    alerts.push(['info',`A linha de reserva de emergência do modelo (${pesoEmerg.toLocaleString('pt-BR')}% no perfil ${nomePerfil(p)}) saiu da carteira e virou o valor informado. Os demais pesos foram renormalizados para 100%.`]);
+
+  /* 1. exclusões por restrição — marca tudo antes de redistribuir, para que o
+        peso e o destino reportados sejam os originais, sem efeito cascata. */
+  const remocoes = [];
+  const excluidos = [];
+  for(const i of itens){
+    let motivo = null;
+    if(!state.ve[i.ve])            motivo = `veículo ${i.ve} desativado na aba Composição`;
+    else if(i.vol10 > state.teto)  motivo = `volatilidade ${rotuloVol(i.vol10).toLowerCase()}`;
+    else if(i.qual && !state.qual) motivo = 'restrito a investidor qualificado';
+    else if(i.liq > state.liqMax)  motivo = `liquidez ${rotuloLiq(i.liq)} acima do prazo aceito (${rotuloLiq(state.liqMax)})`;
+    else if(i.liq < state.liqMin)  motivo = `liquidez ${rotuloLiq(i.liq)} abaixo do mínimo exigido`;
+    if(motivo){ i.on = false; excluidos.push({i,motivo, repor: /volatilidade|liquidez/.test(motivo)}); }
+  }
+  REPOS = state.repos==='sempre' ? true
+        : state.repos==='nunca'  ? false
+        : excluidos.some(e => e.repor && e.i.w0 > 1e-9);
+  const sobrev = itens.filter(i=>i.on);
+  const destinoDe = cls => { let c=cls,g=0; while(c && g++<12){ if(sobrev.some(v=>v.cl===c)) return c; c=CM[c].fb; } return null; };
+  const balde = {};
+  for(const {i,motivo} of excluidos){
+    if(i.w0 <= 1e-9){ i.w = 0; continue; }   // produto de reposição nunca "removido"
+    const d = destinoDe(i.cl);
+    remocoes.push({nome:i.nome, peso:i.w, motivo, dest: d?CM[d].nome:'—'});
+    if(d) balde[d] = (balde[d]||0) + i.w;
+    i.w = 0;
+  }
+  for(const d in balde){
+    const alvo = sobrev.filter(v=>v.cl===d);
+    const s = alvo.reduce((a,b)=>a+pesoBase(b),0);
+    alvo.forEach(v=> v.w += balde[d] * (s>0 ? pesoBase(v)/s : 1/alvo.length));
+  }
+
+  /* 1b. rede de segurança */
+  let sw = itens.filter(i=>i.on).reduce((a,b)=>a+b.w,0);
+  if(sw < 1e-9){
+    const ok = x => !x.emerg && state.ve[x.ve] && x.vol10<=state.teto && (!x.qual||state.qual) && x.liq<=state.liqMax && x.liq>=state.liqMin;
+    const cand = PROD.filter(ok).sort((a,b)=>a.vol10-b.vol10 || a.liq-b.liq)[0];
+    if(cand){
+      const ex = itens.find(i=>i.id===cand.id);
+      if(ex){ ex.on=true; ex.w=1; ex.w0=1; } else itens.push({...cand, w:1, w0:1, on:true});
+      alerts.push(['warn',`Nenhum produto do perfil ${nomePerfil(p)} atende às restrições. A carteira foi montada integralmente em <b>${esc(cand.nome)}</b>, único produto compatível no cadastro. Reveja o perfil, a volatilidade, a liquidez ou os veículos ativos.`]);
+    } else {
+      alerts.push(['err','Nenhum produto do cadastro atende às restrições selecionadas. Ajuste os filtros ou inclua produtos no editor.']);
+    }
+  } else if(Math.abs(sw-1) > 1e-9){
+    itens.filter(i=>i.on).forEach(i=>i.w/=sw);
+  }
+  itens.filter(i=>i.on && i.w<=1e-9).forEach(i=>i.on=false);   // reposição que não recebeu nada
+
+  /* 2. teto de concentração por fundo (ETFs isentos do teto) — e, junto, o teto do FGC.
+     As duas restrições recaem sobre o mesmo produto bancário ao mesmo tempo, então
+     toda etapa de redistribuição usa a MESMA função de folga (o mínimo das duas),
+     nunca uma isolada — senão uma etapa reabre o que a outra fechou. */
+  const pesoClasse = () => { const m={}; itens.filter(i=>i.on).forEach(i=>m[i.cl]=(m[i.cl]||0)+i.w); return m; };
+  const clsAntes = pesoClasse();
+  const tetos = [];
+  const capOf = v => capIndividual(v);
+  const folgaFgcDe = v => {
+    if(!ehBancarioFgc(v)) return Infinity;
+    if(investivel <= 0) return Infinity;
+    const proj = itens.filter(x=>x.on && x.emissor===v.emissor).reduce((a,b)=>a+b.w*investivel*fatorFuturo(b),0);
+    const espaco = (state.fgcLim - proj) / (investivel * fatorFuturo(v));
+    return Math.max(espaco, 0);
+  };
+  const capClassePerfil = CAP_CLASSE[state.perfil] || {};
+  const folgaClasseDe = v => {
+    const g = grupoDe(v.cl);
+    const cap = capClassePerfil[g];
+    if(cap===undefined) return Infinity; // ex.: Pós-fixado — sem teto (D-22)
+    const pesoGrupo = itens.filter(x=>x.on && grupoDe(x.cl)===g).reduce((a,b)=>a+b.w,0);
+    return Math.max(cap/100 - pesoGrupo, 0);
+  };
+  const folgaGeral = v => Math.max(Math.min(capOf(v) - v.w, folgaFgcDe(v), folgaClasseDe(v)), 0);
+  const tetosClasse = [];
+  const classesInsoluveis = new Set();
+  const produtosInsoluveis = new Set();
+  for(let it=0; it<160; it++){
+    // 2a. classe inteira acima do teto das Diretrizes — checado primeiro (é a restrição mais ampla)
+    const pesosGrupo = {};
+    itens.filter(i=>i.on).forEach(i=>{ const g=grupoDe(i.cl); pesosGrupo[g]=(pesosGrupo[g]||0)+i.w; });
+    let grupoExc = null, capExc = null;
+    for(const g in pesosGrupo){
+      if(classesInsoluveis.has(g)) continue;
+      const cap = capClassePerfil[g]; if(cap===undefined) continue;
+      if(pesosGrupo[g] > cap/100 + 1e-9){ grupoExc=g; capExc=cap/100; break; }
+    }
+    if(grupoExc){
+      const membros = itens.filter(i=>i.on && grupoDe(i.cl)===grupoExc);
+      const somaAtual = membros.reduce((a,b)=>a+b.w,0);
+      const ex = somaAtual - capExc;
+      const fator = capExc/somaAtual;
+      membros.forEach(m=> m.w *= fator);
+      const {resto, dest} = derramarClasse(itens, ex, grupoExc, folgaGeral);
+      tetosClasse.push({classe: CM[grupoExc]?.nome || grupoExc, excesso:ex, dest, resto});
+      if(resto > 1e-9){
+        // ninguém tinha folga: devolve o que não coube (dinheiro não desaparece) e não insiste
+        // nessa classe de novo — mas outras restrições (teto de fundo) continuam sendo checadas.
+        membros[membros.length-1].w += resto;
+        classesInsoluveis.add(grupoExc);
+      }
+      continue;
+    }
+    // 2b. produto individual acima do teto de concentração por fundo
+    const excedente = itens.filter(i=>i.on && !produtosInsoluveis.has(i.id) && i.w > capOf(i) + 1e-9).sort((a,b)=>b.w-a.w)[0];
+    if(!excedente) break;
+    const ex = excedente.w - capOf(excedente);
+    excedente.w = capOf(excedente);
+    const {resto, dest} = derramar(itens, ex, excedente, folgaGeral);
+    tetos.push({nome:excedente.nome, excesso:ex, dest, resto, motivo:`teto de ${state.capFundo}% por fundo`});
+    if(resto > 1e-9){ excedente.w += resto; produtosInsoluveis.add(excedente.id); }
+  }
+
+  const clsDepois = pesoClasse();
+  const deriva = CLASSES.map(c=>({c, d:(clsDepois[c.id]||0)-(clsAntes[c.id]||0)}))
+                        .filter(x=>x.d < -0.005);
+
+  /* 3. teto do FGC por grupo emissor — sobre o valor PROJETADO no vencimento */
+  const fgc = [];
+  const fgcEstouro = [];
+  if(investivel > 0){
+    for(let it=0; it<40; it++){
+      const grupos = {};
+      itens.filter(i=>i.on && ehBancarioFgc(i) && i.w>1e-9).forEach(i=>{
+        (grupos[i.emissor] = grupos[i.emissor] || []).push(i);
+      });
+      let estourou = null;
+      for(const g in grupos){
+        const proj = grupos[g].reduce((a,b)=>a + b.w*investivel*fatorFuturo(b), 0);
+        if(proj > state.fgcLim + 0.01){ estourou = {g, proj, itens:grupos[g]}; break; }
+      }
+      if(!estourou) break;
+      const k = state.fgcLim / estourou.proj;
+      let excesso = 0;
+      estourou.itens.forEach(i=>{ const novo = i.w*k; excesso += i.w - novo; i.w = novo; });
+      const origem = estourou.itens[0];
+      const {resto, dest} = derramar(itens, excesso, origem, folgaGeral);
+      if(resto > 1e-9){
+        // ninguém tinha folga: devolve o resto proporcionalmente ao grupo e registra o estouro
+        const sg = estourou.itens.reduce((a,b)=>a+b.w,0);
+        estourou.itens.forEach(i=> i.w += resto * (sg>0 ? i.w/sg : 1/estourou.itens.length));
+        const projFinal = estourou.itens.reduce((a,b)=>a + b.w*investivel*fatorFuturo(b), 0);
+        fgcEstouro.push({emissor:estourou.g, proj:projFinal, sobra: projFinal - state.fgcLim});
+        break;
+      }
+      fgc.push({emissor:estourou.g, proj:estourou.proj, excesso, dest});
+    }
+  }
+  /* Rede de segurança do FGC: o loop acima pode oscilar sem convergir quando dois ou mais
+     emissores disputam a mesma folga escassa (ex.: Tesouro Direto desligado, sem válvula de
+     segurança) — cada um empurra o excesso pro outro, nenhum aciona o branch de "sem folga"
+     a tempo. Reconfere no final, sempre, independente de como o loop terminou. */
+  if(investivel > 0){
+    const gruposFinal = {};
+    itens.filter(i=>i.on && ehBancarioFgc(i) && i.w>1e-9).forEach(i=>{
+      (gruposFinal[i.emissor] = gruposFinal[i.emissor] || []).push(i);
+    });
+    for(const g in gruposFinal){
+      if(fgcEstouro.some(e=>e.emissor===g)) continue; // já registrado
+      const proj = gruposFinal[g].reduce((a,b)=>a+b.w*investivel*fatorFuturo(b),0);
+      if(proj > state.fgcLim + 0.01) fgcEstouro.push({emissor:g, proj, sobra: proj-state.fgcLim});
+    }
+  }
+
+  /* 4. piso por posição */
+  const cortes = [];
+  const pisoInsoluveis = new Set();
+  for(let it=0; it<40; it++){
+    const cand = itens.filter(i=>i.on && i.w>0 && !i.prot && !pisoInsoluveis.has(i.id));
+    if(itens.filter(i=>i.on&&i.w>0).length <= 1) break;
+    cand.sort((a,b)=>a.w-b.w);
+    const alvo = cand.find(v => v.w*investivel < Math.max(state.piso, v.min||0));
+    if(!alvo) break;
+    alvo.on=false; const w=alvo.w; alvo.w=0;
+    const {resto, dest} = derramar(itens, w, alvo, folgaGeral);
+    if(resto > 1e-9){
+      // ninguém tinha folga para receber tudo: religa o alvo com o que sobrou, em vez de
+      // deixar o peso sumir (isso inflaria as outras classes na normalização final do passo 5,
+      // inclusive as que já estavam exatamente no próprio teto — ver ERROR-LOG E-13). Marca
+      // como insolúvel pra não ficar tentando cortar o mesmo item de novo sem progresso.
+      alvo.on = true;
+      alvo.w = resto;
+      pisoInsoluveis.add(alvo.id);
+    }
+    cortes.push({nome:alvo.nome, peso:w, dest, minimo:Math.max(state.piso,alvo.min||0)});
+  }
+
+  /* O piso por posição pode reduzir a carteira a um punhado de sobreviventes — no limite,
+     a um só. Quando isso acontece, o teto de classe pode acabar estourado por pura falta
+     de alternativa (não há mais nenhum outro produto elegível pra segurar o excesso). Isso
+     não é erro de cálculo — é o piso vencendo o teto — mas tem de virar aviso, nunca silêncio. */
+  const violacoesClassePorPiso = [];
+  {
+    const pesosFinal = {};
+    itens.filter(i=>i.on).forEach(i=>{ const g=grupoDe(i.cl); pesosFinal[g]=(pesosFinal[g]||0)+i.w; });
+    for(const g in pesosFinal){
+      const cap = capClassePerfil[g]; if(cap===undefined) continue;
+      if(pesosFinal[g] > cap/100 + 1e-6) violacoesClassePorPiso.push({classe: CM[g]?.nome||g, pesoFinal: pesosFinal[g], cap});
+    }
+  }
+
+  /* 5. valores e resíduo de arredondamento */
+  const vivos = itens.filter(i=>i.on && i.w>1e-9);
+  /* Nenhum produto sobreviveu aos filtros: o dinheiro não pode desaparecer da conta.
+     Fica explícito como "não alocado" e a soma continua fechando no patrimônio. */
+  const naoAlocado = (vivos.length===0 && investivel>0.005) ? investivel : 0;
+  const sw2 = vivos.reduce((a,b)=>a+b.w,0);
+  if(sw2>0 && Math.abs(sw2-1)>1e-9) vivos.forEach(i=>i.w/=sw2);
+  vivos.forEach(i => i.valor = Math.round(i.w*investivel*100)/100);
+  const resid = Math.round((investivel - vivos.reduce((a,b)=>a+b.valor,0))*100)/100;
+  if(vivos.length && Math.abs(resid)>0) vivos.sort((a,b)=>b.valor-a.valor)[0].valor += resid;
+
+  /* avisos de coerência */
+  if(state.teto<7 && p==='A')
+    alerts.push(['warn','Perfil Arrojado combinado com tolerância a volatilidade reduzida. A carteira resultante não expressa o perfil declarado — verifique a aderência ao suitability antes de propor.']);
+  if(naoAlocado>0)
+    alerts.push(['err',`<b>${brl(naoAlocado)} não foram alocados.</b> Nenhum produto do cadastro sobrevive à combinação atual de perfil, volatilidade, liquidez e veículos ativos. O valor aparece como "não alocado" na tabela — não sumiu da conta, mas também não tem destino. Relaxe um filtro ou cadastre um produto compatível.`]);
+  if(investivel>0 && investivel < 10000)
+    alerts.push(['warn','Valor investível baixo. A carteira tende a ficar concentrada em poucas linhas — considere começar só pela reserva e escalonar aportes.']);
+  const banc = vivos.filter(i=>i.ve==='Renda Fixa Bancária');
+  if(banc.length && banc.some(i=>/PLACEHOLDER/.test(i.ver||'')))
+    alerts.push(['warn','A carteira usa títulos bancários que ainda estão como <b>placeholder</b> no cadastro (emissor, % do CDI e prazo fictícios). Preencha no editor antes de levar ao cliente — a checagem de FGC depende desses campos.']);
+
+  tetosClasse.forEach(t => alerts.push(['info',
+    `A classe <b>${esc(t.classe)}</b> ultrapassava o teto de alocação das Diretrizes para o perfil ${nomePerfil(p)}. Excesso de ${pc(t.excesso)} realocado em <b>${esc(t.dest)}</b>${t.resto>1e-9?' — parte não coube, nenhum destino com folga':''}.`]));
+  tetos.forEach(t => alerts.push(['info',
+    `<b>${esc(t.nome)}</b> ultrapassava o ${t.motivo}. Excesso de ${pc(t.excesso)} realocado em <b>${esc(t.dest)}</b>${t.resto>1e-9?' — parte não coube, nenhum destino com folga':''}.`]));
+  fgc.forEach(f => alerts.push(['info',
+    `Grupo emissor <b>${esc(f.emissor)}</b> projetava ${brl(f.proj)} no vencimento, acima do limite de ${brl(state.fgcLim)} do FGC. Excesso de ${pc(f.excesso)} realocado em <b>${esc(f.dest)}</b>.`]));
+  deriva.forEach(({c,d}) => {
+    const capG = capClassePerfil[grupoDe(c.id)];
+    const noTeto = capG!==undefined && Math.abs((clsDepois[c.id]||0) - capG/100) < 0.005;
+    if(noTeto) return; // a classe encolheu porque bateu no próprio teto das Diretrizes — comportamento esperado, não é falta de fundo
+    alerts.push(['warn',
+      `O teto de ${state.capFundo}% por fundo tirou ${pc(-d)} da classe <b>${c.nome}</b> — não há outro fundo dessa classe no cadastro com folga para receber. A alocação mudou de categoria. <b>Cadastre um segundo fundo de ${c.nome}</b> no editor para preservar a classe.`]);
+  });
+  fgcEstouro.forEach(f => alerts.push(['err',
+    `<b>Não foi possível respeitar o FGC.</b> O grupo emissor <b>${esc(f.emissor)}</b> projeta ${brl(f.proj)} no vencimento — ${brl(f.sobra)} acima do limite de ${brl(state.fgcLim)} — e nenhum outro produto compatível com os filtros tem folga para receber o excedente. Cadastre mais emissores bancários, relaxe a liquidez ou aceite exposição sem cobertura do FGC de forma consciente.`]));
+  if(vivos.length===1 && vivos[0].ve==='Renda Fixa Bancária')
+    alerts.push(['warn','A carteira ficou concentrada em um único emissor bancário. Com liquidez D+0 o cadastro só oferece o CDB de liquidez diária — o Tesouro Selic liquida em D+1. Se D+1 for aceitável, relaxe o filtro de liquidez.']);
+  remocoes.forEach(r => alerts.push(['warn',
+    `<b>${esc(r.nome)}</b> (${pc(r.peso)}) removido: ${r.motivo}. Peso realocado em <b>${r.dest}</b>.`]));
+  cortes.forEach(c => alerts.push(['info',
+    `<b>${esc(c.nome)}</b> (${pc(c.peso)}) ficaria em ${brl(c.peso*investivel)}, abaixo do mínimo de ${brl(c.minimo)}. Peso realocado em <b>${c.dest}</b>.`]));
+  itens.filter(i=>i.on && pisoInsoluveis.has(i.id)).forEach(i => alerts.push(['warn',
+    `<b>${esc(i.nome)}</b> ficou em ${brl(i.w*investivel)}, abaixo do piso de ${brl(state.piso)}. Não havia destino com folga para esse valor sem violar o teto de concentração, o FGC ou o teto de classe de outra posição — preferi manter esse resíduo pequeno a forçar através de outro limite. Reduza o piso ou relaxe algum filtro para eliminar essa posição pequena.`]));
+  violacoesClassePorPiso.forEach(v => alerts.push(['err',
+    `<b>O piso por posição não deixou espaço para respeitar o teto da classe ${esc(v.classe)}.</b> Depois de cortar as posições abaixo de ${brl(state.piso)}, não sobrou nenhum outro produto elegível para segurar o excesso, e a classe ficou em ${pc(v.pesoFinal)} — acima do teto de ${pc(v.cap/100)} das Diretrizes. Reduza o piso por posição ou relaxe os filtros (volatilidade, liquidez, enquadramento) para caber mais produtos na carteira.`]));
+
+  return {reserva, investivel, naoAlocado, somaBolsoes, bolsoes, vivos, alerts, remocoes, cortes, tetos, tetosClasse, violacoesClassePorPiso, fgc, fgcEstouro};
+}
+
+/* ---------------- objetivos ---------------- */
+/* Regra de horizonte: quanto menor o prazo, menor a volatilidade e a liquidez aceitas. */
+function regraObjetivo(anos){
+  if(anos <= 1)  return {teto:0, liq:30,  nome:'Caixa'};
+  if(anos <= 3)  return {teto:3, liq:180, nome:'Curto prazo'};
+  if(anos <= 5)  return {teto:6, liq:365, nome:'Médio prazo'};
+  return {teto:10, liq:99999, nome:'Longo prazo'};
+}
+function sugerirObjetivo(o){
+  const r = regraObjetivo(o.anos);
+  const dias = Math.max(Math.round(o.anos*365), 1);
+  const cands = PROD.filter(p => !p.emerg && state.ve[p.ve] && p.vol10<=r.teto
+                              && (!p.qual || state.qual)
+                              && p.liq <= Math.min(r.liq, dias))
+                    .sort((a,b)=> a.vol10-b.vol10 || a.liq-b.liq);
+  const escolhidos = cands.slice(0,3);
+  const pesos = [0.5,0.3,0.2].slice(0,escolhidos.length);
+  const s = pesos.reduce((a,b)=>a+b,0);
+  return {regra:r, linhas: escolhidos.map((p,i)=>({p, w:pesos[i]/s, valor: Math.round((o.valor||0)*pesos[i]/s*100)/100}))};
+}
+
+/* ---------------- simulação come-cotas ---------------- */
+/* Fundo de RF longo prazo: come-cotas semestral a 15%; no resgate, 15% sobre o
+   ganho desde a última tributação (alíquota final igual à do come-cotas → sem
+   complemento). ETF de RF: sem come-cotas; alíquota única no resgate.
+   Modelo determinístico, CDI constante. Não é histórico e não é promessa. */
+function simComeCotas(V0, cdiAA, anos, aliqEtf){
+  const iSem = Math.pow(1+cdiAA, 0.5) - 1;
+  const nSem = Math.max(Math.round(anos*2), 1);
+  let n = 1, c = V0, cref = V0, pago = 0;
+  const serie = [{t:0, fundo:V0, etf:V0}];
+  for(let s=1; s<=nSem; s++){
+    c *= (1+iSem);
+    const ganho = n*(c - cref);
+    const imp = 0.15*ganho;
+    pago += imp;
+    n -= imp/c;
+    cref = c;
+    serie.push({t:s/2, fundo:n*c, etf:V0*Math.pow(1+cdiAA, s/2)});
+  }
+  const brutoEtf = V0*Math.pow(1+cdiAA, nSem/2);
+  return {
+    serie,
+    fundoBruto: n*c,                       // já descontado o come-cotas
+    fundoLiquido: n*c,                     // resgate logo após come-cotas → sem imposto adicional
+    impostoComeCotas: pago,
+    etfBruto: brutoEtf,
+    etfLiquido: V0 + (brutoEtf - V0)*(1 - aliqEtf/100),
+    impostoEtf: (brutoEtf - V0)*(aliqEtf/100),
+  };
+}
+
+
+/* ---------------- download ---------------- */
+function baixar(nome, conteudo, tipo){
+  const blob = new Blob([conteudo], {type: tipo+';charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+}
+/* ---------------- escritor .xlsx (ZIP store, sem dependências) ---------------- */
+const _CRCT = (()=>{const t=new Uint32Array(256);for(let i=0;i<256;i++){let c=i;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[i]=c>>>0;}return t;})();
+function _crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=_CRCT[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function _enc(s){return new TextEncoder().encode(s);}
+function _zip(files){
+  const parts=[],central=[]; let off=0;
+  const dv=n=>{const b=new Uint8Array(4);new DataView(b.buffer).setUint32(0,n,true);return b;};
+  const sv=n=>{const b=new Uint8Array(2);new DataView(b.buffer).setUint16(0,n,true);return b;};
+  for(const f of files){
+    const nm=_enc(f.name), d=f.data, c=_crc32(d);
+    const lh=[_enc('PK\x03\x04'),sv(20),sv(0),sv(0),sv(0),sv(0),dv(c),dv(d.length),dv(d.length),sv(nm.length),sv(0),nm,d];
+    parts.push(...lh);
+    central.push([_enc('PK\x01\x02'),sv(20),sv(20),sv(0),sv(0),sv(0),sv(0),dv(c),dv(d.length),dv(d.length),sv(nm.length),sv(0),sv(0),sv(0),sv(0),dv(0),dv(off),nm]);
+    off+=lh.reduce((a,b)=>a+b.length,0);
+  }
+  const cd=[]; let cdLen=0;
+  for(const e of central){ cd.push(...e); cdLen+=e.reduce((a,b)=>a+b.length,0); }
+  const all=[...parts,...cd,_enc('PK\x05\x06'),sv(0),sv(0),sv(files.length),sv(files.length),dv(cdLen),dv(off),sv(0)];
+  const out=new Uint8Array(all.reduce((a,b)=>a+b.length,0)); let p=0;
+  for(const b of all){ out.set(b,p); p+=b.length; }
+  return out;
+}
+const _x = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const _col = n => { let s='';n++; while(n>0){const m=(n-1)%26; s=String.fromCharCode(65+m)+s; n=(n-m-1)/26;} return s; };
+function _cell(ref,c){
+  if(c===null||c===undefined||c==='') return '';
+  if(typeof c!=='object') c = (typeof c==='number') ? {v:c,t:'n'} : {v:c,t:'s'};
+  const st = c.s ? ` s="${c.s}"` : '';
+  if(c.f!==undefined) return `<c r="${ref}"${st}><f>${_x(c.f)}</f><v>${c.v??0}</v></c>`;
+  if(c.t==='n')       return `<c r="${ref}"${st}><v>${c.v}</v></c>`;
+  return `<c r="${ref}"${st} t="inlineStr"><is><t xml:space="preserve">${_x(c.v)}</t></is></c>`;
+}
+function _sheet(rows,larg){
+  const cols = larg ? `<cols>${larg.map((w,i)=>`<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join('')}</cols>` : '';
+  const body = rows.map((r,ri)=>{
+    const cs = r.map((c,ci)=>_cell(_col(ci)+(ri+1), c)).join('');
+    return cs ? `<row r="${ri+1}">${cs}</row>` : `<row r="${ri+1}"/>`;
+  }).join('');
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0" showGridLines="0"/></sheetViews>${cols}<sheetData>${body}</sheetData></worksheet>`;
+}
+/* estilos: 1 negrito · 2 R$ · 3 % · 4 título · 5 cabeçalho · 6 total R$ · 7 total texto · 8 nota */
+const _STYLES = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="2"><numFmt numFmtId="164" formatCode="&quot;R$&quot;\\ #,##0.00"/><numFmt numFmtId="165" formatCode="0.00%"/></numFmts><fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="14"/><name val="Calibri"/></font><font><i/><sz val="9"/><color rgb="FF666666"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEFEBE3"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border/><border><top style="thin"><color rgb="FF999999"/></top></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="9"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="164" fontId="1" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+function montarXlsx(abas){
+  const ct = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${abas.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`;
+  const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+  const wb = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${abas.map((a,i)=>`<sheet name="${_x(a.nome)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`;
+  const wbr = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${abas.map((_,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${abas.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+  return _zip([
+    {name:'[Content_Types].xml', data:_enc(ct)},
+    {name:'_rels/.rels', data:_enc(rels)},
+    {name:'xl/workbook.xml', data:_enc(wb)},
+    {name:'xl/_rels/workbook.xml.rels', data:_enc(wbr)},
+    {name:'xl/styles.xml', data:_enc(_STYLES)},
+    ...abas.map((a,i)=>({name:`xl/worksheets/sheet${i+1}.xml`, data:_enc(_sheet(a.rows,a.larguras))}))
+  ]);
+}
+
+
+
+/* ---------------- boleta .xlsx ---------------- */
+function linhasBoleta(){
+  const r = ULTIMO, tot = state.total||0;
+  const rp = PROD.find(x=>x.id===state.resprod) || {nome:'—', ve:'', liq:0};
+  const hoje = new Date().toLocaleDateString('pt-BR');
+  const b = [];
+  b.push([{v:'Boleta de alocação',s:4}]);
+  b.push([{v:'Gerado em',s:1}, hoje]);
+  b.push([]);
+  b.push([{v:'Cliente',s:1}, state.nome||'—', '', {v:'Perfil',s:1}, nomePerfil(state.perfil)]);
+  b.push([{v:'Enquadramento',s:1}, state.qual?'Investidor qualificado':'Investidor comum', '', {v:'Volatilidade máxima',s:1}, `${state.teto} — ${rotuloVol(state.teto)}`]);
+  b.push([{v:'Liquidez aceita',s:1}, `até ${rotuloLiq(state.liqMax)}`, '', {v:'Piso por posição',s:1}, {v:state.piso||0,t:'n',s:2}]);
+  b.push([{v:'Patrimônio',s:1}, {v:tot,t:'n',s:2}, '', {v:'Teto por fundo',s:1}, {v:state.capFundo/100,t:'n',s:3}]);
+  b.push([{v:'Reserva de emergência',s:1}, {v:r.reserva,t:'n',s:2}, '', {v:'Objetivos (bolsões)',s:1}, {v:r.somaBolsoes,t:'n',s:2}]);
+  b.push([{v:'Carteira de longo prazo',s:1}, {v:r.investivel,t:'n',s:2}, '', {v:'FGC por grupo emissor',s:1}, {v:state.fgcLim,t:'n',s:2}]);
+  b.push([]);
+  b.push([{v:'Bolsão',s:5},{v:'Classe',s:5},{v:'Produto',s:5},{v:'Veículo',s:5},{v:'Volatilidade',s:5},{v:'Liquidez',s:5},
+          {v:'Restrição',s:5},{v:'% carteira',s:5},{v:'% patrimônio',s:5},{v:'Valor (R$)',s:5},{v:'Executado',s:5},{v:'Data',s:5},{v:'Observação',s:5}]);
+  const ini = b.length + 1;
+
+  if(r.reserva > 0){
+    const det = state.resmodo==='meses' ? `${state.meses} meses × ${brl(state.custo)}` : 'valor definido';
+    b.push(['Reserva','Reserva de emergência', rp.nome, rp.ve||'', rotuloVol(0), rotuloLiq(rp.liq||0), '', '',
+            {v: tot?r.reserva/tot:0,t:'n',s:3}, {v:r.reserva,t:'n',s:2}, '', '', det]);
+  }
+  for(const o of state.objetivos.filter(o=>o.carve && o.valor>0)){
+    const s = sugerirObjetivo(o);
+    for(const l of s.linhas){
+      b.push([`${o.nome} (${o.anos}a)`, CM[l.p.cl].nome, l.p.nome, l.p.ve, `${l.p.vol10} — ${rotuloVol(l.p.vol10)}`, rotuloLiq(l.p.liq),
+              l.p.qual?'Investidor qualificado':'', '', {v: tot?l.valor/tot:0,t:'n',s:3}, {v:l.valor,t:'n',s:2},
+              '', '', l.p.ver||'']);
+    }
+  }
+  for(const c of CLASSES){
+    r.vivos.filter(i=>i.cl===c.id && i.valor>0.005).sort((a,b2)=>b2.valor-a.valor).forEach(i=>{
+      b.push(['Carteira', c.nome, i.nome, i.ve, `${i.vol10} — ${rotuloVol(i.vol10)}`, rotuloLiq(i.liq),
+              i.qual?'Investidor qualificado':'',
+              {v: r.investivel ? i.valor/r.investivel : 0,t:'n',s:3},
+              {v: tot ? i.valor/tot : 0,t:'n',s:3},
+              {v: i.valor,t:'n',s:2}, '', '', i.ver||'']);
+    });
+  }
+  if(r.naoAlocado>0)
+    b.push(['NÃO ALOCADO','—','Nenhum produto compatível com os filtros','','','','','',
+            {v: tot?r.naoAlocado/tot:0,t:'n',s:3},{v:r.naoAlocado,t:'n',s:2},'','',
+            'Relaxe um filtro ou cadastre um produto compatível antes de boletar.']);
+  const fim = b.length;
+  const somaTot = r.reserva + r.somaBolsoes + r.naoAlocado + r.vivos.reduce((a,x)=>a+x.valor,0);
+  b.push([{v:'TOTAL',s:7},{v:'',s:7},{v:'',s:7},{v:'',s:7},{v:'',s:7},{v:'',s:7},{v:'',s:7},{v:'',s:7},{v:'',s:7},
+          {v: Math.round(somaTot*100)/100, t:'n', s:6, f:`SUM(J${ini}:J${fim})`},{v:'',s:7},{v:'',s:7},{v:'',s:7}]);
+  b.push([]);
+  b.push([{v:'A coluna "Observação" traz itens do cadastro que dependem de conferência na lâmina ou no regulamento do produto.',s:8}]);
+  b.push([{v:'Simulação sujeita a suitability, disponibilidade dos produtos e análise individual. Não constitui recomendação de investimento.',s:8}]);
+  return b;
+}
+
+function linhasResumo(){
+  const r = ULTIMO, semTags = s => String(s).replace(/<[^>]+>/g,'');
+  const s2 = [];
+  s2.push([{v:'Resumo da carteira',s:4}]);
+  s2.push([`${state.nome||'—'} · ${nomePerfil(state.perfil)} · ${state.qual?'Qualificado':'Comum'} · ${new Date().toLocaleDateString('pt-BR')}`]);
+  s2.push([]);
+  const agrup = fn => r.vivos.reduce((a,i)=>{ const k=fn(i); a[k]=(a[k]||0)+i.valor; return a; },{});
+  const bloco = (t, mapa) => {
+    s2.push([{v:t,s:1}]);
+    s2.push([{v:'Item',s:5},{v:'% da carteira',s:5},{v:'Valor (R$)',s:5}]);
+    Object.entries(mapa).sort((a,b)=>b[1]-a[1]).forEach(([k,v])=>
+      s2.push([k, {v: r.investivel? v/r.investivel : 0, t:'n', s:3}, {v: Math.round(v*100)/100, t:'n', s:2}]));
+    s2.push([]);
+  };
+  bloco('Por classe de ativo', agrup(i=>CM[i.cl].nome));
+  bloco('Por veículo', agrup(i=>GRUPO_VE(i.ve)==='Fundo'?'Fundos de Investimentos':i.ve));
+  bloco('Por sub-perfil', agrup(i=>SUBS[i.sub||'C']));
+  bloco('Por nível de volatilidade', agrup(i=>`${i.vol10} — ${rotuloVol(i.vol10)}`));
+  bloco('Por faixa de liquidez', agrup(i=>rotuloLiq(i.liq)));
+
+  const banc = r.vivos.filter(i=>ehBancarioFgc(i));
+  if(banc.length){
+    s2.push([{v:`Checagem do FGC — CDI projetado de ${state.cdiProj}% a.a.`,s:1}]);
+    s2.push([{v:'Grupo emissor',s:5},{v:'Aplicado hoje (R$)',s:5},{v:'Projetado no vencimento (R$)',s:5},{v:'Limite (R$)',s:5},{v:'Folga (R$)',s:5}]);
+    const g = {};
+    banc.forEach(i=>{ (g[i.emissor]=g[i.emissor]||{hoje:0,fut:0}); g[i.emissor].hoje+=i.valor; g[i.emissor].fut+=i.valor*fatorFuturo(i); });
+    Object.entries(g).forEach(([k,v])=> s2.push([k,
+      {v:Math.round(v.hoje*100)/100,t:'n',s:2}, {v:Math.round(v.fut*100)/100,t:'n',s:2},
+      {v:state.fgcLim,t:'n',s:2}, {v:Math.round((state.fgcLim-v.fut)*100)/100,t:'n',s:2}]));
+    s2.push([]);
+  }
+  if(r.remocoes.length || r.cortes.length || r.tetos.length || r.fgc.length){
+    s2.push([{v:'Ajustes aplicados ao modelo',s:1}]);
+    s2.push([{v:'Produto / grupo',s:5},{v:'Peso ou excesso',s:5},{v:'Motivo',s:5},{v:'Destino',s:5}]);
+    r.remocoes.forEach(x=> s2.push([x.nome, {v:x.peso,t:'n',s:3}, semTags(x.motivo), x.dest]));
+    r.tetos.forEach(x=> s2.push([x.nome, {v:x.excesso,t:'n',s:3}, semTags(x.motivo), x.dest]));
+    r.fgc.forEach(x=> s2.push([x.emissor, {v:x.excesso,t:'n',s:3}, `Projeção de ${brl(x.proj)} acima do FGC`, x.dest]));
+    r.cortes.forEach(x=> s2.push([x.nome, {v:x.peso,t:'n',s:3}, `Abaixo do mínimo de ${brl(x.minimo)}`, x.dest]));
+    s2.push([]);
+  }
+  if(r.alerts.length){
+    s2.push([{v:'Observações',s:1}]);
+    r.alerts.forEach(a=> s2.push([semTags(a[1])]));
+  }
+  return s2;
+}
+
+document.getElementById('btn-xlsx').onclick = ()=>{
+  const bin = montarXlsx([
+    {nome:'Boleta', rows:linhasBoleta(), larguras:[22,22,46,20,34,14,22,13,14,16,12,12,52]},
+    {nome:'Resumo', rows:linhasResumo(), larguras:[52,20,26,18,18]},
+  ]);
+  const slug = (state.nome||'cliente').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  baixar(`boleta-${slug}.xlsx`, bin, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  toast('Boleta exportada.');
+};
+
+document.getElementById('btn-csv').onclick = ()=>{
+  const r = ULTIMO;
+  const linhas = [['Bolsão','Classe','Produto','Veículo','Volatilidade','Liquidez','% carteira','% patrimônio','Valor']];
+  if(r.reserva>0) linhas.push(['Reserva','Reserva de emergência','','','','','', (r.reserva/state.total).toFixed(4), r.reserva.toFixed(2)]);
+  state.objetivos.filter(o=>o.carve&&o.valor>0).forEach(o=>
+    sugerirObjetivo(o).linhas.forEach(l=>linhas.push([o.nome,CM[l.p.cl].nome,l.p.nome,l.p.ve,l.p.vol10,rotuloLiq(l.p.liq),'',(l.valor/state.total).toFixed(4),l.valor.toFixed(2)])));
+  r.vivos.forEach(i=>linhas.push(['Carteira',CM[i.cl].nome,i.nome,i.ve,i.vol10,rotuloLiq(i.liq),
+    (i.valor/(r.investivel||1)).toFixed(4),(i.valor/(state.total||1)).toFixed(4),i.valor.toFixed(2)]));
+  if(r.naoAlocado>0) linhas.push(['NÃO ALOCADO','—','Nenhum produto compatível','','','','','',(r.naoAlocado/(state.total||1)).toFixed(4),r.naoAlocado.toFixed(2)]);
+  const csv = '\uFEFF' + linhas.map(l=>l.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(';')).join('\n');
+  baixar('carteira.csv', csv, 'text/csv');
+  toast('CSV exportado.');
+};
+
+document.getElementById('btn-wpp').onclick = async ()=>{
+  const r = ULTIMO;
+  const L = [];
+  L.push(`*Proposta de alocação — ${state.nome||'cliente'}*`);
+  L.push(`Perfil ${nomePerfil(state.perfil)} · ${state.qual?'qualificado':'comum'} · volatilidade até N${state.teto} · liquidez até ${rotuloLiq(state.liqMax)}`);
+  L.push('');
+  L.push(`Patrimônio: ${brl(state.total)}`);
+  if(r.reserva>0) L.push(`Reserva de emergência: ${brl(r.reserva)}`);
+  if(r.somaBolsoes>0) L.push(`Objetivos de curto prazo: ${brl(r.somaBolsoes)}`);
+  L.push(`Carteira de longo prazo: ${brl(r.investivel)}`);
+  L.push('');
+  for(const c of CLASSES){
+    const its = r.vivos.filter(i=>i.cl===c.id).sort((a,b)=>b.valor-a.valor);
+    if(!its.length) continue;
+    L.push(`*${c.nome}* — ${pc(its.reduce((a,b)=>a+b.valor,0)/(r.investivel||1))}`);
+    its.forEach(i=>L.push(`• ${i.nome} — ${brl(i.valor)}`));
+  }
+  L.push('');
+  L.push('_Sujeito a suitability, disponibilidade e análise individual. Não é recomendação de investimento._');
+  const txt = L.join('\n');
+  try{ await navigator.clipboard.writeText(txt); toast('Resumo copiado.'); }
+  catch{ baixar('resumo.txt', txt, 'text/plain'); toast('Resumo salvo em arquivo.'); }
+};
+
+/* =========================================================================
+   UI — abas, questionário, objetivos, composição, apresentação, editor
+   ========================================================================= */
+
+/* ---------------- questionário ---------------- */
+const QUESTOES = [
+  {id:'q1', t:'Qual o objetivo principal deste patrimônio?', o:[
+    {r:'Preservar o poder de compra', s:'Não quero ver o valor cair', pts:0},
+    {r:'Gerar renda', s:'Complementar a renda mensal', pts:1},
+    {r:'Crescer no longo prazo', s:'Aceito oscilar para acumular', pts:2},
+    {r:'Crescer agressivamente', s:'Busco retorno acima da média', pts:3},
+  ]},
+  {id:'q2', t:'Em quanto tempo pretende usar a maior parte do recurso?', o:[
+    {r:'Menos de 2 anos', pts:0, teto:10},
+    {r:'De 2 a 5 anos',   pts:1, teto:6},
+    {r:'De 5 a 10 anos',  pts:2, teto:10},
+    {r:'Mais de 10 anos', pts:3, teto:10},
+  ]},
+  {id:'q3', t:'Se a carteira caísse 15% em seis meses, o que faria?', o:[
+    {r:'Resgataria tudo', s:'Não suporto ver perda no extrato', pts:0, teto:0},
+    {r:'Resgataria uma parte', pts:1, teto:6},
+    {r:'Manteria a posição', pts:2, teto:10},
+    {r:'Aportaria mais', s:'Vejo queda como oportunidade', pts:3, teto:10},
+  ]},
+  {id:'q4', t:'Que produtos você já usou?', o:[
+    {r:'Poupança e renda fixa', pts:0, teto:10},
+    {r:'Fundos e Tesouro Direto', pts:1, teto:6},
+    {r:'Bolsa e multimercados', pts:2, teto:10},
+    {r:'Derivativos e alternativos', pts:3, teto:10},
+  ]},
+  {id:'q5', t:'Este dinheiro representa quanto do seu patrimônio total?', o:[
+    {r:'Praticamente tudo', pts:0, teto:10},
+    {r:'Uma parte relevante', pts:1, teto:6},
+    {r:'Uma parcela pequena', pts:2, teto:10},
+    {r:'Irrelevante no conjunto', pts:3, teto:10},
+  ]},
+  {id:'q6', t:'Em quanto tempo precisa poder resgatar?', liq:true, o:[
+    {r:'No mesmo dia (D+0)', liq:0},
+    {r:'Em até 30 dias',     liq:30},
+    {r:'Em até 180 dias',    liq:180},
+    {r:'Posso carregar até o vencimento', liq:99999},
+  ]},
+  {id:'q7', t:'Enquadramento do investidor', o:[
+    {r:'Investidor comum', qual:false},
+    {r:'Qualificado — mais de R$ 1 milhão declarado', qual:true},
+    {r:'Qualificado — certificação (CGA, CNPI, CFP...)', qual:true},
+  ]},
+];
+
+function renderDiag(){
+  const el = document.getElementById('quest');
+  el.innerHTML = QUESTOES.map(q=>`
+    <div class="qbox">
+      <div class="qt">${esc(q.t)}</div>
+      <div class="radios" data-q="${q.id}">
+        ${q.o.map((o,i)=>`<button data-i="${i}" aria-pressed="${state.q[q.id]===i}">
+          <span class="dot"></span><span><b>${esc(o.r)}</b>${o.s?`<small>${esc(o.s)}</small>`:''}</span></button>`).join('')}
+      </div>
+    </div>`).join('') + `
+    <div class="qbox">
+      <div class="qt">Reserva de emergência</div>
+      <div class="qgrid">
+        <div class="f"><label>Custo de vida mensal</label>
+          <input class="inp money" id="q-custo" value="${fmtMoney(state.custo)}"></div>
+        <div class="f"><label>Meses de reserva</label>
+          <input class="inp" id="q-meses" type="number" min="0" max="36" value="${state.meses}"></div>
+      </div>
+    </div>
+    <div class="qbox">
+      <div class="qt">Patrimônio a alocar</div>
+      <div class="qgrid">
+        <div class="f"><label>Nome do cliente</label><input class="inp" id="q-nome" value="${esc(state.nome)}" placeholder="Cliente ou prospect"></div>
+        <div class="f"><label>Valor total</label><input class="inp money" id="q-total" value="${fmtMoney(state.total)}"></div>
+      </div>
+    </div>`;
+
+  el.querySelectorAll('.radios[data-q]').forEach(g=>{
+    g.onclick = e=>{
+      const b = e.target.closest('button[data-i]'); if(!b) return;
+      state.q[g.dataset.q] = +b.dataset.i;
+      renderDiag(); renderCriterios();
+    };
+  });
+  bindMoney('q-custo','custo', ()=>{ renderCriterios(); });
+  document.getElementById('q-meses').oninput = e=>{ state.meses=+e.target.value||0; renderCriterios(); };
+  document.getElementById('q-nome').oninput  = e=>{ state.nome=e.target.value; syncRail(); };
+  bindMoney('q-total','total', ()=>{ renderCriterios(); });
+  renderCriterios();
+}
+
+function derivarCriterios(){
+  const resp = QUESTOES.map(q => ({q, o: q.o[state.q[q.id]]}));
+  const faltam = resp.filter(x=>!x.o).map(x=>x.q.id);
+  const pontuadas = resp.filter(x=>x.o && x.o.pts!==undefined);
+  const pts = pontuadas.reduce((a,b)=>a+b.o.pts,0);
+  const max = pontuadas.reduce((a,b)=>a+3,0) || 1;
+  const r = pts/max;
+  const perfil = r < 0.34 ? 'C' : (r < 0.67 ? 'M' : 'A');
+  const tetos = resp.filter(x=>x.o && x.o.teto!==undefined).map(x=>x.o.teto);
+  const teto = tetos.length ? Math.min(...tetos) : 3;
+  const qLiq = resp.find(x=>x.q.liq && x.o);
+  const qQual = resp.find(x=>x.q.id==='q7' && x.o);
+  return {
+    faltam, pts, max, razao:r, perfil, teto,
+    liqMax: qLiq ? qLiq.o.liq : 99999,
+    qual: qQual ? qQual.o.qual : false,
+    reserva: state.custo*state.meses,
+  };
+}
+
+function renderCriterios(){
+  const d = derivarCriterios();
+  const box = document.getElementById('criterios');
+  const pronto = d.faltam.length===0;
+  const restricao = d.teto < ({C:1,M:2,A:3}[d.perfil]);
+  box.innerHTML = `
+    <h2>Critérios derivados</h2>
+    ${!pronto ? `<div class="al warn" style="margin-bottom:12px"><span class="ic">!</span><span>Faltam ${d.faltam.length} resposta(s). Os critérios abaixo usam apenas o que já foi respondido.</span></div>` : ''}
+    <div class="crit">
+      <div><span class="ck">Perfil</span><span class="cv">${nomePerfil(d.perfil)}</span>
+           <span class="cs">${d.pts} de ${d.max} pontos</span></div>
+      <div><span class="ck">Volatilidade máxima</span><span class="cv">N${d.teto}</span>
+           <span class="cs">${rotuloVol(d.teto)}</span></div>
+      <div><span class="ck">Liquidez aceita</span><span class="cv">${rotuloLiq(d.liqMax)}</span>
+           <span class="cs">Produtos mais lentos são excluídos</span></div>
+      <div><span class="ck">Enquadramento</span><span class="cv">${d.qual?'Qualificado':'Comum'}</span>
+           <span class="cs">${d.qual?'FIDCs e restritos liberados':'FIDCs restritos excluídos'}</span></div>
+      <div><span class="ck">Reserva</span><span class="cv">${brl(d.reserva)}</span>
+           <span class="cs">${state.meses} meses × ${brl(state.custo)}</span></div>
+      <div><span class="ck">Carteira</span><span class="cv">${brl(Math.max(state.total-d.reserva,0))}</span>
+           <span class="cs">Antes dos objetivos de curto prazo</span></div>
+    </div>
+    ${restricao ? `<div class="al info" style="margin-top:12px"><span class="ic">i</span><span>O perfil pontuou <b>${nomePerfil(d.perfil)}</b>, mas uma resposta específica travou a volatilidade em <b>N${d.teto}</b>. A carteira será mais defensiva do que o perfil sugere. Isso é intencional: a pergunta que trava vence a média.</span></div>` : ''}
+    <div class="ed-actions">
+      <button class="btn btn-p" id="q-aplicar">Aplicar critérios à carteira</button>
+      <button class="btn" id="q-limpar">Limpar respostas</button>
+    </div>
+    <p class="note">O questionário não substitui o suitability da corretora. Ele traduz as respostas em filtros para este guia; a aderência regulatória continua sendo verificada no processo oficial.</p>`;
+
+  document.getElementById('q-aplicar').onclick = ()=>{
+    Object.assign(state, {perfil:d.perfil, teto:d.teto, liqMax:d.liqMax, qual:d.qual, resmodo:'meses'});
+    syncRail(); render(); irPara('cart'); toast('Critérios aplicados à carteira.');
+  };
+  document.getElementById('q-limpar').onclick = ()=>{ state.q={}; renderDiag(); };
+}
+
+/* ---------------- objetivos ---------------- */
+function renderObj(){
+  const r = ULTIMO || calcular();
+  const tot = state.total || 1;
+  const somaB = state.objetivos.filter(o=>o.carve).reduce((a,b)=>a+(b.valor||0),0);
+  const livre = Math.max(state.total - r.reserva - somaB, 0);
+
+  document.getElementById('obj-bar').innerHTML = `
+    <div class="bar">
+      <div class="seg-r" style="width:${r.reserva/tot*100}%" title="Reserva — ${brl(r.reserva)}"></div>
+      ${state.objetivos.filter(o=>o.carve).map((o,i)=>
+        `<div class="seg-c" style="width:${(o.valor||0)/tot*100}%;background:var(--brass-lt);opacity:${1-i*0.13}" title="${esc(o.nome)} — ${brl(o.valor||0)}"></div>`).join('')}
+      <div class="seg-c" style="width:${livre/tot*100}%;background:var(--c-pos)" title="Carteira de longo prazo"></div>
+    </div>
+    <div class="legend">
+      <span class="lg"><i style="background:repeating-linear-gradient(45deg,var(--c-res) 0 3px,#9BA3AA 3px 6px)"></i>Reserva <b>${brl(r.reserva)}</b></span>
+      <span class="lg"><i style="background:var(--brass-lt)"></i>Objetivos <b>${brl(somaB)}</b></span>
+      <span class="lg"><i style="background:var(--c-pos)"></i>Carteira <b>${brl(livre)}</b></span>
+    </div>`;
+
+  const linhas = state.objetivos.map((o,ix)=>{
+    const reg = regraObjetivo(o.anos||0);
+    return `<tr>
+      <td><input value="${esc(o.nome)}" data-o="${ix}" data-k="nome" placeholder="Ex.: comprar um carro"></td>
+      <td><input class="money" value="${fmtMoney(o.valor||0)}" data-o="${ix}" data-k="valor"></td>
+      <td><input type="number" min="0" step="0.5" value="${o.anos||0}" data-o="${ix}" data-k="anos"></td>
+      <td><span class="pill">${reg.nome}</span></td>
+      <td><span class="pill">N${reg.teto}</span></td>
+      <td><span class="pill">${rotuloLiq(Math.min(reg.liq, Math.max(Math.round((o.anos||0)*365),1)))}</span></td>
+      <td class="chk"><input type="checkbox" data-o="${ix}" data-k="carve" ${o.carve?'checked':''}></td>
+      <td><button class="btn" data-delo="${ix}" style="padding:2px 8px">×</button></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('obj-body').innerHTML = linhas ||
+    `<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:22px">Nenhum objetivo cadastrado. O patrimônio inteiro, menos a reserva, vai para a carteira de longo prazo.</td></tr>`;
+
+  document.getElementById('obj-sug').innerHTML = state.objetivos.filter(o=>o.carve && o.valor>0).map(o=>{
+    const s = sugerirObjetivo(o);
+    if(!s.linhas.length) return `<div class="al err"><span class="ic">!!</span><span>
+      <b>${esc(o.nome)}</b> — nenhum produto do cadastro atende a ${o.anos} ano(s) com volatilidade até N${s.regra.teto} e liquidez compatível. Relaxe o prazo ou cadastre um produto adequado.</span></div>`;
+    return `<div class="sug">
+      <div class="sug-h"><b>${esc(o.nome)}</b> · ${brl(o.valor)} · ${o.anos} ano(s)
+        <span class="pill">${s.regra.nome}</span></div>
+      <div class="sug-d">Horizonte de ${o.anos} ano(s) ⇒ volatilidade máxima <b>${s.regra.teto}</b> (${rotuloVol(s.regra.teto).toLowerCase()}) e liquidez até <b>${rotuloLiq(s.regra.liq)}</b>. Este bolsão não entra na carteira de perfil nem na reserva.</div>
+      <table class="mini"><tbody>${s.linhas.map(l=>`<tr>
+        <td>${esc(l.p.nome)}<span class="ve">${l.p.ve}</span>${l.p.ver?`<span class="flag" title="${esc(l.p.ver)}">!</span>`:''}</td>
+        <td>${rotuloLiq(l.p.liq)}</td><td>${pc(l.w)}</td><td>${brlc(l.valor)}</td></tr>`).join('')}</tbody></table>
+    </div>`;
+  }).join('') || '';
+
+  const el = document.getElementById('obj-body');
+  el.oninput = e=>{
+    const t=e.target, ix=+t.dataset.o, k=t.dataset.k; if(isNaN(ix)||!k) return;
+    if(k==='carve') state.objetivos[ix].carve = t.checked;
+    else if(k==='valor') state.objetivos[ix].valor = parseMoney(t.value);
+    else if(k==='anos') state.objetivos[ix].anos = +t.value||0;
+    else state.objetivos[ix][k] = t.value;
+    render();
+  };
+  el.onclick = e=>{
+    const d = e.target.dataset.delo; if(d===undefined) return;
+    state.objetivos.splice(+d,1); render();
+  };
+}
+
+/* ---------------- composição ---------------- */
+function pesosPerfil(p){
+  const its = PROD.filter(x=>(x.w[p]||0)>0);
+  const s = its.reduce((a,b)=>a+b.w[p],0) || 1;
+  return {its, s};
+}
+function renderComp(){
+  /* toggles de veículo */
+  document.getElementById('ve-toggles').innerHTML = VEICULOS.map(v=>{
+    const n = PROD.filter(p=>p.ve===v).length;
+    return `<label class="vetog ${state.ve[v]?'on':''}">
+      <input type="checkbox" data-ve="${esc(v)}" ${state.ve[v]?'checked':''}>
+      <span class="vn">${v}</span><span class="vc">${n} produto${n===1?'':'s'}</span></label>`;
+  }).join('');
+  document.getElementById('ve-toggles').onchange = e=>{
+    const v = e.target.dataset.ve; if(!v) return;
+    state.ve[v] = e.target.checked; render();
+  };
+
+  /* tabelas por perfil, no formato da planilha */
+  const RV_CLASSES = ['rvb','rval','rvg','fli']; // B-33: "Renda Variável" agregada — RV Brasil + Am. Latina + Global + Fundos Listados (FIIs, incluídos por decisão do Alexandre em 21/07). ALT (Alternativos) fica de fora.
+  document.getElementById('comp-perfis').innerHTML = ['C','M','A'].map(p=>{
+    const {its, s} = pesosPerfil(p);
+    const porVe = {}, porSub = {C:0,M:0,A:0};
+    let rvTotal = 0;
+    its.forEach(i=>{
+      const g = GRUPO_VE(i.ve);
+      porVe[g] = (porVe[g]||0) + i.w[p]/s;
+      porSub[i.sub||'C'] += i.w[p]/s;
+      if(RV_CLASSES.includes(i.cl)) rvTotal += i.w[p]/s;
+    });
+    const cor = {C:'#DDEBDD', M:'#F6E2A8', A:'#C0392B'};
+    return `<div class="cperfil">
+      <div class="cph">${nomePerfil(p)}</div>
+      <table class="mini"><tbody>
+        ${Object.entries(porVe).sort((a,b)=>b[1]-a[1]).map(([k,v])=>
+          `<tr><td>${k==='Fundo'?'Fundos de Investimentos':k}</td><td>${pc2(v)}</td></tr>`).join('')}
+        <tr class="sep"><td colspan="2"></td></tr>
+        <tr class="rv-total" style="font-weight:600"><td>Renda Variável (total)</td><td>${pc2(rvTotal)}</td></tr>
+        <tr class="sep"><td colspan="2"></td></tr>
+        ${['C','M','A'].map(k=>
+          `<tr class="sub" style="background:${cor[k]};${k==='A'?'color:#fff':''}">
+             <td>${k}</td><td>${pc2(porSub[k])}</td></tr>`).join('')}
+      </tbody></table>
+    </div>`;
+  }).join('');
+
+  /* composição realizada do cliente */
+  const r = ULTIMO || calcular();
+  const inv = r.investivel || 1;
+  const g = (fn) => {
+    const m = new Map();
+    r.vivos.forEach(i=>m.set(fn(i), (m.get(fn(i))||0)+i.valor));
+    const arr=[...m.entries()].sort((a,b)=>b[1]-a[1]);
+    const max = arr.length?arr[0][1]:1;
+    return arr.map(([k,v])=>`<div class="crow"><div class="lbl">${k}</div><div class="val">${pc(v/inv)}</div>
+      <div class="track"><div class="fill" style="width:${v/max*100}%"></div></div></div>`).join('')
+      || '<div class="crow"><div class="lbl">Sem posições</div><div class="val">—</div></div>';
+  };
+  document.getElementById('comp-real-ve').innerHTML  = g(i=>GRUPO_VE(i.ve)==='Fundo'?'Fundos de Investimentos':i.ve);
+  document.getElementById('comp-real-sub').innerHTML = g(i=>SUBS[i.sub||'C']);
+  const rvValor = r.vivos.filter(i=>RV_CLASSES.includes(i.cl)).reduce((a,b)=>a+b.valor,0);
+  document.getElementById('comp-real-rv').innerHTML = `<div class="crow"><div class="lbl">Renda Variável (RV Brasil + América Latina + Global + FIIs)</div><div class="val">${pc(rvValor/inv)}</div>
+    <div class="track"><div class="fill" style="width:${inv>0?Math.min(rvValor/inv*100,100):0}%"></div></div></div>`;
+
+  /* knobs */
+  const set = (id,v)=>{ const e=document.getElementById(id); if(e && e.value!=String(v)) e.value=v; };
+  set('k-cap', state.capFundo); set('k-fgc', fmtMoney(state.fgcLim)); set('k-cdi', state.cdiProj);
+  document.getElementById('k-fidc').checked = state.capFidc;
+  document.getElementById('k-prev').checked = state.capPrev;
+  document.querySelectorAll('#s-repos button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.v===state.repos)));
+}
+
+/* ---------------- apresentação técnico-comercial ---------------- */
+function chartSVG(serie, w=680, h=280){
+  const pad = {l:52,r:14,t:14,b:34};
+  const maxV = Math.max(...serie.map(p=>Math.max(p.fundo,p.etf)));
+  const minV = serie[0].etf;
+  const tMax = serie[serie.length-1].t;
+  const X = t => pad.l + (t/tMax)*(w-pad.l-pad.r);
+  const Y = v => h-pad.b - ((v-minV)/((maxV-minV)||1))*(h-pad.t-pad.b);
+  const linha = k => serie.map(p=>`${X(p.t).toFixed(1)},${Y(p[k]).toFixed(1)}`).join(' ');
+  const ticksY = 5, ticksX = Math.min(Math.round(tMax),6) || 1;
+  let g = '';
+  for(let i=0;i<=ticksY;i++){
+    const v = minV + (maxV-minV)*i/ticksY, y = Y(v);
+    g += `<line x1="${pad.l}" x2="${w-pad.r}" y1="${y}" y2="${y}" stroke="var(--rule2)"/>
+          <text x="${pad.l-8}" y="${y+3.5}" text-anchor="end" class="ax">${(v/serie[0].etf*100-100).toFixed(0)}%</text>`;
+  }
+  for(let i=0;i<=ticksX;i++){
+    const t = tMax*i/ticksX, x = X(t);
+    g += `<text x="${x}" y="${h-pad.b+16}" text-anchor="middle" class="ax">${t.toFixed(t<1?1:0)}a</text>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" class="chart" role="img" aria-label="Comparativo de acumulação com e sem come-cotas">
+    ${g}
+    <polyline points="${linha('etf')}"   fill="none" stroke="var(--brass)" stroke-width="2.4"/>
+    <polyline points="${linha('fundo')}" fill="none" stroke="var(--c-pos)" stroke-width="2.4" stroke-dasharray="0"/>
+    <line x1="${pad.l}" x2="${pad.l}" y1="${pad.t}" y2="${h-pad.b}" stroke="var(--rule)"/>
+    <line x1="${pad.l}" x2="${w-pad.r}" y1="${h-pad.b}" y2="${h-pad.b}" stroke="var(--rule)"/>
+  </svg>`;
+}
+
+function renderBandas(){
+  const r = ULTIMO || calcular();
+  const inv = r.investivel || 1;
+  const perfil = state.perfil;
+  document.getElementById('bandas-perfil-nome').textContent = nomePerfil(perfil);
+
+  const pesos = {};
+  r.vivos.forEach(i => { const g = grupoDe(i.cl); pesos[g] = (pesos[g]||0) + i.valor; });
+
+  const ordem = CLASSES.filter(c=>c.id!=='rval'); // rval é mostrado junto de rvg (D-23)
+  const linhas = ordem.map(c => {
+    const g = c.id;
+    const valorCliente = pesos[g] || 0;
+    const pctCliente = valorCliente / inv;
+    const teto = CAP_CLASSE[perfil]?.[g];
+    const piso = CAP_CLASSE_MIN[perfil]?.[g];
+    return {c, pctCliente, teto, piso, temPeso: valorCliente > 0.001};
+  }).filter(l => l.temPeso || l.teto!==undefined);
+
+  document.getElementById('bandas-lista').innerHTML = linhas.map(l => {
+    const semTeto = l.teto===undefined;
+    const escalaMax = Math.max(l.teto||0, l.pctCliente*100, l.piso||0) * 1.2 || 10;
+    const pctPos = v => Math.min(v/escalaMax*100, 100);
+    const nomeExibido = l.c.id==='rvg' ? 'RV Global (inclui RV América Latina)' : l.c.nome;
+    const fora = !semTeto && l.pctCliente*100 > l.teto + 0.05;
+    return `<div class="banda-row">
+      <div class="banda-nome">${nomeExibido}${semTeto?'<span class="banda-livre">livre de risco</span>':''}</div>
+      <div class="banda-track">
+        ${l.piso!==undefined && l.teto!==undefined ? `<div class="banda-faixa" style="left:${pctPos(l.piso)}%;width:${pctPos(l.teto)-pctPos(l.piso)}%"></div>` :
+          (l.teto!==undefined ? `<div class="banda-faixa" style="left:0%;width:${pctPos(l.teto)}%"></div>` : '')}
+        ${l.teto!==undefined ? `<div class="banda-teto" style="left:${pctPos(l.teto)}%"></div>` : ''}
+        <div class="banda-cliente ${fora?'fora':''}" style="left:${pctPos(l.pctCliente*100)}%" title="${nomeExibido}: ${pc(l.pctCliente)} da carteira"></div>
+      </div>
+      <div class="banda-vals">
+        <span class="cli">${pc(l.pctCliente)}</span>
+        <span class="lim">${l.piso!==undefined?pc(l.piso/100)+' – ':''}${semTeto?'sem teto':pc(l.teto/100)}</span>
+      </div>
+    </div>`;
+  }).join('') || '<p class="note">Monte a carteira na aba Carteira para ver a aderência às bandas.</p>';
+}
+
+function renderApres(){
+  const r = ULTIMO || calcular();
+  const inv = r.investivel || 1;
+  const V0 = state.simVal, anos = state.simAnos, cdi = state.cdiProj/100;
+  const s = simComeCotas(V0, cdi, anos, state.aliqEtf);
+  const dif = s.etfLiquido - s.fundoLiquido;
+
+  document.getElementById('sim-chart').innerHTML = chartSVG(s.serie);
+  document.getElementById('sim-num').innerHTML = [
+    ['Sem come-cotas, líquido', brl(s.etfLiquido), 'brass'],
+    ['Com come-cotas, líquido', brl(s.fundoLiquido), ''],
+    ['Diferença ao fim de '+anos+' anos', brl(dif), 'brass'],
+    ['Em % sobre o valor final', pc(dif/s.fundoLiquido), ''],
+  ].map(([k,v,c])=>`<div class="kpi"><div class="k">${k}</div><div class="v ${v.length>11?'sm':''}" ${c?'style="color:var(--brass)"':''}>${v}</div></div>`).join('');
+
+  document.getElementById('sim-tw').innerHTML = `
+    <p>O fundo com come-cotas pagou <b>${brl(s.impostoComeCotas)}</b> de imposto no período.
+    O produto sem come-cotas pagou <b>${brl(s.impostoEtf)}</b> — <b>mais</b> imposto — e ainda assim
+    terminou com <b>${brl(dif)}</b> a mais no bolso do cliente.</p>
+    <p>A diferença não está na alíquota. Está em <b>quando</b> o imposto sai. Cada parcela antecipada
+    em maio e novembro deixa de render pelos anos seguintes. É juro composto que o cliente não recebe.</p>`;
+
+  /* métricas da carteira montada */
+  const emissores = new Set(r.vivos.filter(i=>i.emissor).map(i=>i.emissor));
+  const fgcCob = r.vivos.filter(i=>ehBancarioFgc(i)).reduce((a,b)=>a+b.valor,0);
+  const isento = r.vivos.filter(i=>i.isento).reduce((a,b)=>a+b.valor,0);
+  const mtm = r.vivos.filter(i=>i.vol10>2).reduce((a,b)=>a+b.valor,0);
+  const rv  = r.vivos.filter(i=>i.vol10>=7).reduce((a,b)=>a+b.valor,0);
+  const liqPond = r.vivos.reduce((a,b)=>a+b.w*Math.min(b.liq,365),0);
+  const maior = r.vivos.length ? Math.max(...r.vivos.map(i=>i.w)) : 0;
+  const top5 = [...r.vivos].sort((a,b)=>b.w-a.w).slice(0,5).reduce((a,b)=>a+b.w,0);
+  const hhi = r.vivos.reduce((a,b)=>a+b.w*b.w,0);
+
+  document.getElementById('ap-kpis').innerHTML = [
+    ['Linhas na carteira', String(r.vivos.length)],
+    ['Emissores distintos', String(emissores.size || '—')],
+    ['Maior posição individual', pc(maior)],
+    ['Concentração top 5', pc(top5)],
+    ['Equivalente a', (hhi>0? (1/hhi).toFixed(1):'—')+' posições iguais'],
+    ['Liquidez média ponderada', 'D+'+liqPond.toFixed(0)],
+    ['Coberto pelo FGC', pc(fgcCob/inv)],
+    ['Isento de IR', pc(isento/inv)],
+    ['Com marcação a mercado', pc(mtm/inv)],
+    ['Renda variável e alternativos', pc(rv/inv)],
+  ].map(([k,v])=>`<div class="kpi"><div class="k">${k}</div><div class="v ${v.length>11?'sm':''}">${v}</div></div>`).join('');
+
+  /* argumentos derivados da própria carteira, não genéricos */
+  const args = [];
+  if(r.vivos.length >= 8) args.push([`${r.vivos.length} linhas, nenhuma acima de ${pc(maior)}`,
+    `A maior posição da carteira é ${pc(maior)}. O equivalente em posições iguais é ${(1/hhi).toFixed(1)} — quanto maior esse número, menos o resultado depende de um único acerto.`]);
+  const nf = r.vivos.filter(i=>i.ve==='Fundo'||i.ve==='FIDC').length;
+  if(nf) args.push([`Teto de ${state.capFundo}% por fundo`,
+    `Nenhum dos ${nf} fundos da carteira passa de ${state.capFundo}%. Se um gestor errar, o dano é limitado por construção, não por sorte.`]);
+  if(fgcCob>0) args.push(['Cobertura do FGC respeitada na projeção',
+    `Os títulos bancários foram dimensionados para que o valor <b>projetado no vencimento</b> — e não o valor aplicado hoje — caiba dentro de ${brl(state.fgcLim)} por grupo emissor. É o erro mais comum: aplicar R$ 250 mil e resgatar R$ 320 mil, com R$ 70 mil descobertos.`]);
+  if(isento>0) args.push([`${pc(isento/inv)} da carteira isenta de IR`,
+    `Produtos incentivados e LCI/LCA não pagam imposto de renda para pessoa física. Confirme cada um: a isenção está marcada no cadastro, não verificada por mim.`]);
+  if(mtm/inv < 0.4) args.push([`Só ${pc(mtm/inv)} sofre marcação a mercado`,
+    `O resto da carteira não oscila com a curva de juros. O extrato do cliente não vai contar uma história de queda que a carteira não viveu.`]);
+  document.getElementById('ap-args').innerHTML = args.map(([t,d])=>
+    `<div class="argx"><div class="argt">${t}</div><div class="argd">${d}</div></div>`).join('')
+    || '<p class="note">Monte a carteira na aba Carteira para gerar os argumentos.</p>';
+  renderBandas();
+}
+
+/* ---------------- editor ---------------- */
+function renderEditor(){
+  document.getElementById('ed-body').innerHTML = PROD.map((p,ix)=>`
+    <tr>
+      <td><input value="${esc(p.nome)}" data-i="${ix}" data-k="nome">${p.ver?`<span class="flag" title="${esc(p.ver)}">!</span>`:''}</td>
+      <td><select data-i="${ix}" data-k="cl">${CLASSES.map(c=>`<option value="${c.id}" ${c.id===p.cl?'selected':''}>${c.nome}</option>`).join('')}</select></td>
+      <td><select data-i="${ix}" data-k="ve">${VEICULOS.map(v=>`<option ${v===p.ve?'selected':''}>${v}</option>`).join('')}</select></td>
+      <td><input type="number" min="0" max="10" step="0.1" value="${p.vol10}" data-i="${ix}" data-k="vol10" style="max-width:56px"></td>
+      <td><span class="pill" style="${p.volFonte==='provisorio'?'background:var(--warn-bg);color:var(--warn)':''}">${p.volFonte||'—'}</span></td>
+      <td><select data-i="${ix}" data-k="sub">${['C','M','A'].map(k=>`<option value="${k}" ${k===(p.sub||'C')?'selected':''}>${k}</option>`).join('')}</select></td>
+      <td><input type="number" min="0" step="1" value="${p.liq??0}" data-i="${ix}" data-k="liq"></td>
+      <td><input value="${esc(p.emissor||'')}" data-i="${ix}" data-k="emissor" placeholder="—" style="min-width:88px"></td>
+      <td><input type="number" min="0" step="1" value="${p.pctCDI??''}" data-i="${ix}" data-k="pctCDI" placeholder="—"></td>
+      <td><input type="number" min="0" step="0.5" value="${p.prazoAnos??''}" data-i="${ix}" data-k="prazoAnos" placeholder="—"></td>
+      <td class="chk"><input type="checkbox" data-i="${ix}" data-k="fgc" ${p.fgc?'checked':''}></td>
+      <td class="chk"><input type="checkbox" data-i="${ix}" data-k="isento" ${p.isento?'checked':''}></td>
+      <td class="chk"><input type="checkbox" data-i="${ix}" data-k="qual" ${p.qual?'checked':''}></td>
+      <td><input type="number" min="0" step="100" value="${p.min||0}" data-i="${ix}" data-k="min"></td>
+      <td><input type="number" min="0" step="0.25" value="${p.w.C}" data-i="${ix}" data-k="wC"></td>
+      <td><input type="number" min="0" step="0.25" value="${p.w.M}" data-i="${ix}" data-k="wM"></td>
+      <td><input type="number" min="0" step="0.25" value="${p.w.A}" data-i="${ix}" data-k="wA"></td>
+      <td><button class="btn" data-del="${ix}" style="padding:2px 8px">×</button></td>
+    </tr>`).join('') + `<tr><td colspan="14" style="text-align:right;font-weight:700">Soma dos pesos</td>
+      ${['C','M','A'].map(k=>{const s=PROD.reduce((a,b)=>a+(+b.w[k]||0),0);
+        return `<td style="font-family:var(--mono);text-align:right;font-weight:700;color:${Math.abs(s-100)<0.01?'var(--ink)':'var(--danger)'}">${s.toLocaleString('pt-BR',{maximumFractionDigits:2})}</td>`;}).join('')}<td></td></tr>`;
+
+  const b = document.getElementById('ed-body');
+  b.oninput = e=>{
+    const t=e.target, ix=+t.dataset.i, k=t.dataset.k; if(isNaN(ix)||!k) return;
+    if(['qual','fgc','isento'].includes(k)) PROD[ix][k] = t.checked;
+    else if(k[0]==='w' && k.length===2) PROD[ix].w[k[1]] = +t.value||0;
+    else if(['vol10','min','liq'].includes(k)) PROD[ix][k] = +t.value||0;
+    else if(['pctCDI','prazoAnos'].includes(k)) PROD[ix][k] = t.value===''?undefined:(+t.value||0);
+    else PROD[ix][k] = t.value;
+    render();
+  };
+  b.onchange = b.oninput;
+  b.onclick = e=>{
+    const d=e.target.dataset.del; if(d===undefined) return;
+    PROD.splice(+d,1); renderEditor(); render();
+  };
+}
+
+function syncResProd(){
+  const sel = document.getElementById('i-resprod');
+  const cands = PROD.filter(p=>p.vol10<=2 && p.liq<=30);
+  sel.innerHTML = cands.map(p=>`<option value="${p.id}">${esc(p.nome.replace(/ — Reserva de (Emergência|Estratégica)$/,''))} · ${rotuloLiq(p.liq)}</option>`).join('');
+  if(cands.some(p=>p.id===state.resprod)) sel.value = state.resprod;
+  else if(cands.length){ state.resprod = cands[0].id; sel.value = state.resprod; }
+}
+
+/* ---------------- carteira ---------------- */
+let ULTIMO = null;
+
+function render(){
+  const r = calcular(); ULTIMO = r;
+  const {reserva, investivel, vivos, alerts, somaBolsoes} = r;
+  const tot = state.total || 1;
+  const inv = investivel || 1;
+
+  const mtm = vivos.filter(i=>i.vol10>2).reduce((a,b)=>a+b.valor,0);
+  const rv  = vivos.filter(i=>i.vol10>=7).reduce((a,b)=>a+b.valor,0);
+  document.getElementById('kpis').innerHTML = [
+    ['Patrimônio', brl(state.total)],
+    ['Reserva', brl(reserva)],
+    ['Objetivos', brl(somaBolsoes)],
+    ['Carteira', brl(investivel)],
+    ['Linhas', String(vivos.length)],
+    ['Com marcação a mercado', pc(mtm/inv)],
+    ['Renda variável e alternativos', pc(rv/inv)],
+  ].map(([k,v])=>`<div class="kpi"><div class="k">${k}</div><div class="v ${v.length>11?'sm':''}">${v}</div></div>`).join('');
+
+  const porClasse = CLASSES.map(c=>({...c, valor: vivos.filter(i=>i.cl===c.id).reduce((a,b)=>a+b.valor,0)})).filter(c=>c.valor>0.005);
+  document.getElementById('bar-tot').textContent =
+    `reserva ${pc(reserva/tot)} · objetivos ${pc(somaBolsoes/tot)} · carteira ${pc(investivel/tot)}`;
+  document.getElementById('bar').innerHTML =
+    (reserva>0?`<div class="seg-r" style="width:${reserva/tot*100}%" title="Reserva — ${brl(reserva)}"></div>`:'') +
+    (somaBolsoes>0?`<div class="seg-c" style="width:${somaBolsoes/tot*100}%;background:var(--brass-lt)" title="Objetivos — ${brl(somaBolsoes)}"></div>`:'') +
+    porClasse.map(c=>`<div class="seg-c" style="width:${c.valor/tot*100}%;background:var(${c.cor})" title="${c.nome} — ${brl(c.valor)}"></div>`).join('');
+  document.getElementById('legend').innerHTML =
+    (reserva>0?`<span class="lg"><i style="background:repeating-linear-gradient(45deg,var(--c-res) 0 3px,#9BA3AA 3px 6px)"></i>Reserva <b>${pc(reserva/tot)}</b></span>`:'') +
+    (somaBolsoes>0?`<span class="lg"><i style="background:var(--brass-lt)"></i>Objetivos <b>${pc(somaBolsoes/tot)}</b></span>`:'') +
+    porClasse.map(c=>`<span class="lg"><i style="background:var(${c.cor})"></i>${c.nome} <b>${pc(c.valor/tot)}</b></span>`).join('');
+
+  document.getElementById('alerts').innerHTML = alerts.map(([t,m])=>{
+    const ic = t==='err'?'!!':(t==='warn'?'!':'i');
+    return `<div class="al ${t}"><span class="ic">${ic}</span><span>${m}</span></div>`;
+  }).join('');
+
+  const rp = PROD.find(x=>x.id===state.resprod) || {nome:'Tesouro Selic', liq:1};
+  let html = '';
+  if(reserva>0){
+    html += `<tr class="cls" style="--cc:var(--c-res)"><td>Reserva de emergência</td><td>—</td><td>${pc(reserva/tot)}</td><td>${brlc(reserva)}</td></tr>
+      <tr class="item"><td>${esc(rp.nome.replace(/ — Reserva de Emergência$/,''))}<span class="tag-res">${rotuloLiq(rp.liq)}</span></td>
+      <td>—</td><td>${pc(reserva/tot)}</td><td>${brlc(reserva)}</td></tr>`;
+  }
+  for(const o of state.objetivos.filter(o=>o.carve && o.valor>0)){
+    const s = sugerirObjetivo(o);
+    html += `<tr class="cls" style="--cc:var(--brass-lt)"><td>${esc(o.nome)} · ${o.anos} ano(s)</td><td>—</td><td>${pc(o.valor/tot)}</td><td>${brlc(o.valor)}</td></tr>`;
+    for(const l of s.linhas)
+      html += `<tr class="item"><td>${esc(l.p.nome)}<span class="ve">${l.p.ve}</span></td><td>—</td><td>${pc(l.valor/tot)}</td><td>${brlc(l.valor)}</td></tr>`;
+  }
+  for(const c of CLASSES){
+    const its = vivos.filter(i=>i.cl===c.id).sort((a,b)=>b.valor-a.valor);
+    if(!its.length) continue;
+    const sv = its.reduce((a,b)=>a+b.valor,0);
+    html += `<tr class="cls" style="--cc:var(${c.cor})"><td>${c.nome}</td><td>${pc(sv/inv)}</td><td>${pc(sv/tot)}</td><td>${brlc(sv)}</td></tr>`;
+    for(const i of its){
+      const f = i.ver ? `<span class="flag" title="${esc(i.ver)}">!</span>` : '';
+      const est = /Reserva Estratégica/.test(i.nome) ? '<span class="tag-res">estratégica</span>' : '';
+      html += `<tr class="item"><td>${esc(i.nome.replace(/ — Reserva Estratégica$/,''))}${est}<span class="ve">${i.ve}</span><span class="ve">${rotuloLiq(i.liq)}</span>${f}</td>
+        <td>${pc(i.valor/inv)}</td><td>${pc(i.valor/tot)}</td><td>${brlc(i.valor)}</td></tr>`;
+    }
+  }
+  if(r.naoAlocado>0){
+    html += `<tr class="cls" style="--cc:var(--danger)"><td>Não alocado</td><td>${pc(1)}</td><td>${pc(r.naoAlocado/tot)}</td><td>${brlc(r.naoAlocado)}</td></tr>
+      <tr class="item"><td>Nenhum produto compatível com os filtros atuais</td><td>—</td><td>${pc(r.naoAlocado/tot)}</td><td>${brlc(r.naoAlocado)}</td></tr>`;
+  }
+  const somaTudo = investivel + reserva + somaBolsoes;
+  html += `<tr class="tot"><td>Total</td><td>100,0%</td><td>${pc(somaTudo/tot)}</td><td>${brlc(somaTudo)}</td></tr>`;
+  document.getElementById('tbody').innerHTML = html;
+
+  renderObj(); renderComp(); renderApres();
+}
+
+/* ---------------- navegação ---------------- */
+function irPara(t){
+  document.querySelectorAll('section[data-tab]').forEach(s=>s.hidden = s.dataset.tab!==t);
+  document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.t===t)));
+  try{ window.scrollTo({top:0, behavior:'instant'}); }catch(e){}
+}
+document.querySelector('.tabs').onclick = e=>{
+  const b = e.target.closest('button[data-t]'); if(b) irPara(b.dataset.t);
+};
+
+/* ---------------- bindings ---------------- */
+function bindMoney(id, key, after){
+  const el = document.getElementById(id); if(!el) return;
+  el.addEventListener('input', ()=>{ state[key]=parseMoney(el.value); (after||render)(); });
+  el.addEventListener('blur',  ()=>{ el.value=fmtMoney(state[key]); (after||render)(); });
+}
+function segBind(id, key, cast=(v=>v)){
+  const el = document.getElementById(id); if(!el) return;
+  el.onclick = e=>{ const b=e.target.closest('button[data-v]'); if(!b) return;
+    [...el.querySelectorAll('button')].forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    state[key]=cast(b.dataset.v); afterSeg(key); render(); };
+}
+function afterSeg(key){
+  if(key==='resmodo'){
+    document.getElementById('box-meses').hidden = state.resmodo!=='meses';
+    document.getElementById('box-valor').hidden = state.resmodo!=='valor';
+  }
+}
+function syncRail(){
+  document.getElementById('i-nome').value = state.nome;
+  document.getElementById('i-total').value = fmtMoney(state.total);
+  document.getElementById('i-custo').value = fmtMoney(state.custo);
+  document.getElementById('i-meses').value = state.meses;
+  document.getElementById('i-resval').value = fmtMoney(state.resval);
+  document.getElementById('i-piso').value = fmtMoney(state.piso);
+  document.getElementById('i-liq').value = String(state.liqMax);
+  ['perfil','resmodo'].forEach(k=>document.querySelectorAll(`#s-${k} button`).forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.v===state[k]))));
+  document.querySelectorAll('#s-vol button').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.v===state.teto)));
+  document.getElementById('i-teto').value = state.teto;
+  pintaTeto();
+  document.querySelectorAll('#s-qual button').forEach(b=>b.setAttribute('aria-pressed', String((b.dataset.v==='1')===state.qual)));
+  afterSeg('resmodo');
+}
+
+segBind('s-perfil','perfil');
+segBind('s-resmodo','resmodo');
+segBind('s-vol','teto', v=>+v);
+document.getElementById('s-vol').addEventListener('click', ()=>{
+  document.getElementById('i-teto').value = state.teto; pintaTeto();
+});
+document.getElementById('i-teto').addEventListener('input', e=>{
+  state.teto = Math.max(0, Math.min(10, +e.target.value || 0));
+  document.querySelectorAll('#s-vol button').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.v===state.teto)));
+  pintaTeto(); render();
+});
+function pintaTeto(){ const el=document.getElementById('i-teto-nome'); if(el) el.textContent = rotuloVol(state.teto); }
+segBind('s-qual','qual', v=>v==='1');
+segBind('s-repos','repos');
+
+bindMoney('i-total','total'); bindMoney('i-custo','custo');
+bindMoney('i-resval','resval'); bindMoney('i-piso','piso');
+document.getElementById('i-meses').addEventListener('input', e=>{ state.meses=+e.target.value||0; render(); });
+document.getElementById('i-nome').addEventListener('input', e=>{ state.nome=e.target.value; });
+document.getElementById('i-resprod').addEventListener('change', e=>{ state.resprod=e.target.value; render(); });
+document.getElementById('i-liq').addEventListener('change', e=>{ state.liqMax=+e.target.value; render(); });
+
+document.getElementById('k-cap').addEventListener('input', e=>{ state.capFundo=+e.target.value||0; render(); });
+document.getElementById('k-cdi').addEventListener('input', e=>{ state.cdiProj=+e.target.value||0; render(); });
+bindMoney('k-fgc','fgcLim');
+document.getElementById('k-fidc').addEventListener('change', e=>{ state.capFidc=e.target.checked; render(); });
+document.getElementById('k-prev').addEventListener('change', e=>{ state.capPrev=e.target.checked; render(); });
+
+document.getElementById('obj-add').onclick = ()=>{
+  state.objetivos.push({id:uid(), nome:'Novo objetivo', valor:50000, anos:1, carve:true});
+  render();
+};
+document.getElementById('sim-val').addEventListener('input', e=>{ state.simVal=parseMoney(e.target.value); renderApres(); });
+document.getElementById('sim-anos').addEventListener('input', e=>{ state.simAnos=+e.target.value||1; renderApres(); });
+document.getElementById('sim-aliq').addEventListener('input', e=>{ state.aliqEtf=+e.target.value||0; renderApres(); });
+document.getElementById('sim-cdi').addEventListener('input', e=>{ state.cdiProj=+e.target.value||0; render(); });
+
+document.getElementById('btn-add').onclick = ()=>{
+  PROD.push({id:'novo'+Date.now(), nome:'Novo produto', cl:'pos', ve:'Renda Fixa Bancária', vol10:0, volFonte:'provisorio', sub:'C', liq:0, qual:false, min:0, w:{C:0,M:0,A:0}});
+  renderEditor(); syncResProd(); render();
+};
+document.getElementById('btn-reset').onclick = ()=>{
+  PROD = JSON.parse(JSON.stringify(PADRAO)); renderEditor(); syncResProd(); render(); toast('Cadastro original restaurado.');
+};
+document.getElementById('btn-exp').onclick = ()=>{
+  baixar('guia-alocacao-config.json', JSON.stringify({versao:2, atualizado:new Date().toISOString().slice(0,10), produtos:PROD, parametros:{capFundo:state.capFundo, capFidc:state.capFidc, capPrev:state.capPrev, fgcLim:state.fgcLim, cdiProj:state.cdiProj, repos:state.repos}}, null, 2), 'application/json');
+  toast('Configuração exportada.');
+};
+document.getElementById('btn-imp').onclick = ()=> document.getElementById('file-imp').click();
+document.getElementById('file-imp').onchange = e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const rd=new FileReader();
+  rd.onload = ()=>{ try{
+      const j=JSON.parse(rd.result);
+      if(!Array.isArray(j.produtos)) throw 0;
+      PROD = j.produtos;
+      if(j.parametros) Object.assign(state, j.parametros);
+      renderEditor(); syncResProd(); syncRail(); render(); toast('Configuração importada.');
+    }catch{ toast('Arquivo inválido. Esperado um JSON exportado por este guia.'); } };
+  rd.readAsText(f); e.target.value='';
+};
+
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1900);}
+
+/* =========================================================================
+   Parser da "Posição Consolidada" (export XP Hub, colado como texto) +
+   matcher contra o cadastro + calculadora do aportador esporádico.
+   ========================================================================= */
+
+function parseMoneyBR(s){
+  if(s===undefined||s===null||s==='') return null;
+  const t = String(s).replace(/[^\d,.\-]/g,'').replace(/\./g,'').replace(',','.');
+  const v = parseFloat(t);
+  return isFinite(v) ? v : null;
+}
+
+function parsePosicaoConsolidada(texto){
+  const linhas = texto.split(/\r?\n/).map(l => l.split('\t').map(c=>c.trim()));
+  const itens = [];
+  const categorias = []; // {nome, total, tipo:'nivel1'|'nivel2'}
+  let colunas = null;     // cabeçalho de colunas vigente
+  let catAtual = null, subAtual = null;
+  const avisos = [];
+
+  const reCat = /^([\d.,]+)\s*%\|(.+)$/;
+
+  for(const cells of linhas){
+    if(!cells.length || cells.every(c=>c==='')) continue;
+    const c0 = cells[0];
+    const restoPreenchido = cells.slice(1).filter(c=>c!=='');
+    const m = c0.match(reCat);
+
+    if(m){
+      const nome = m[2].trim();
+      if(restoPreenchido.length <= 1){
+        // nível 1: categoria-mãe (ou total geral) — só o valor, sem cabeçalho de coluna junto
+        const total = parseMoneyBR(restoPreenchido[0]);
+        categorias.push({nome, total, tipo:'nivel1'});
+        catAtual = nome; subAtual = null; colunas = null;
+      } else {
+        // nível 2: sub-categoria + cabeçalho de colunas na mesma linha
+        subAtual = nome;
+        colunas = cells.slice(1);
+        categorias.push({nome, total:null, tipo:'nivel2', categoriaMae:catAtual});
+      }
+      continue;
+    }
+    if(c0==='Ativo' || c0==='Aplicação' || c0==='Data cota'){
+      colunas = cells.slice(1); // cabeçalho de colunas puro, sem nova sub-categoria
+      continue;
+    }
+    if(c0==='Custódia remunerada'){
+      const v = restoPreenchido.length ? parseMoneyBR(restoPreenchido[restoPreenchido.length-1]) : 0;
+      itens.push({categoria:'Caixa', subcategoria:null, nome:'Custódia remunerada', valor: v ?? 0, campos:{}, tipo:'caixa'});
+      continue;
+    }
+    if(!colunas || !catAtual){
+      avisos.push(`Linha não reconhecida (ignorada): ${cells.join(' | ').slice(0,80)}`);
+      continue;
+    }
+    // linha de item: zera pelos nomes de coluna vigentes
+    const campos = {};
+    colunas.forEach((h,i)=>{ if(h) campos[h] = cells[i+1] ?? ''; });
+    const valorBruto = campos['Posição'] ?? campos['Valor líquido'] ?? campos['Provisionado'];
+    const valor = parseMoneyBR(valorBruto);
+    if(valor===null){
+      // linha de resumo numérico (ex.: bloco final "Saldo Disponível | Garantia | ...") — não é item
+      continue;
+    }
+    itens.push({categoria:catAtual, subcategoria:subAtual, nome:c0, valor, campos, tipo:'ativo'});
+  }
+
+  const totalDeclarado = categorias.find(c=>c.tipo==='nivel1' && /patrim/i.test(c.nome));
+  const somaItens = itens.reduce((a,b)=>a+(b.valor||0),0);
+  return {itens, categorias, avisos, somaItens};
+}
+
+/* ---------------- matching contra o cadastro ---------------- */
+function normaliza(s){
+  return String(s||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+}
+/* Termos financeiros genéricos não contam como sinal de identidade — "CDB Banco X"
+   e "CDB Banco Y" não podem parecer o mesmo produto só por compartilhar "cdb/banco/jul". */
+const STOPWORDS = new Set([
+  'banco','cdb','lci','lca','lcd','fic','fif','fim','fidc','rl','ltda','sa','s','cic',
+  'cotas','cota','fundo','fundos','incentivada','incentivadas','incentivado','debenture','debentures',
+  'pos','pós','fixado','fixada','renda','fixa','credito','crédito','privado','classe','classes',
+  'investimento','investimentos','resp','limitada','fii','fof','deb','cra','cri',
+  'cdi','xp','ipca','selic','di','fic','ref','referenciado','simples',
+  'jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez',
+]);
+function tokensSignificativos(s){
+  return normaliza(s).split(' ').filter(w => w.length>2 && !STOPWORDS.has(w) && !/^\d+$/.test(w));
+}
+function tokenScore(a, b){
+  const ta = new Set(tokensSignificativos(a));
+  const tb = new Set(tokensSignificativos(b));
+  if(!ta.size || !tb.size) return 0;
+  let inter = 0; for(const t of ta) if(tb.has(t)) inter++;
+  return inter / Math.max(ta.size, tb.size);
+}
+function casarProduto(item, PROD){
+  const nomeN = normaliza(item.nome);
+  const exato = PROD.find(p => normaliza(p.nome) === nomeN);
+  if(exato) return {produto:exato, conf:'alta', score:1};
+  let melhor = null, melhorScore = 0;
+  for(const p of PROD){
+    const s = tokenScore(item.nome, p.nome);
+    if(s > melhorScore){ melhorScore = s; melhor = p; }
+  }
+  if(melhor && melhorScore >= 0.6) return {produto:melhor, conf:'media', score:melhorScore};
+  if(melhor && melhorScore >= 0.34) return {produto:melhor, conf:'baixa', score:melhorScore};
+  return {produto:null, conf:'nenhuma', score:melhorScore||0};
+}
+
+/* ---------------- aportador esporádico (só compra — D-13) ---------------- */
+/* itensMapeados: [{produto: <PROD item>, valor: R$}] já resolvidos manualmente.
+   aporte: valor novo a alocar. Usa as MESMAS funções de restrição do motor
+   principal (folgaGeral-like: capIndividual, fatorFuturo) para não duplicar regra. */
+function calcularAportadorEsporadico(itensMapeados, aporte, perfil, filtros, PROD){
+  const porClasse = {};
+  itensMapeados.forEach(i => { porClasse[i.produto.cl] = (porClasse[i.produto.cl]||0) + i.valor; });
+  const patrimMapeado = itensMapeados.reduce((a,b)=>a+b.valor,0);
+  const novoTotal = patrimMapeado + aporte;
+
+  // peso ideal por classe (soma dos pesos de produto do perfil, dentro dos filtros ativos)
+  const elegiveis = PROD.filter(p => !p.emerg
+    && (filtros.ve ? filtros.ve[p.ve] : true)
+    && p.vol10 <= (filtros.teto ?? 10)
+    && (!p.qual || filtros.qual)
+    && p.liq <= (filtros.liqMax ?? 99999) && p.liq >= (filtros.liqMin ?? 0)
+    && (p.w[perfil]||0) > 0);
+  const somaPesoTotal = elegiveis.reduce((a,b)=>a+b.w[perfil],0) || 1;
+  const pesoIdealClasse = {};
+  elegiveis.forEach(p => { pesoIdealClasse[p.cl] = (pesoIdealClasse[p.cl]||0) + p.w[perfil]/somaPesoTotal; });
+
+  if(!elegiveis.length){
+    return {novoTotal, patrimMapeado, deficits:{}, linhas:[], naoAlocado: aporte,
+      aviso: 'Nenhum produto do cadastro atende aos filtros atuais (volatilidade, liquidez, enquadramento, veículo). O aporte não foi alocado — relaxe algum filtro ou cadastre um produto compatível.'};
+  }
+
+  // déficit por classe (nunca negativo — só compra)
+  let deficits = {};
+  Object.keys(pesoIdealClasse).forEach(cl => {
+    const alvo = pesoIdealClasse[cl] * novoTotal;
+    const hoje = porClasse[cl] || 0;
+    deficits[cl] = Math.max(alvo - hoje, 0);
+  });
+  const somaDeficit = Object.values(deficits).reduce((a,b)=>a+b,0);
+
+  let alocPorClasse = {};
+  if(somaDeficit >= aporte - 1e-9){
+    // não dá para fechar tudo: distribui o aporte proporcional ao déficit de cada classe
+    Object.keys(deficits).forEach(cl => { alocPorClasse[cl] = deficits[cl]/somaDeficit * aporte; });
+  } else {
+    // fecha todos os déficits e distribui a sobra pelo peso ideal entre todas as classes elegíveis
+    Object.keys(deficits).forEach(cl => { alocPorClasse[cl] = deficits[cl]; });
+    const sobra = aporte - somaDeficit;
+    Object.keys(pesoIdealClasse).forEach(cl => { alocPorClasse[cl] = (alocPorClasse[cl]||0) + pesoIdealClasse[cl]*sobra; });
+  }
+
+  // dentro de cada classe, distribui pelos pesos relativos dos produtos elegíveis daquela classe
+  const linhas = [];
+  Object.entries(alocPorClasse).forEach(([cl, valorClasse]) => {
+    if(valorClasse <= 1e-9) return;
+    const prodsClasse = elegiveis.filter(p=>p.cl===cl);
+    const somaW = prodsClasse.reduce((a,b)=>a+b.w[perfil],0) || 1;
+    prodsClasse.forEach(p => {
+      const v = valorClasse * (p.w[perfil]/somaW);
+      if(v > 0.005) linhas.push({produto:p, valor: Math.round(v*100)/100});
+    });
+  });
+  const somaLinhas = linhas.reduce((a,b)=>a+b.valor,0);
+  const resid = Math.round((aporte - somaLinhas)*100)/100;
+  if(linhas.length && Math.abs(resid)>0) linhas.sort((a,b)=>b.valor-a.valor)[0].valor += resid;
+
+  return {novoTotal, patrimMapeado, deficits, linhas, naoAlocado: 0};
+}
+
+/* ---------------- revisão de carteira completa (B-12, modo 2/3) ----------------
+   Sugestão de venda só em RF bancária/títulos (fora de carência) e Ações (ganho de
+   capital simplificado a 15%). Fundos, FIDC e Previdência NUNCA são sugeridos para
+   venda: o extrato da XP não traz o valor aportado original para eles, e sem custo
+   de aplicação não há como calcular ganho/IR com segurança. Ver SPEC-carteira-atual.md
+   §Modo 2 — escopo confirmado por Alexandre em 16/07/2026. */
+const CLASSE_SUBCATEGORIA_RF = {'Prefixada':'pre', 'Pós-Fixada':'pos', 'Inflação':'inf'};
+
+function parseDataBR(s){
+  const m = String(s||'').match(/(\d{2})\/(\d{2})\/(\d{4})/);
+  if(!m) return null;
+  return new Date(+m[3], +m[2]-1, +m[1]);
+}
+
+/* Enriquece um item já parseado com classe, elegibilidade de venda e custo de saída.
+   `hoje` é injetável (default: agora) para deixar o cálculo de carência testável. */
+function classificarItemCarteira(item, hoje){
+  hoje = hoje || new Date();
+  if(item.categoria==='Renda Fixa'){
+    const cl = CLASSE_SUBCATEGORIA_RF[item.subcategoria];
+    if(!cl) return {...item, cl:null, tipo:'mantido', elegivelVenda:false, valorLiquido:item.valor, custoSaida:0,
+      motivoBloqueio:'sub-categoria de Renda Fixa não reconhecida'};
+    const aplicado = parseMoneyBR(item.campos['Valor aplicado']);
+    const liquido = parseMoneyBR(item.campos['Valor líquido']) ?? item.valor;
+    const carencia = parseDataBR(item.campos['Carência']);
+    const disponivel = parseMoneyBR(item.campos['Disponível']);
+    const bloqueadoPorCarencia = !!(carencia && carencia > hoje);
+    const semQtdDisponivel = disponivel !== null && disponivel <= 0;
+    return {...item, cl, tipo:'rf', aplicado, valorLiquido: liquido, custoSaida: Math.max(item.valor - liquido, 0),
+      elegivelVenda: !bloqueadoPorCarencia && !semQtdDisponivel,
+      motivoBloqueio: bloqueadoPorCarencia ? `em carência até ${carencia.toLocaleDateString('pt-BR')}`
+                    : semQtdDisponivel ? 'sem quantidade disponível para resgate' : null};
+  }
+  if(item.categoria==='Ações'){
+    const precoMedio = parseMoneyBR(item.campos['Preço Médio']);
+    const ultimaCot = parseMoneyBR(item.campos['Última Cotação']);
+    const qtd = parseMoneyBR(item.campos['Qtd. Total']) ?? parseMoneyBR(item.campos['Qtd. Disponivel']);
+    const ganho = (precoMedio!=null && ultimaCot!=null && qtd!=null) ? Math.max((ultimaCot-precoMedio)*qtd, 0) : 0;
+    const ir = ganho * 0.15;
+    const valorLiquido = Math.max(item.valor - ir, 0);
+    return {...item, cl:'rvb', tipo:'acao', valorLiquido, custoSaida: ir, elegivelVenda: true,
+      ver: ir>0 ? 'IR estimado a 15% flat sobre o ganho de capital, sem considerar a isenção mensal de R$20.000 em vendas de ações nem compensação de prejuízos de outras operações — conferir produto a produto antes de executar.' : null};
+  }
+  if(item.tipo==='caixa' || item.categoria==='Caixa')
+    return {...item, cl:null, tipo:'caixa', elegivelVenda:false, valorLiquido:item.valor, custoSaida:0,
+      motivoBloqueio: 'saldo em caixa / custódia remunerada — já é liquidez, não há o que vender'};
+  return {...item, cl:null, tipo:'mantido', elegivelVenda:false, valorLiquido:item.valor, custoSaida:0,
+    motivoBloqueio: 'o extrato não traz o valor aportado original para este tipo de produto — sem essa informação não é possível calcular ganho/IR com segurança para sugerir venda'};
+}
+
+/* itensClassificados: saída de classificarItemCarteira() para cada item da carteira atual.
+   Reaproveita a mesma noção de "peso ideal por classe" do aportador esporádico. */
+function calcularRevisaoCompleta(itensClassificados, perfil, filtros, PROD){
+  const patrimonioTotal = itensClassificados.reduce((a,b)=>a+(b.valor||0),0);
+  const porClasse = {};
+  itensClassificados.forEach(i => { if(i.cl) porClasse[i.cl] = (porClasse[i.cl]||0) + i.valor; });
+
+  const elegiveis = PROD.filter(p => !p.emerg
+    && (filtros.ve ? filtros.ve[p.ve] : true)
+    && p.vol10 <= (filtros.teto ?? 10)
+    && (!p.qual || filtros.qual)
+    && p.liq <= (filtros.liqMax ?? 99999) && p.liq >= (filtros.liqMin ?? 0)
+    && (p.w[perfil]||0) > 0);
+  const somaPesoTotal = elegiveis.reduce((a,b)=>a+b.w[perfil],0) || 1;
+  const pesoIdealClasse = {};
+  elegiveis.forEach(p => { pesoIdealClasse[p.cl] = (pesoIdealClasse[p.cl]||0) + p.w[perfil]/somaPesoTotal; });
+
+  if(patrimonioTotal<=0 || !elegiveis.length){
+    return {patrimonioTotal, porClasse, pesoIdealClasse, excessos:{}, deficits:{}, vendas:[],
+      excessoResidual:{}, caixaRebalanceamento:0, alocacao:{}, naoRebalanceado:0,
+      aviso: !elegiveis.length ? 'Nenhum produto do cadastro atende aos filtros atuais (volatilidade, liquidez, enquadramento, veículo).' : null};
+  }
+
+  const classes = new Set([...Object.keys(porClasse), ...Object.keys(pesoIdealClasse)]);
+  const excessos = {}, deficits = {};
+  classes.forEach(cl => {
+    const hoje = porClasse[cl]||0;
+    const alvo = (pesoIdealClasse[cl]||0) * patrimonioTotal;
+    const dif = hoje - alvo;
+    if(dif > 1e-6) excessos[cl] = dif; else if(dif < -1e-6) deficits[cl] = -dif;
+  });
+
+  const vendas = [];
+  const excessoResidual = {};
+  let caixaRebalanceamento = 0;
+  for(const cl in excessos){
+    let restante = excessos[cl];
+    const candidatos = itensClassificados
+      .filter(i => i.cl===cl && i.elegivelVenda && i.valor>1e-9)
+      .sort((a,b) => (b.valorLiquido/b.valor) - (a.valorLiquido/a.valor));
+    for(const item of candidatos){
+      if(restante <= 1e-6) break;
+      const valorBruto = Math.min(item.valor, restante);
+      const proporcao = valorBruto / item.valor;
+      const liquidoRecebido = item.valorLiquido * proporcao;
+      const custo = item.custoSaida * proporcao;
+      vendas.push({item, classe:cl, valorBruto, liquidoRecebido, custo});
+      caixaRebalanceamento += liquidoRecebido;
+      restante -= valorBruto;
+    }
+    if(restante > 1e-6) excessoResidual[cl] = restante;
+  }
+
+  const somaDeficit = Object.values(deficits).reduce((a,b)=>a+b,0);
+  const alocacao = {};
+  if(somaDeficit > 1e-6 && caixaRebalanceamento > 1e-9){
+    const fator = Math.min(caixaRebalanceamento / somaDeficit, 1);
+    Object.keys(deficits).forEach(cl => { alocacao[cl] = deficits[cl]*fator; });
+    const alocado = Object.values(alocacao).reduce((a,b)=>a+b,0);
+    const sobra = caixaRebalanceamento - alocado;
+    if(sobra > 1e-6){
+      const somaPesoDeficit = Object.keys(deficits).reduce((a,c)=>a+(pesoIdealClasse[c]||0),0) || 1;
+      Object.keys(deficits).forEach(cl => { alocacao[cl] += sobra*(pesoIdealClasse[cl]||0)/somaPesoDeficit; });
+    }
+  }
+  const alocadoFinal = Object.values(alocacao).reduce((a,b)=>a+b,0);
+  const naoRebalanceado = Math.max(caixaRebalanceamento - alocadoFinal, 0);
+
+  return {patrimonioTotal, porClasse, pesoIdealClasse, excessos, deficits, vendas,
+    excessoResidual, caixaRebalanceamento, alocacao, naoRebalanceado};
+}
+
+
+/* ---------------- aba 07 · Carteira Atual ---------------- */
+let CLI_PARSED = null;      // resultado do parsePosicaoConsolidada
+let CLI_MATCHES = [];       // [{item, match:{produto,conf,score}, produtoManual:id|null}]
+
+document.getElementById('cli-analisar').onclick = ()=>{
+  const texto = document.getElementById('cli-paste').value;
+  if(!texto.trim()){ toast('Cole o texto da posição consolidada antes de analisar.'); return; }
+  const r = parsePosicaoConsolidada(texto);
+  CLI_PARSED = r;
+  CLI_MATCHES = r.itens.filter(i=>i.tipo==='ativo').map(item => ({
+    item, match: casarProduto(item, PROD), produtoManual: null,
+  }));
+  renderCliResultado();
+  document.getElementById('cli-resultado').style.display = '';
+  toast(`${r.itens.length} linha(s) identificada(s).`);
+};
+document.getElementById('cli-limpar').onclick = ()=>{
+  document.getElementById('cli-paste').value=''; CLI_PARSED=null; CLI_MATCHES=[];
+  document.getElementById('cli-resultado').style.display='none';
+};
+
+function renderCliResultado(){
+  const r = CLI_PARSED;
+  const ativos = r.itens.filter(i=>i.tipo==='ativo');
+  const caixa = r.itens.filter(i=>i.tipo==='caixa').reduce((a,b)=>a+b.valor,0);
+  const somaTudo = ativos.reduce((a,b)=>a+b.valor,0) + caixa;
+  const totalPatrimonio = r.categorias.find(c=>c.tipo==='nivel1' && /patrim|total investido/i.test(c.nome));
+
+  const mapeados = CLI_MATCHES.filter(m => m.produtoManual || (m.match.produto && m.match.conf!=='baixa' && m.match.conf!=='nenhuma')).length;
+  document.getElementById('cli-kpis').innerHTML = [
+    ['Linhas identificadas', String(ativos.length)],
+    ['Casadas com o cadastro', String(mapeados)],
+    ['Não mapeadas', String(ativos.length-mapeados)],
+    ['Soma dos itens', brl(somaTudo)],
+  ].map(([k,v])=>`<div class="kpi"><div class="k">${k}</div><div class="v ${v.length>11?'sm':''}">${v}</div></div>`).join('');
+
+  const avisos = [];
+  const somaCategorias = r.categorias.filter(c=>c.tipo==='nivel1').reduce((a,b)=>a+(b.total||0),0);
+  if(Math.abs(somaCategorias - somaTudo) > 1){
+    avisos.push(['warn', `A soma das categorias declaradas no extrato (${brl(somaCategorias)}) difere da soma dos itens lidos (${brl(somaTudo)}) em ${brl(Math.abs(somaCategorias-somaTudo))}. Diferenças pequenas costumam ser rendimento não quebrado por linha no extrato; diferenças grandes merecem conferência.`]);
+  }
+  if(r.avisos.length) avisos.push(['info', `${r.avisos.length} linha(s) do texto colado não foram reconhecidas e ficaram de fora (cabeçalhos e resumos do próprio extrato — normal).`]);
+  document.getElementById('cli-avisos').innerHTML = avisos.map(([t,m])=>
+    `<div class="al ${t}"><span class="ic">${t==='warn'?'!':'i'}</span><span>${m}</span></div>`).join('');
+
+  document.getElementById('cli-body').innerHTML = CLI_MATCHES.map((cm,ix)=>{
+    const m = cm.match;
+    const corConf = {alta:'', media:'color:var(--brass)', baixa:'color:var(--warn)', nenhuma:'color:var(--danger)'}[m.conf];
+    const opcoesManual = PROD.map(p=>`<option value="${p.id}" ${cm.produtoManual===p.id?'selected':''}>${esc(p.nome)}</option>`).join('');
+    return `<tr>
+      <td>${esc(cm.item.categoria)}${cm.item.subcategoria?' · '+esc(cm.item.subcategoria):''}</td>
+      <td>${esc(cm.item.nome)}</td>
+      <td style="text-align:right;font-family:var(--mono)">${brlc(cm.item.valor)}</td>
+      <td>
+        <select data-ix="${ix}" class="cli-sel">
+          <option value="">— não mapeado —</option>
+          ${opcoesManual}
+        </select>
+        <div style="font-size:10.5px;margin-top:2px;${corConf}">
+          ${cm.produtoManual ? 'ajustado manualmente' : (m.produto ? `sugestão automática · confiança ${m.conf} (${(m.score*100).toFixed(0)}%)` : 'nenhum candidato razoável')}
+        </div>
+      </td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">Nenhum item identificado.</td></tr>';
+
+  // pré-seleciona o select com a sugestão automática (se houver e não tiver ajuste manual)
+  document.querySelectorAll('.cli-sel').forEach(sel=>{
+    const ix = +sel.dataset.ix, cm = CLI_MATCHES[ix];
+    if(!cm.produtoManual && cm.match.produto && cm.match.conf!=='nenhuma') sel.value = cm.match.produto.id;
+  });
+  document.getElementById('cli-body').onchange = e=>{
+    const sel = e.target.closest('.cli-sel'); if(!sel) return;
+    CLI_MATCHES[+sel.dataset.ix].produtoManual = sel.value || null;
+  };
+}
+
+document.querySelectorAll('#cli-s-perfil button').forEach(b=>{
+  b.onclick = ()=>{ document.querySelectorAll('#cli-s-perfil button').forEach(x=>x.setAttribute('aria-pressed', String(x===b))); };
+});
+document.querySelectorAll('#cli-r-perfil button').forEach(b=>{
+  b.onclick = ()=>{ document.querySelectorAll('#cli-r-perfil button').forEach(x=>x.setAttribute('aria-pressed', String(x===b))); };
+});
+document.querySelectorAll('#cli-r-modo button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('#cli-r-modo button').forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    document.getElementById('cli-r-titulo').textContent = b.dataset.m==='novo'
+      ? 'Enquadramento de novo cliente — da carteira que ele traz até o alvo'
+      : 'Revisão de carteira completa — pode sugerir venda';
+  };
+});
+document.getElementById('cli-aporte').addEventListener('input', e=>{
+  e.target.dataset.raw = parseMoney(e.target.value);
+});
+document.getElementById('cli-aporte').addEventListener('blur', e=>{
+  e.target.value = fmtMoney(parseMoney(e.target.value));
+});
+
+document.getElementById('cli-calcular').onclick = ()=>{
+  if(!CLI_MATCHES.length){ toast('Analise uma posição consolidada primeiro.'); return; }
+  const itensMapeados = CLI_MATCHES.map(cm=>{
+    const id = cm.produtoManual || (cm.match.conf!=='baixa' && cm.match.conf!=='nenhuma' ? cm.match.produto?.id : null);
+    if(!id) return null;
+    const p = PROD.find(x=>x.id===id);
+    return p ? {produto:p, valor: cm.item.valor} : null;
+  }).filter(Boolean);
+
+  const aporte = parseMoney(document.getElementById('cli-aporte').value);
+  const perfil = document.querySelector('#cli-s-perfil button[aria-pressed="true"]').dataset.v;
+  const filtros = {teto:state.teto, qual:state.qual, liqMax:state.liqMax, liqMin:state.liqMin, ve:state.ve};
+  const r = calcularAportadorEsporadico(itensMapeados, aporte, perfil, filtros, PROD);
+
+  const el = document.getElementById('cli-aporte-resultado');
+  if(r.naoAlocado){
+    el.innerHTML = `<div class="al err"><span class="ic">!!</span><span>${r.aviso}</span></div>`;
+    return;
+  }
+  const porClasse = {};
+  r.linhas.forEach(l=>{ porClasse[l.produto.cl]=(porClasse[l.produto.cl]||0)+l.valor; });
+  const linhasHtml = CLASSES.filter(c=>porClasse[c.id]>0.005).map(c=>{
+    const itens = r.linhas.filter(l=>l.produto.cl===c.id).sort((a,b)=>b.valor-a.valor);
+    return `<tr class="cls" style="--cc:var(${c.cor})"><td>${c.nome}</td><td colspan="2">${brl(itens.reduce((a,b)=>a+b.valor,0))}</td></tr>` +
+      itens.map(l=>`<tr class="item"><td>${esc(l.produto.nome)}<span class="ve">${l.produto.ve}</span></td><td></td><td>${brlc(l.valor)}</td></tr>`).join('');
+  }).join('');
+  el.innerHTML = `
+    <div class="kpis" style="margin-bottom:14px">
+      <div class="kpi"><div class="k">Patrimônio mapeado</div><div class="v sm">${brl(r.patrimMapeado)}</div></div>
+      <div class="kpi"><div class="k">Aporte</div><div class="v sm">${brl(aporte)}</div></div>
+      <div class="kpi"><div class="k">Total após o aporte</div><div class="v sm">${brl(r.novoTotal)}</div></div>
+    </div>
+    <div class="tbl-wrap"><table><thead><tr><th style="text-align:left">Onde entrar com o aporte</th><th></th><th>Valor</th></tr></thead>
+      <tbody>${linhasHtml}</tbody></table></div>`;
+};
+
+/* ---------------- revisão de carteira completa (B-12 modo 2) ---------------- */
+document.getElementById('cli-revisar').onclick = ()=>{
+  if(!CLI_PARSED || !CLI_PARSED.itens.length){ toast('Analise uma posição consolidada primeiro.'); return; }
+  const modo = document.querySelector('#cli-r-modo button[aria-pressed="true"]').dataset.m; // 'rev' | 'novo'
+  const novo = modo==='novo';
+  const perfil = document.querySelector('#cli-r-perfil button[aria-pressed="true"]').dataset.v;
+  const filtros = {teto:state.teto, qual:state.qual, liqMax:state.liqMax, liqMin:state.liqMin, ve:state.ve};
+  const classificados = CLI_PARSED.itens.map(i => classificarItemCarteira(i));
+  const r = calcularRevisaoCompleta(classificados, perfil, filtros, PROD);
+  const el = document.getElementById('cli-revisao-resultado');
+
+  if(r.aviso){ el.innerHTML = `<div class="al err"><span class="ic">!!</span><span>${r.aviso}</span></div>`; return; }
+
+  const nomeCls = cl => (CM[cl] && CM[cl].nome) || cl;
+  const somaVendaBruta = r.vendas.reduce((a,b)=>a+b.valorBruto,0);
+  const somaCusto = r.vendas.reduce((a,b)=>a+b.custo,0);
+  // rótulos que mudam com o modo (mesma matemática — ver SPEC-carteira-atual.md §Modo 3)
+  const L = novo ? {
+    total:'Patrimônio que entra', vender:'A desmontar (bruto)', caixa:'Caixa p/ montar o alvo',
+    tituloVendas:'Posições a desmontar para chegar ao alvo',
+    semVenda:`Nada a desmontar: as classes ajustáveis da carteira que o cliente traz (Renda Fixa e Ações) já estão dentro do peso ideal do perfil ${perfil}, ou não há posição elegível (tudo em carência, fundos ou previdência).`,
+    tituloAloc:'Composição-alvo a montar com o caixa',
+  } : {
+    total:'Patrimônio total', vender:'Sugerido vender (bruto)', caixa:'Caixa p/ rebalancear',
+    tituloVendas:'Sugestões de venda',
+    semVenda:`Nenhuma venda sugerida: as classes vendáveis da carteira (Renda Fixa e Ações) já estão dentro do peso ideal do perfil ${perfil}, ou não há posição elegível para venda (tudo em carência, fundos ou previdência).`,
+    tituloAloc:'Para onde levar o caixa das vendas',
+  };
+
+  const kpis = `<div class="kpis" style="margin-bottom:14px">
+    <div class="kpi"><div class="k">${L.total}</div><div class="v sm">${brl(r.patrimonioTotal)}</div></div>
+    <div class="kpi"><div class="k">${L.vender}</div><div class="v sm">${brl(somaVendaBruta)}</div></div>
+    <div class="kpi"><div class="k">Custo de saída (IR)</div><div class="v sm">${brl(somaCusto)}</div></div>
+    <div class="kpi"><div class="k">${L.caixa}</div><div class="v sm">${brl(r.caixaRebalanceamento)}</div></div>
+  </div>`;
+
+  let vendasHtml;
+  if(r.vendas.length){
+    vendasHtml = `<div class="panel" style="margin-top:0"><h2>${L.tituloVendas}</h2>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="text-align:left">Ativo</th><th style="text-align:left">Classe</th><th>${novo?'Desmontar':'Vender'} (bruto)</th><th>Custo (IR)</th><th>Líquido</th></tr></thead>
+        <tbody>${r.vendas.sort((a,b)=>b.valorBruto-a.valorBruto).map(v=>`<tr>
+          <td>${esc(v.item.nome)}<span class="ve">${esc(v.item.categoria)}</span>${v.item.ver?` <span class="flag" title="${esc(v.item.ver)}">!</span>`:''}</td>
+          <td>${esc(nomeCls(v.classe))}</td>
+          <td style="text-align:right;font-family:var(--mono)">${brlc(v.valorBruto)}</td>
+          <td style="text-align:right;font-family:var(--mono)">${brlc(v.custo)}</td>
+          <td style="text-align:right;font-family:var(--mono)">${brlc(v.liquidoRecebido)}</td>
+        </tr>`).join('')}</tbody>
+      </table></div></div>`;
+  } else {
+    vendasHtml = `<div class="al info"><span class="ic">i</span><span>${L.semVenda}</span></div>`;
+  }
+
+  const alocEntries = Object.entries(r.alocacao).filter(([,v])=>v>0.005).sort((a,b)=>b[1]-a[1]);
+  let alocHtml = '';
+  if(alocEntries.length){
+    alocHtml = `<div class="panel" style="margin-top:16px"><h2>${L.tituloAloc}</h2>
+      <div class="tbl-wrap"><table><thead><tr><th style="text-align:left">Classe em déficit</th><th>Valor a alocar</th></tr></thead>
+        <tbody>${alocEntries.map(([cl,v])=>`<tr class="cls" style="--cc:var(${(CM[cl]&&CM[cl].cor)||'--rule'})"><td>${esc(nomeCls(cl))}</td><td style="text-align:right;font-family:var(--mono)">${brlc(v)}</td></tr>`).join('')}</tbody>
+      </table></div></div>`;
+  }
+
+  const avisos = [];
+  Object.entries(r.excessoResidual).forEach(([cl,v])=>{
+    avisos.push(['warn', `A classe <b>${esc(nomeCls(cl))}</b> está acima do peso ideal em ${brl(v)}, mas não há posição elegível para venda que cubra esse excesso (o excedente está em fundo, previdência ou título ainda em carência). Ajuste manualmente ou aguarde a carência.`]);
+  });
+  if(r.naoRebalanceado > 0.01){
+    avisos.push(['info', `Sobraram ${brl(r.naoRebalanceado)} de caixa após fechar todos os déficits das classes vendáveis. O valor fica líquido na conta — decida o destino (novo aporte em objetivo, reserva ou reforço de classe).`]);
+  }
+  const mantidos = classificados.filter(i=>i.tipo==='mantido');
+  if(mantidos.length){
+    avisos.push(['info', `${mantidos.length} posição(ões) em fundo/FIDC/previdência não entram na sugestão de venda — o extrato não traz o valor aportado, sem o qual não há custo de saída calculável. Elas contam no patrimônio total e no diagnóstico por classe, mas ficam mantidas.`]);
+  }
+  const avisosHtml = avisos.length ? `<div class="alerts" style="margin-top:16px">${avisos.map(([t,m])=>`<div class="al ${t}"><span class="ic">${t==='warn'?'!':'i'}</span><span>${m}</span></div>`).join('')}</div>` : '';
+
+  el.innerHTML = kpis + vendasHtml + alocHtml + avisosHtml;
+};
+
+/* ---------------- boot ---------------- */
+document.getElementById('i-liq').innerHTML = LIQ_OPCOES.map(o=>
+  `<option value="${o.v}" ${o.v===state.liqMax?'selected':''}>${o.r} — ${o.d}</option>`).join('');
+const dc = document.getElementById('disc-cdi');
+const pintaCdi = ()=>{ if(dc) dc.textContent = state.cdiProj.toLocaleString('pt-BR',{minimumFractionDigits:1})+'%'; };
+const _renderApres = renderApres;
+renderApres = function(){ _renderApres(); pintaCdi(); };
+
+renderEditor();
+syncResProd();
+syncRail();
+renderDiag();
+render();
+irPara('diag');
+
+</script>
+</body>
+</html>
