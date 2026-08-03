@@ -1,7 +1,7 @@
 # INDEX.md — Estado vivo do projeto SSID Portfolio Manager (ex-Guia de Alocação PG)
 **Função:** mapa de estado do repositório. **Atualizar a cada mudança** (ver `CLAUDE.md` → Protocolo de Auto-Atualização).
-**Versão do app:** v3.3.0 · **INDEX:** 03/08/2026
-**⚠️ REBASE + evolução (31/07/2026):** produto renomeado **SSID Portfolio Manager**; base v2.0 = melhorias do **Bruno** (PGBL como bolsão, aba Estrutura/simulações fiscais, rebrand) + B-33 + B-35. **v3.0 = lote de 5 melhorias** (B-28 visualização por estratégia/classe · B-29 aceitar matches em lote · B-30 e-mail de ordens · B-31 incluir/excluir ativo com rebalanceamento · B-32 resumo simples). **v3.1 = B-26** (limite de quantidade de produtos). **v3.2 = B-27** (não usar ETF nos Filtros) **+ B-24** (coluna recolhível) **+ B-25** (feedback com origem). **v3.3 = B-34** (previdência opcional — toggle mestre carteira+PGBL, D-36). **Fonte de verdade agora é o HTML único** `80-producao/ssid-portfolio-manager-v3.3.0.html`; módulos `codigo-fonte/` congelados (linha antiga até v1.23). Ver CLAUDE.md v1.1 e CHANGELOG.
+**Versão do app:** v3.4.0 · **INDEX:** 03/08/2026
+**⚠️ REBASE + evolução (31/07/2026):** produto renomeado **SSID Portfolio Manager**; base v2.0 = melhorias do **Bruno** (PGBL como bolsão, aba Estrutura/simulações fiscais, rebrand) + B-33 + B-35. **v3.0 = lote de 5 melhorias** (B-28 visualização por estratégia/classe · B-29 aceitar matches em lote · B-30 e-mail de ordens · B-31 incluir/excluir ativo com rebalanceamento · B-32 resumo simples). **v3.1 = B-26** (limite de quantidade de produtos). **v3.2 = B-27** (não usar ETF nos Filtros) **+ B-24** (coluna recolhível) **+ B-25** (feedback com origem). **v3.3 = B-34** (previdência opcional — toggle mestre carteira+PGBL, D-36). **v3.4 = B-36** (e-mail de ordens reescrito — o mailto único do B-30 falhava silenciosamente quando não havia cliente de e-mail padrão no SO; substituído por um modelo de compliance por produto, conforme o PDF "Modelos de Ordem — Todos os Produtos" da XP, sempre copiável/baixável). **Fonte de verdade agora é o HTML único** `80-producao/ssid-portfolio-manager-v3.4.0.html`; módulos `codigo-fonte/` congelados (linha antiga até v1.23). Ver CLAUDE.md v1.1 e CHANGELOG.
 **Fase atual (linha antiga, herdada):** B-21, B-02, B-11, B-12 (3 modos) e **B-19 fechados.** B-03/04/05/06/07/08 fechados. B-09 decidido (D-27). B-10 redigido. **B-19: 32 de 36 produtos com dado real/calculado** — 5 previdências (D-28), DEBB11/DIVO11/HASH11 (D-29), SPXR11/GOLX11/BILF39/BCOM39/HGBR11 (D-30), XP Deb CDI CP/AlphaKey via dados abertos da CVM (D-32). Só 4 exceções documentadas por decisão (D-31): LFTB11 (×2), NLFA11, LFIN11, MARG11.
 **E-16 revisado: a rota de rede para Yahoo Finance é dado genuíno**, não sintético — o alarme da rodada anterior era falso, corrigido após reteste com referências conhecidas (S&P 500, Ibovespa, Bitcoin, Apple, Vale3, ILF, LQD — datas de crash batendo com eventos reais conhecidos).
 **Não há mais nenhuma pendência aberta que dependa só de código.** Tudo que resta depende de dado/decisão do Alexandre ou de terceiros (Bruno).
@@ -23,10 +23,11 @@
 ### 80-producao
 | Arquivo | Versão | Estado |
 |---|---|---|
-| `ssid-portfolio-manager-v3.3.0.html` | v3.3.0 — **FONTE DE VERDADE atual (HTML único, editar direto)** | OK, em produção. + B-27/B-24/B-25 (v3.2) + B-34 (v3.3) |
+| `ssid-portfolio-manager-v3.4.0.html` | v3.4.0 — **FONTE DE VERDADE atual (HTML único, editar direto)** | OK, em produção. + B-36 (v3.4) — B-27/B-24/B-25 (v3.2) + B-34 (v3.3) |
+| `ssid-portfolio-manager-v3.3.0.html` | v3.3.0 | histórica — preservada, superada pela v3.4.0 |
 | `ssid-portfolio-manager-v1.36.0.html` | v1.36 | recebido original do Bruno (pristino), preservado como referência do rebase |
 | `guia-alocacao.html` + `codigo-fonte/*.js` + `build.js` | v1.23 | **CONGELADOS** — linha modular antiga, histórica; não é mais a fonte de verdade (ver rebase) |
-| `codigo-fonte/fuzz-monolito.js` · `verificar-monolito.js` | ativos | testes que rodam sobre o HTML único via jsdom (fuzz 20.000/0 com PGBL) |
+| `codigo-fonte/fuzz-monolito.js` · `verificar-monolito.js` · `verificar-ordens.js` | ativos | testes que rodam sobre o HTML único via jsdom (fuzz 20.000/0 com PGBL; `verificar-ordens.js` cobre os modelos de compliance do B-36) |
 
 ### 04-insumos
 | Arquivo | Versão | Estado |
@@ -65,15 +66,17 @@
 | B-27 | Toggle "não usar ETF" acessível nos Filtros | ✅ fechado (v3.2.0) |
 | B-28 | Visualizar carteira por estratégia ou por classe de ativo | ✅ fechado (v3.0.0) |
 | B-29 | Match de produtos mais produtivo (aceitar em lote + filtro) | ✅ fechado (v3.0.0) |
-| B-30 | E-mail de ordens (mailto com resumo) | ✅ fechado (v3.0.0) |
+| B-30 | E-mail de ordens (mailto com resumo) | ✅ fechado (v3.0.0) — implementação **substituída pelo B-36** (v3.4.0): mailto único falhava silenciosamente |
+| B-36 | E-mail de ordens por produto, no modelo de compliance do PDF "Modelos de Ordem" | ✅ fechado (v3.4.0) |
 | B-31 | Incluir/excluir ativo manualmente com rebalanceamento | ✅ fechado (v3.0.0, escopo D-34) |
 | B-32 | Resumo simples do rebalanceamento/aporte e o motivo | ✅ fechado (v3.0.0) |
 | B-33 | Classe "Renda Variável" agregada na Composição | ✅ fechado (reaplicado na v2.0.0) |
 | B-34 | Previdência opcional (toggle mestre carteira+PGBL) | ✅ fechado (v3.3.0, D-36) |
 | B-35 | Alerta de RV "Verificar se está no mycapital" | ✅ fechado (v2.0.0) |
 | B-22 | Migrar para Cowork Project (fim do ciclo zip-upload-rezip) | ⏳ decisão tomada, execução pendente |
-| B-14/15 | Carteiras ETF e discursos (itens #5/#6) | ⏳ P2 — dono: Bruno |
-| B-16 | Botão R$300k ETF dolarizado / UCITS (item #3) | ⏳ P2 — bloqueado por B-14 |
+| B-14 | Carteiras ETF BR e ETF USA (item #5) | 🟡 parcial — ETF BR feito na evolução para v3; falta só ETF USA |
+| B-15 | Discursos comercial e técnico das alocações (item #6) | ✅ fechado — finalizado na evolução para v3 |
+| B-16 | Botão R$300k ETF dolarizado / UCITS (item #3) | ⏳ P2 — segue bloqueado (falta a parte de ETF USA do B-14) |
 | B-17/23 | Unificar com Portfolio Mgmt Sys (item #1) | ⏸ P3 — adiado por decisão (D-24) |
 | B-18 | Bloqueio de edição para admins (item #4) | ⏸ pausado |
 | B-09 | Fundos Listados sem produto | ⏸ decidido — vazio por escolha (D-27) |
@@ -90,4 +93,5 @@
 ---
 
 ## Histórico
+- **v1.1 — 03/08/2026.** Projeto importado para novo ambiente (zip). B-36 fechado: e-mail de ordens reescrito (v3.4.0). B-14 atualizado para parcial (ETF BR feito, falta ETF USA); B-15 fechado; B-16 segue bloqueado.
 - **v1.0 — 14/07/2026.** Estado vivo aberto. Projeto formalizado; 3 sessões prévias consolidadas em governança.

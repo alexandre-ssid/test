@@ -3,6 +3,7 @@
 > **⚠️ 31/07/2026 — os módulos `*.js` + `build.js` desta pasta estão CONGELADOS.** Refletem a linha modular antiga (até v1.23). Depois do rebase sobre a base externa **SSID Portfolio Manager v1.36**, a fonte de verdade passou a ser o **HTML único** em `../ssid-portfolio-manager-v{versão}.html` (ver `CLAUDE.md` v1.1). **Não edite os módulos antigos esperando que virem produção** — eles não são mais compilados. O que continua vivo desta pasta são os **testes portados para o monólito**:
 > - `fuzz-monolito.js` — fuzz do motor sobre o HTML único via jsdom (20.000 cenários, invariantes incl. PGBL). Rodar: `node fuzz-monolito.js ../ssid-portfolio-manager-v1.37.0.html`
 > - `verificar-monolito.js` — checagem rápida (PGBL conserva valor, B-33 renderiza, versão no rodapé). Rodar: `node verificar-monolito.js ../ssid-portfolio-manager-v1.37.0.html`
+> - `verificar-ordens.js` (B-36) — checa o gerador de ordens por e-mail: os 4 modelos de compliance (Tesouro Direto, ETF, Fundo/FIDC, Renda Fixa Bancária), o aviso de Previdência sem modelo no PDF, e a renderização do modal. Rodar: `node verificar-ordens.js ../ssid-portfolio-manager-v3.4.0.html`
 > - `e2e2.js` ainda aponta para a estrutura de abas antiga — **precisa ser reapontado** para o monólito e para os novos ids de aba (Diagnóstico+Objetivos fundidos, aba Estrutura nova) antes de valer de novo. Pendência de workflow.
 
 O texto abaixo é histórico da era modular (build.js), mantido como referência.

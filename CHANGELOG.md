@@ -3,6 +3,14 @@ Formato: `vX.Y — DATA — título`. O mais recente no topo. O *porquê* fica n
 
 ---
 
+## v3.4.0 — 03/08/2026 — B-36: e-mail de ordens reescrito (compliance, um modelo por produto)
+- **Bug reportado por Alexandre:** o botão "Enviar por e-mail" (B-30) sempre mostrava o toast de sucesso, mas o cliente de e-mail nunca abria. Causa: `window.location.href = 'mailto:...'` depende de haver um cliente de e-mail padrão configurado no sistema operacional — sem isso, o navegador não faz nada, sem erro algum, e o toast era um falso positivo.
+- **Substituído — não remendado** (regra §7 do CLAUDE.md): em vez de um único `mailto:` com o resumo inteiro da carteira, o app agora gera **uma ordem por produto**, no modelo exato do PDF interno "Modelos de Ordem — Todos os Produtos" (Supervisão de Agentes Autônomos, XP Investimentos) fornecido por Alexandre.
+- Modal "Ordens por e-mail" (`#ord-overlay`): um card por posição viva da carteira (incluindo a reserva, via `state.resprod`), cada um com o texto do modelo, botão "Copiar" e "Abrir e-mail" (mailto individual — bem mais curto, funciona mesmo quando o único mailto grande falhava). Botões globais "Copiar todas" e "Baixar .txt" garantem uma saída que nunca depende só do cliente de e-mail do SO.
+- Quatro modelos implementados por veículo (`MODELOS_ORDEM`): **Tesouro Direto** (indexador pela classe, vencimento aproximado do nome do produto), **ETF** (compra a mercado, quantidade a calcular pela cotação do dia), **Fundo** (aplicação — reusado por **FIDC**, mesmo fluxo de cotização, sem campo Emissor), **Renda Fixa Bancária** (aplicação, com emissor do cadastro e taxa sempre marcada `[conferir]` — nunca apresentada como definitiva, §0). **Previdência não tem modelo no PDF**: o sistema avisa que o fluxo é outro (plataforma de seguros) em vez de inventar um texto de ordem.
+- Todo campo que depende de cotação/data ao vivo (taxa, carência, vencimento exato, quantidade de ETF) fica marcado `[a confirmar]` no texto gerado — nunca preenchido com um número que o motor não pode garantir.
+- Testes: novo `codigo-fonte/verificar-ordens.js` (9 checks — os 4 modelos, o aviso de Previdência sem modelo, a reposição em Renda Fixa Bancária sob cenário restritivo, e a renderização do modal). `verificar-monolito.js` revalidado. Fuzz 20.000/0 (motor de alocação inalterado). Arquivo: `ssid-portfolio-manager-v3.4.0.html`.
+
 ## v3.3.0 — 03/08/2026 — B-34: previdência opcional (toggle mestre)
 - Previdência redefinida como **opcional** (D-36): toggle "Usar previdência na carteira" nos Filtros, ligado por padrão. Desligado, zera **tudo** — a previdência da carteira e o bolsão do PGBL.
 - Implementado reusando `state.ve['Previdência']`: a etapa 1 do `calcular()` já excluía o veículo; `pgblSugerido()` agora retorna 0 quando o veículo está desligado (antes era sempre 12% da renda).
