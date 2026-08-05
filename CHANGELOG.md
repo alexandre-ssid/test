@@ -3,6 +3,16 @@ Formato: `vX.Y — DATA — título`. O mais recente no topo. O *porquê* fica n
 
 ---
 
+## v3.5.0 — 05/08/2026 — B-37: 5 features da evolução paralela do Bruno (v1.41.0) portadas
+- Alexandre recebeu um `ssid-portfolio-manager-v1.41.0.html` do Bruno — evolução paralela que parte da mesma base v1.36, mas não tinha nenhuma das nossas melhorias B-24→B-36. Avaliadas e portadas 5 features, preservando 100% do que já existia.
+- **Questionário** — 4 perguntas novas: idade (4 faixas etárias, com teto de volatilidade travado acima de 50 anos), situação financeira (renda vs. despesas/dívidas), tolerância a risco de crédito (FGC vs. crédito privado/FIDC — seta `state.tetoCredito`, critério **próprio**, não combinado com `teto`) e um quiz de conhecimento de risco (separado de experiência declarada). Reordenadas para agrupar idade/horizonte/patrimônio, depois capacidade financeira/crédito, depois reação a perda/experiência/quiz.
+- **Cadastro** — campo `credito` (0–10) em 28 dos 36 produtos (Tesouro, FIDCs, fundos de crédito, previdência, CDB/LCI/LCA, ETF de crédito global HGBR11), separando risco de inadimplência de emissor/estrutura da volatilidade de mercado (`vol10`). Nova `rotuloCredito()`. **Todo valor marcado `[CRÉDITO] ... NÃO confirmado por Alexandre`** no campo `ver` — dado herdado do Bruno, não validado (D-40).
+- **Motor** — 3 mudanças em `calcular()`: (a) nova condição de exclusão por risco de crédito na Etapa 1, reposição (`REPOS`) estendida para cobri-la (D-42); (b) nova etapa 1c — giro de peso por ciclo macro (Corte/Estável/Alta) entre produtos de duration diferente dentro da mesma classe, preservando o total da classe; (c) nova etapa 1d — teto de pulverização por emissor (50% do peso da classe, hoje no-op). 1c/1d rodam antes do bloco de tetos (2a/2b/3/4/4b) por decisão documentada (D-38, `SPEC-motor.md` v1.2) — preservam o total da classe, não competem pela mesma `folgaGeral`.
+- **Interface** — painel "Cenário macro" (Corte/Estável/Alta, default **Estável** — diverge de propósito do default `'corte'` do Bruno, D-39) + controle de tolerância a crédito, ambos na aba Carteira; seção estática "Janela móvel" (CDI/Ibovespa, janelas de 3/5 anos, 2000–2024) na aba Evidências Científicas.
+- **Não portado:** `q4` com `multi:true` do v1.41 (mudaria o comportamento da pergunta de experiência para múltipla escolha — fora do pedido, não assimilado sem confirmação).
+- **Achado ao validar (não causado pelo B-37):** fuzz estendido (20.000 cenários com `tetoCredito`/`macroCiclo`) encontrou 1 falha no invariante de teto de fundo. Reproduzida a mesma falha rodando o mesmo fuzz contra a v3.4.0 sem nenhuma mudança do B-37 (200.000 cenários) — confirma bug pré-existente, não regressão. Registrado em ERROR-LOG E-20 e BACKLOG B-38 (pausado, baixa frequência).
+- Testes: novo `codigo-fonte/verificar-credito-macro-emissor.js` (9 checks — os 3 filtros/etapas do motor + presença da Janela Móvel). `verificar-monolito.js` e `verificar-ordens.js` (B-36) revalidados sem regressão. Arquivo: `ssid-portfolio-manager-v3.5.0.html`.
+
 ## 03/08/2026 — B-22: projeto migrado para este ambiente (Claude Code / Cowork)
 - Confirmado por Alexandre: migração concluída, fim do ciclo zip-upload-rezip entre sessões. Sem mudança de versão do app (não altera o HTML) — item de workflow/governança, registrado aqui e fechado no `BACKLOG.md`/`INDEX.md`.
 

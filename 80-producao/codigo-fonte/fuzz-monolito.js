@@ -36,6 +36,7 @@ const script = `(function(N){
       resval:R(0,300000), resprod:'ts_emerg', liqMin:0, liqMax:P(LIQ),
       rendaTributavel:P([0,0,50000,120000,300000,800000]),
       capFundo:R(1,20), capPrev:Math.random()>0.7, capFidc:Math.random()>0.3, repos:P(['auto','sempre','nunca']),
+      tetoCredito:P([1,4,7,10,10,10]), macroCiclo:P(['corte','estavel','estavel','alta']),
       fgcLim:250000, cdiProj:R(2,18), aliqEtf:15, ve, objetivos:objs, q:{},
       excluidosManuais:exMan, cartView:P(['estrategia','veiculo']),
       maxAtivos:P([0,0,0,3,5,8,12])
@@ -67,6 +68,10 @@ const script = `(function(N){
     if(r.vivos.some(i=>!state.ve[i.ve])) bad.push('veículo');
     if(r.vivos.some(i=>i.qual&&!state.qual)) bad.push('qual');
     if(r.vivos.some(i=>i.valor<0)) bad.push('valor negativo');
+    // B-37: nenhum produto vivo acima da tolerância de crédito aceita
+    if(r.vivos.some(i=>i.credito!==undefined && i.credito>state.tetoCredito+1e-9)) bad.push('crédito');
+    // B-37: giro macro/teto de emissor fazem subtração direta de peso — nunca negativo
+    if(r.vivos.some(i=>i.w<-1e-9)) bad.push('peso negativo (giro/emissor)');
     // teto de classe
     const capPerfil = CAP_CLASSE[state.perfil]||{};
     const pesosGrupo={}; r.vivos.forEach(i=>{const g=grupoDe(i.cl); pesosGrupo[g]=(pesosGrupo[g]||0)+i.w;});

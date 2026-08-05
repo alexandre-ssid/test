@@ -1,5 +1,5 @@
 # SPEC — Motor de alocação (`calcular()`)
-**status: MATERIALIZADA — v1.1, 16/07/2026, atualizada a partir do código e da suíte de testes em produção**
+**status: MATERIALIZADA — v1.2, 05/08/2026, atualizada a partir do código e da suíte de testes em produção**
 
 Este documento faz o que o `CLAUDE.md` §7 já exigia: transforma as regras do motor em critérios de aceite verificáveis, para que uma sessão nova entenda o "pronto" sem precisar ler `core.js` linha a linha. A fonte de verdade continua sendo o código — este documento é o mapa dele, e deve ser atualizado sempre que uma etapa mudar. **B-11 fechado por esta versão** (a v1.0 tinha sido escrita antes do teto por classe entrar em produção — ver histórico).
 
@@ -19,8 +19,10 @@ Este documento faz o que o `CLAUDE.md` §7 já exigia: transforma as regras do m
 | # | Etapa | O que faz | Por que essa ordem |
 |---|---|---|---|
 | 0 | Reserva + bolsões | Retira reserva de emergência e objetivos (`carve:true`) do topo do patrimônio | Eles não seguem a lógica de perfil; têm de sair antes de qualquer peso ser calculado |
-| 1 | Exclusão por restrição | Remove produtos que violam veículo desativado, `vol10 > teto`, qualificação, liquidez. Marca `w0` (peso original) antes de zerar, para reportar corretamente | Reportar peso/motivo originais evita o efeito cascata (ver ERROR-LOG E-01) |
-| 1b | Rede de segurança | Se ninguém sobrevive, força o produto mais líquido/menos volátil compatível | Patrimônio nunca fica com carteira vazia se existir QUALQUER produto compatível |
+| 1 | Exclusão por restrição | Remove produtos que violam veículo desativado, `vol10 > teto`, qualificação, liquidez, **risco de crédito** (`credito > tetoCredito`, B-37). Marca `w0` (peso original) antes de zerar, para reportar corretamente | Reportar peso/motivo originais evita o efeito cascata (ver ERROR-LOG E-01) |
+| 1c | **Giro por ciclo macro (B-37)** | Se `macroCiclo≠'estavel'`, redistribui peso ENTRE produtos de duration diferente (proxy: `prazoAnos` ou `vol10` quando `volFonte==='duration'`) DENTRO da mesma classe — preserva o total da classe, só inclina a proporção interna via `dur^(±1)` | Preserva o % por classe (política de perfil); roda ANTES do bloco de tetos (2a/2b/3/4/4b) para que essas etapas enxerguem o giro já aplicado como ponto de partida, não o contrário (D-38) |
+| 1d | **Teto de pulverização por emissor (B-37)** | Nenhum emissor único passa de 50% do peso da própria classe (`TETO_EMISSOR`); hoje é no-op de segurança (cadastro não tem 2+ produtos do mesmo emissor por classe) | Mesmo motivo do 1c: preserva o total da classe, roda fora de `folgaGeral`, antes do bloco de tetos (D-38) |
+| 1b | Rede de segurança | Se ninguém sobrevive, força o produto mais líquido/menos volátil compatível (também respeita `tetoCredito`) | Patrimônio nunca fica com carteira vazia se existir QUALQUER produto compatível |
 | 2a | **Teto por classe (Diretrizes)** | Nenhum grupo de classes (`grupoDe`) passa do teto do perfil em `CAP_CLASSE`; checado **antes** do teto por fundo, por ser a restrição mais ampla. Pós-fixado não tem teto — é a válvula de segurança no fim de toda cadeia de fallback (D-22) | Sem teto por classe, a primeira classe com capacidade "infinita" absorve tudo de uma vez (causou o E-11) |
 | 2b | Teto de concentração por fundo | Nenhum fundo/FIDC/previdência (se ativado) passa de `capFundo`%; o excesso procura primeiro a mesma classe+veículo, depois a mesma classe, depois a cadeia de fallback, depois qualquer sobrevivente | ETFs ficam de fora do teto por decisão explícita (D-06) |
 | 3 | Teto do FGC por grupo emissor | Nenhum grupo emissor bancário projeta, no vencimento, mais que `fgcLim` (padrão R$250 mil). Verificação final independente reconfere todos os emissores depois do loop, não confia que o loop convergiu (E-14) | Usa o **valor projetado**, não o aplicado hoje (D-07) — ver §4 |
@@ -30,6 +32,8 @@ Este documento faz o que o `CLAUDE.md` §7 já exigia: transforma as regras do m
 
 **Regra central (E-07, estendida em D-22/E-12):** as etapas 2a, 2b, 3 e 4 usam a **mesma função de folga** (`folgaGeral`), que é o mínimo entre três restrições — folga de concentração por fundo, folga de FGC e folga de teto de classe. Nunca usar uma folga isolada.
 
+**1c/1d ficam FORA da regra central de propósito (D-38, B-37).** Giro por ciclo macro e teto de pulverização por emissor não são etapas de teto — são pré-conformação de peso: preservam o total de cada classe, então não competem pela mesma folga que 2a/2b/3/4 disputam. Rodam antes desse bloco para que ele sempre veja o resultado do giro/emissor como o "peso a defender", nunca o contrário — se rodassem depois, reabririam uma concentração que o teto de fundo/FGC/classe já tinha fechado, criando uma dependência circular sem necessidade.
+
 **Regra de insolvência (E-12):** quando uma classe ou produto não tem nenhum destino com folga, o excesso não coube é devolvido ao próprio item (dinheiro nunca desaparece) e a classe/produto entra num conjunto de "insolúveis" — para não ficar travando no mesmo item sem progresso, mas **sem impedir** que as outras restrições continuem sendo checadas no mesmo loop.
 
 ---
@@ -38,7 +42,7 @@ Este documento faz o que o `CLAUDE.md` §7 já exigia: transforma as regras do m
 
 1. **Conservação de valor.** `reserva + somaBolsoes + naoAlocado + Σvalor(vivos) = patrimônio total`, sempre, com tolerância de R$0,02.
 2. **Conservação de peso.** Se `investivel > 0` e há produtos vivos, `Σw(vivos) = 1` (tolerância 1e-6).
-3. **Nenhum produto violado.** Todo item em `vivos` respeita: `vol10 ≤ teto`, `liq ≤ liqMax` e `liq ≥ liqMin`, veículo ativo, `!qual OR state.qual`.
+3. **Nenhum produto violado.** Todo item em `vivos` respeita: `vol10 ≤ teto`, `liq ≤ liqMax` e `liq ≥ liqMin`, veículo ativo, `!qual OR state.qual`, e (B-37) `credito ≤ tetoCredito` quando o produto tem o campo `credito` definido.
 4. **Nenhuma classe acima do próprio teto das Diretrizes** (`CAP_CLASSE`), exceto quando `tetosClasse[].resto > 0` ou `violacoesClassePorPiso` foi populado — nesses casos o motor avisa (`alerts` com `err`/`info`), nunca esconde.
 5. **Nenhum fundo/FIDC/previdência (se ativado) acima do teto de concentração**, exceto quando `tetos[].resto > 0` (ninguém tinha folga — o motor avisa, não esconde).
 6. **Nenhum grupo emissor bancário projeta acima do FGC**, exceto quando `fgcEstouro` foi populado (idem — avisa, não esconde). A checagem final (passo 3) é independente do caminho do loop.
@@ -50,7 +54,7 @@ Este documento faz o que o `CLAUDE.md` §7 já exigia: transforma as regras do m
 ## 4. Regras de negócio que não estão óbvias no código
 
 - **FGC sobre valor projetado, não aplicado.** `fatorFuturo(p) = (1 + cdiProj/100 · pctCDI/100) ^ prazoAnos`. O teto do grupo emissor é sobre `Σ w·investivel·fatorFuturo`, não sobre `Σ w·investivel`. Verificado numericamente em 14/07/2026 (item #7 do backlog): correto desde a implementação original.
-- **Reposição condicional (D-08).** Produtos com `receber:true` (títulos bancários, Tesouro Selic estratégico) só entram na disputa de peso quando `REPOS=true`. `REPOS` é `true` sempre (`repos:'sempre'`), nunca (`'nunca'`), ou — no modo padrão `'auto'` — só quando alguma exclusão da etapa 1 foi por volatilidade ou liquidez (não por enquadramento). Uma exclusão por enquadramento tem destino natural na própria classe; um CDB não resolve isso.
+- **Reposição condicional (D-08, estendida em D-42/B-37).** Produtos com `receber:true` (títulos bancários, Tesouro Selic estratégico) só entram na disputa de peso quando `REPOS=true`. `REPOS` é `true` sempre (`repos:'sempre'`), nunca (`'nunca'`), ou — no modo padrão `'auto'` — só quando alguma exclusão da etapa 1 foi por volatilidade, liquidez **ou risco de crédito** (não por enquadramento). Uma exclusão por enquadramento tem destino natural na própria classe; um CDB não resolve isso — mas uma exclusão por crédito alto também não tem destino natural garantido (o fallback pode cair em outro produto de crédito igualmente alto), por isso crédito entra no mesmo grupo que vol/liquidez.
 - **Aportador esporádico só compra (D-13).** Ainda não implementado no motor de alocação por perfil — é regra do motor novo de B-12 (ver `SPEC-carteira-atual.md`).
 - **Teto por classe é variável por classe, a partir das Diretrizes reais (D-21/D-22).** Não é um número único global — Inflação, Multimercado etc. têm tetos próprios por perfil. Pós-fixado não tem teto (classe "livre de risco") e funciona como válvula de segurança no fim da cadeia de fallback.
 - **RV América Latina compartilha o teto de RV Global (D-23)** — soma das duas contra um único limite, não dois tetos independentes, porque as Diretrizes não têm linha própria para RV América Latina.
@@ -70,5 +74,6 @@ Este documento faz o que o `CLAUDE.md` §7 já exigia: transforma as regras do m
 ---
 
 ## Histórico
+- v1.2 — 05/08/2026 — **B-37: portadas 3 features do motor da evolução paralela do Bruno (v1.41.0).** Novas etapas 1c (giro por ciclo macro) e 1d (teto de pulverização por emissor), inseridas entre a exclusão (1) e a rede de segurança (1b) — documentadas como estando FORA da regra central de `folgaGeral` (D-38), porque preservam o total de cada classe em vez de impor um teto. Etapa 1 ganhou a condição de exclusão por risco de crédito (`credito > tetoCredito`); reposição (D-08) estendida para cobrir essa exclusão também (D-42). Nenhuma mudança nas etapas 2a→5 nem na regra central que já existia.
 - v1.0 — 14/07/2026 — Documento criado a partir do código e da suíte de testes já em produção (fecha B-11 pela primeira vez). Nenhuma mudança de comportamento — é descrição, não alteração.
 - v1.1 — 16/07/2026 — **Reabertura e fechamento definitivo de B-11.** A v1.0 ficou desatualizada assim que o teto por classe (B-21/D-22) entrou em produção em 15/07/2026 — a SPEC não mencionava a etapa 2a, a 3ª restrição na `folgaGeral`, o mecanismo de insolúveis (E-12), a preservação do resto no piso (E-13), a checagem final do FGC (E-14) nem a checagem final de classe pós-piso. Documento reescrito para refletir o `core.js` atual; nenhuma mudança de comportamento nesta sessão, só descrição. Lição registrada: "status: MATERIALIZADA" sem processo de revisão associado é o tipo de coisa que gera drift silencioso — ver nota em `BACKLOG`/`INDEX`.
