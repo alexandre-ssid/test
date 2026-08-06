@@ -1,6 +1,6 @@
 # INDEX.md — Estado vivo do projeto SSID Portfolio Manager (ex-Guia de Alocação PG)
 **Função:** mapa de estado do repositório. **Atualizar a cada mudança** (ver `CLAUDE.md` → Protocolo de Auto-Atualização).
-**Versão do app:** v3.5.0 · **INDEX:** 05/08/2026
+**Versão do app:** v3.5.1 · **INDEX:** 05/08/2026
 **⚠️ REBASE + evolução (31/07/2026):** produto renomeado **SSID Portfolio Manager**; base v2.0 = melhorias do **Bruno** (PGBL como bolsão, aba Estrutura/simulações fiscais, rebrand) + B-33 + B-35. **v3.0 = lote de 5 melhorias** (B-28 visualização por estratégia/classe · B-29 aceitar matches em lote · B-30 e-mail de ordens · B-31 incluir/excluir ativo com rebalanceamento · B-32 resumo simples). **v3.1 = B-26** (limite de quantidade de produtos). **v3.2 = B-27** (não usar ETF nos Filtros) **+ B-24** (coluna recolhível) **+ B-25** (feedback com origem). **v3.3 = B-34** (previdência opcional — toggle mestre carteira+PGBL, D-36). **v3.4 = B-36** (e-mail de ordens reescrito — o mailto único do B-30 falhava silenciosamente quando não havia cliente de e-mail padrão no SO; substituído por um modelo de compliance por produto, conforme o PDF "Modelos de Ordem — Todos os Produtos" da XP, sempre copiável/baixável). **Fonte de verdade agora é o HTML único** `80-producao/ssid-portfolio-manager-v3.4.0.html`; módulos `codigo-fonte/` congelados (linha antiga até v1.23). Ver CLAUDE.md v1.1 e CHANGELOG.
 **Fase atual (linha antiga, herdada):** B-21, B-02, B-11, B-12 (3 modos) e **B-19 fechados.** B-03/04/05/06/07/08 fechados. B-09 decidido (D-27). B-10 redigido. **B-19: 32 de 36 produtos com dado real/calculado** — 5 previdências (D-28), DEBB11/DIVO11/HASH11 (D-29), SPXR11/GOLX11/BILF39/BCOM39/HGBR11 (D-30), XP Deb CDI CP/AlphaKey via dados abertos da CVM (D-32). Só 4 exceções documentadas por decisão (D-31): LFTB11 (×2), NLFA11, LFIN11, MARG11.
 **E-16 revisado: a rota de rede para Yahoo Finance é dado genuíno**, não sintético — o alarme da rodada anterior era falso, corrigido após reteste com referências conhecidas (S&P 500, Ibovespa, Bitcoin, Apple, Vale3, ILF, LQD — datas de crash batendo com eventos reais conhecidos).
@@ -23,13 +23,14 @@
 ### 80-producao
 | Arquivo | Versão | Estado |
 |---|---|---|
-| `ssid-portfolio-manager-v3.5.0.html` | v3.5.0 — **FONTE DE VERDADE atual (HTML único, editar direto)** | OK, em produção. + B-37 (v3.5, evolução paralela do Bruno assimilada) — B-36 (v3.4) — B-27/B-24/B-25 (v3.2) + B-34 (v3.3) |
-| `ssid-portfolio-manager-v3.4.0.html` | v3.4.0 | histórica — preservada, superada pela v3.5.0 |
+| `ssid-portfolio-manager-v3.5.1.html` | v3.5.1 — **FONTE DE VERDADE atual (HTML único, editar direto)** | OK, em produção. + B-38 (v3.5.1, teto de fundo silencioso corrigido) — B-37 (v3.5.0, evolução paralela do Bruno assimilada) — B-36 (v3.4) — B-27/B-24/B-25 (v3.2) + B-34 (v3.3) |
+| `ssid-portfolio-manager-v3.5.0.html` | v3.5.0 | histórica — preservada, superada pela v3.5.1 (tinha o bug E-20/B-38) |
+| `ssid-portfolio-manager-v3.4.0.html` | v3.4.0 | histórica — preservada |
 | `ssid-portfolio-manager-v3.3.0.html` | v3.3.0 | histórica — preservada |
 | `ssid-portfolio-manager-v1.36.0.html` | v1.36 | recebido original do Bruno (pristino), preservado como referência do rebase |
 | `ssid-portfolio-manager-v1.41.0.html` | v1.41.0 (Bruno) | **externo, NÃO fonte de verdade** — evolução paralela recebida em 05/08/2026, 5 features avaliadas e portadas para a v3.5.0 via B-37. Não copiado para `80-producao/` (é referência, não produção); mantido como upload de sessão |
 | `guia-alocacao.html` + `codigo-fonte/*.js` + `build.js` | v1.23 | **CONGELADOS** — linha modular antiga, histórica; não é mais a fonte de verdade (ver rebase) |
-| `codigo-fonte/fuzz-monolito.js` · `verificar-monolito.js` · `verificar-ordens.js` · `verificar-credito-macro-emissor.js` | ativos | testes que rodam sobre o HTML único via jsdom (fuzz 20.000/1 — falha pré-existente E-20, não B-37; `verificar-ordens.js` cobre B-36; `verificar-credito-macro-emissor.js` cobre B-37) |
+| `codigo-fonte/fuzz-monolito.js` · `verificar-monolito.js` · `verificar-ordens.js` · `verificar-credito-macro-emissor.js` | ativos | testes que rodam sobre o HTML único via jsdom (fuzz 20.000/0 + confirmação em 150.000/0 após o fix do B-38; `verificar-ordens.js` cobre B-36; `verificar-credito-macro-emissor.js` cobre B-37) |
 
 ### 04-insumos
 | Arquivo | Versão | Estado |
@@ -71,7 +72,7 @@
 | B-30 | E-mail de ordens (mailto com resumo) | ✅ fechado (v3.0.0) — implementação **substituída pelo B-36** (v3.4.0): mailto único falhava silenciosamente |
 | B-36 | E-mail de ordens por produto, no modelo de compliance do PDF "Modelos de Ordem" | ✅ fechado (v3.4.0) |
 | B-37 | 5 features da evolução paralela do Bruno (v1.41.0) portadas — questionário estendido, risco de crédito, giro por ciclo macro, teto de emissor, janela móvel | ✅ fechado (v3.5.0) |
-| B-38 | Teto de fundo violado silenciosamente (~1/100–200 mil cenários) quando `maxAtivos` está ativo — achado ao validar B-37, mas pré-existente (E-20) | ⏸ pausado, baixa frequência |
+| B-38 | Teto de fundo violado silenciosamente (~1/100–200 mil cenários) quando `maxAtivos` está ativo — achado ao validar B-37, mas pré-existente (E-20) | ✅ fechado (v3.5.1) |
 | B-31 | Incluir/excluir ativo manualmente com rebalanceamento | ✅ fechado (v3.0.0, escopo D-34) |
 | B-32 | Resumo simples do rebalanceamento/aporte e o motivo | ✅ fechado (v3.0.0) |
 | B-33 | Classe "Renda Variável" agregada na Composição | ✅ fechado (reaplicado na v2.0.0) |
@@ -97,6 +98,7 @@
 ---
 
 ## Histórico
+- **v1.4 — 05/08/2026.** B-38 fechado: bug silencioso de teto de fundo na etapa 4b (B-26) corrigido (v3.5.1) — causa raiz isolada por reprodução instrumentada, fuzz 150.000/0 de confirmação.
 - **v1.3 — 05/08/2026.** B-37 fechado: 5 features da evolução paralela do Bruno (v1.41.0) avaliadas e portadas para a v3.5.0 (questionário estendido, risco de crédito, giro por ciclo macro, teto de emissor, janela móvel), preservando 100% do B-24→B-36. E-20/B-38 registrados (bug pré-existente de teto de fundo achado ao validar, não causado pelo B-37).
 - **v1.2 — 03/08/2026.** B-22 fechado: projeto migrado para este ambiente (Claude Code / Cowork), confirmado por Alexandre — fim do ciclo zip-upload-rezip entre sessões.
 - **v1.1 — 03/08/2026.** Projeto importado para novo ambiente (zip). B-36 fechado: e-mail de ordens reescrito (v3.4.0). B-14 atualizado para parcial (ETF BR feito, falta ETF USA); B-15 fechado; B-16 segue bloqueado.

@@ -3,6 +3,13 @@ Formato: `vX.Y — DATA — título`. O mais recente no topo. O *porquê* fica n
 
 ---
 
+## v3.5.1 — 05/08/2026 — B-38: teto de fundo silencioso na etapa 4b, corrigido
+- **Causa raiz isolada** (achada ao validar o B-37, ver E-20): na etapa 4b (B-26, limite de quantidade de ativos), quando `derramar()` só conseguia distribuir PARTE do peso removido antes de esgotar a folga (`resto>1e-9`), essa parte parcial já tinha sido somada aos destinos — via `folgaContagem`, que de propósito não olha o teto de fundo (B-26 tem precedência) — **antes** do `break` que devolve o item de origem. A checagem que marca `fundoRelaxado=true` só rodava no branch de sucesso, então essa violação parcial nunca virava alerta.
+- Não era uma violação nova do teto de fundo (isso já é esperado/intencional do B-26) — era a mesma violação de sempre, só **sem o aviso correspondente**, tornando-a silenciosa. Reproduzido com o `state` exato de uma falha do fuzz, tracing o peso do produto violado etapa por etapa — mostrou o salto acontecendo dentro do 4b, num item que nem aparecia entre os `cortesQtd` registrados.
+- **Corrigido**: a checagem de `fundoRelaxado` agora roda incondicionalmente logo após toda chamada a `derramar()` em 4b, sucesso ou falha parcial.
+- Confirmado que o bug já existia na v3.4.0 (pré-B-37) — reproduzido na baseline sem nenhuma mudança de hoje, então não era regressão do B-37.
+- Testes: fuzz 20.000/0 (era 1/20.000) + 150.000/0 de confirmação (a falha original só aparecia a cada 100–200 mil cenários). Arquivo: `ssid-portfolio-manager-v3.5.1.html`.
+
 ## v3.5.0 — 05/08/2026 — B-37: 5 features da evolução paralela do Bruno (v1.41.0) portadas
 - Alexandre recebeu um `ssid-portfolio-manager-v1.41.0.html` do Bruno — evolução paralela que parte da mesma base v1.36, mas não tinha nenhuma das nossas melhorias B-24→B-36. Avaliadas e portadas 5 features, preservando 100% do que já existia.
 - **Questionário** — 4 perguntas novas: idade (4 faixas etárias, com teto de volatilidade travado acima de 50 anos), situação financeira (renda vs. despesas/dívidas), tolerância a risco de crédito (FGC vs. crédito privado/FIDC — seta `state.tetoCredito`, critério **próprio**, não combinado com `teto`) e um quiz de conhecimento de risco (separado de experiência declarada). Reordenadas para agrupar idade/horizonte/patrimônio, depois capacidade financeira/crédito, depois reação a perda/experiência/quiz.
