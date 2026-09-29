@@ -12,3 +12,7 @@ Não é recomendação de investimento; não substitui suitability. Dado não co
 
 ## Estado em uma linha
 Funcional e testado. O que falta é confirmação de dados do mundo real (ver `BACKLOG.md`, P0), não código.
+
+---
+
+**Subprojeto separado:** [`biblioteca-prompts/`](biblioteca-prompts/README.md) — biblioteca de prompts de análise financeira e de dados. Tem governança própria e não faz parte do SSID Portfolio Manager.
