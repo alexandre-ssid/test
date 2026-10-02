@@ -30,6 +30,7 @@
 | `ssid-portfolio-manager-v1.36.0.html` | v1.36 | recebido original do Bruno (pristino), preservado como referência do rebase |
 | `ssid-portfolio-manager-v1.41.0.html` | v1.41.0 (Bruno) | **externo, NÃO fonte de verdade** — evolução paralela recebida em 05/08/2026, 5 features avaliadas e portadas para a v3.5.0 via B-37. Não copiado para `80-producao/` (é referência, não produção); mantido como upload de sessão |
 | `guia-alocacao.html` + `codigo-fonte/*.js` + `build.js` | v1.23 | **CONGELADOS** — linha modular antiga, histórica; não é mais a fonte de verdade (ver rebase) |
+| `apresentacoes/brave-lookthrough/brave-lookthrough-set26-v1.0.pptx` | v1.0 (02/10/2026) | Material lateral (não é o app): look-through dos 5 fundos Brave (lâmina set/26 + CDA/Informe FIDC da CVM). Fonte e dados em `apresentacoes/brave-lookthrough/fonte/`. Brave 30 sem lista pública de FIDCs → `[verificar]` (D-43) |
 | `codigo-fonte/fuzz-monolito.js` · `verificar-monolito.js` · `verificar-ordens.js` · `verificar-credito-macro-emissor.js` | ativos | testes que rodam sobre o HTML único via jsdom (fuzz 20.000/0 + confirmação em 150.000/0 após o fix do B-38; `verificar-ordens.js` cobre B-36; `verificar-credito-macro-emissor.js` cobre B-37) |
 
 ### 04-insumos

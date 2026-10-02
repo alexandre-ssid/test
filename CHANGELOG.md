@@ -3,6 +3,11 @@ Formato: `vX.Y — DATA — título`. O mais recente no topo. O *porquê* fica n
 
 ---
 
+## 02/10/2026 — Apresentação look-through dos fundos Brave (v1.0 do deck, fora do app)
+- Pedido do Alexandre: esquemático abrindo Brave 30, Brave 90, Brave 180 XP, Brave Iron e Brave Prev XP Seguros até os ativos finais, 1 slide por fundo. Novo `80-producao/apresentacoes/brave-lookthrough/brave-lookthrough-set26-v1.0.pptx` (8 slides) + fonte reprodutível em `fonte/`.
+- As lâminas só abrem até a classe; os níveis abaixo vieram dos dados abertos da CVM: CDA (31/08/26 para Brave 90, 180 XP e Prev FIC; 30/06/26 para Iron e Prev FIFE, porque agosto está em sigilo até 29/11/26) e Informe Mensal FIDC (lastro dos FIDCs investidos, rateado — aproximação).
+- Brave 30 não entrega CDA com ativos; só o Informe FIDC com totais (67,3% cotas de FIDC / 32,4% cotas FIF em 31/08/26) → marcado `[verificar]`. Debêntures aparecem pelo código do ativo, sem inferir emissor. Slide extra: 29 de 77 FIDCs aparecem em ≥3 dos 4 fundos abertos. Sem mudança no app (continua v3.5.1). Ver D-43.
+
 ## v3.5.1 — 05/08/2026 — B-38: teto de fundo silencioso na etapa 4b, corrigido
 - **Causa raiz isolada** (achada ao validar o B-37, ver E-20): na etapa 4b (B-26, limite de quantidade de ativos), quando `derramar()` só conseguia distribuir PARTE do peso removido antes de esgotar a folga (`resto>1e-9`), essa parte parcial já tinha sido somada aos destinos — via `folgaContagem`, que de propósito não olha o teto de fundo (B-26 tem precedência) — **antes** do `break` que devolve o item de origem. A checagem que marca `fundoRelaxado=true` só rodava no branch de sucesso, então essa violação parcial nunca virava alerta.
 - Não era uma violação nova do teto de fundo (isso já é esperado/intencional do B-26) — era a mesma violação de sempre, só **sem o aviso correspondente**, tornando-a silenciosa. Reproduzido com o `state` exato de uma falha do fuzz, tracing o peso do produto violado etapa por etapa — mostrou o salto acontecendo dentro do 4b, num item que nem aparecia entre os `cortesQtd` registrados.
